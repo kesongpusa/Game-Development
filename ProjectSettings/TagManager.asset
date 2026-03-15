@@ -8,6 +8,7 @@ TagManager:
   - LeftHover
   - Script
   - Draggable
+  - GiveOrder
   layers:
   - Default
   - TransparentFX

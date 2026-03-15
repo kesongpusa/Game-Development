@@ -1,9 +1,12 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     Vector3 mousePosition;
     RaycastHit2D raycastHit2D;
+    Transform prevHoverObject, nextHoverObject;
+
     private GameObject clickObject;
     public GameObject origObject;
     private GameObject draggedObject;
@@ -12,7 +15,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public Texture2D dragCursor;
 
     private bool isMouseDown = false;
-
     void Start()
     {
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -28,11 +30,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         Ray mouseRay = Camera.main.ScreenPointToRay(mousePosition);
 
+        prevHoverObject = nextHoverObject;
+
+        raycastHit2D = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+        nextHoverObject = raycastHit2D ? raycastHit2D.collider.transform : null;
+
+        // Handle mouse click to start dragging
         if (Input.GetMouseButtonDown(0))
         {
             isMouseDown = true;
             
             raycastHit2D = Physics2D.Raycast(mouseRay.origin, mouseRay.direction);
+
             if (raycastHit2D.collider != null)
             {
                 clickObject = raycastHit2D.collider.gameObject;
@@ -41,7 +50,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 {
                     draggedObject = Instantiate(origObject, mouseWorldPos, Quaternion.identity);
 
-                    draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0.40f);
+                    draggedObject.SetActive(true);
+                    draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, -0.40f);
 
                     Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);                    
 
@@ -56,6 +66,33 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (Input.GetMouseButton(0) && draggedObject != null)
         {
             draggedObject.transform.position = mouseWorldPos;
+            ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
+
+            Debug.Log($"Hovering over: {nextHoverObject}");
+
+            if (nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
+            {
+                Debug.Log("Dragging Over to eat Cat");
+
+                if (cs != null)
+                {
+                    cs.HighlightSprite();
+
+                    return;
+                }
+            }
+
+            // Reset when leaving Cat Eat
+            if (!nextHoverObject.CompareTag("GiverOrder"))
+            {
+                if (cs != null)
+                {
+                    cs.ResetSprite();
+                    Debug.Log("Resetting sprite on: " + prevHoverObject.name);
+                }
+            }
+
+
         }
 
 
@@ -65,12 +102,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
             clickObject = null;
 
-            if (draggedObject != null)
+            if (draggedObject != null && nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
             {
-                Destroy(draggedObject); // remove the clone when dropped
-                draggedObject = null;
+                ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
+                if (cs != null)
+                {
+                    cs.ResetSprite(); // reset when dropped
+                }
             }
 
+            Destroy(draggedObject);
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
         }
     }
