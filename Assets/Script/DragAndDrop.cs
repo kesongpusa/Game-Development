@@ -66,36 +66,36 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (Input.GetMouseButton(0) && draggedObject != null)
         {
             draggedObject.transform.position = mouseWorldPos;
-            ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
 
-            Debug.Log($"Hovering over: {nextHoverObject}");
+            Debug.Log($"Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");
 
-            if (nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
+            if (nextHoverObject != null)
             {
-                Debug.Log("Dragging Over to eat Cat");
-
-                if (cs != null)
+                if (nextHoverObject.CompareTag("GiveOrder"))
                 {
-                    cs.HighlightSprite();
-
-                    return;
+                    ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
+                    if (cs != null)
+                    {
+                        cs.HighlightSprite();
+                    }
                 }
             }
-
-            // Reset when leaving Cat Eat
-            if (!nextHoverObject.CompareTag("GiverOrder"))
+            else
             {
-                if (cs != null)
+                // If nothing is hovered, reset the previous Cat Eat
+                if (prevHoverObject != null && prevHoverObject.CompareTag("GiveOrder"))
                 {
-                    cs.ResetSprite();
-                    Debug.Log("Resetting sprite on: " + prevHoverObject.name);
+                    ChangeSprite csPrev = prevHoverObject.GetComponent<ChangeSprite>();
+                    if (csPrev != null)
+                    {
+                        csPrev.ResetSprite();
+                    }
                 }
             }
-
-
         }
 
 
+        // Mouse released, stop dragging and check for drop
         if (Input.GetMouseButtonUp(0))
         {
             isMouseDown = false;

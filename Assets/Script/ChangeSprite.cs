@@ -19,11 +19,6 @@ public class ChangeSprite : MonoBehaviour
             sr.sprite = newSprite;
             Debug.Log("Highlight applied to: " + sr.gameObject.name);
         }
-        else
-        {
-            Debug.LogWarning("HighlightSprite failed — check references!");
-        }
-
     }
 
     public void ResetSprite()
