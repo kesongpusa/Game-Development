@@ -14,7 +14,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public Texture2D defaultCursor;
     public Texture2D dragCursor;
 
-    private bool isMouseDown = false;
+    public OrderScript orderScript;
+
     void Start()
     {
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -37,9 +38,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         // Handle mouse click to start dragging
         if (Input.GetMouseButtonDown(0))
-        {
-            isMouseDown = true;
-            
+        {            
             raycastHit2D = Physics2D.Raycast(mouseRay.origin, mouseRay.direction);
 
             if (raycastHit2D.collider != null)
@@ -51,7 +50,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     draggedObject = Instantiate(origObject, mouseWorldPos, Quaternion.identity);
 
                     draggedObject.SetActive(true);
-                    draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, -0.40f);
+                    draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
 
                     Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);                    
 
@@ -98,8 +97,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // Mouse released, stop dragging and check for drop
         if (Input.GetMouseButtonUp(0))
         {
-            isMouseDown = false;
-
             clickObject = null;
 
             if (draggedObject != null && nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
@@ -107,6 +104,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
                 if (cs != null)
                 {
+                    orderScript.addScoreToOrder();
                     cs.ResetSprite(); // reset when dropped
                 }
             }
