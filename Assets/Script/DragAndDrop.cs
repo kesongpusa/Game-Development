@@ -8,7 +8,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     Transform prevHoverObject, nextHoverObject;
 
     private GameObject clickObject;
-    public GameObject origObject;
+    public GameObject origObjectCandy;
+    public GameObject origObjectCookie;
     private GameObject draggedObject;
 
     public Texture2D defaultCursor;
@@ -47,12 +48,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                 if (clickObject.CompareTag("Draggable"))
                 {
-                    draggedObject = Instantiate(origObject, mouseWorldPos, Quaternion.identity);
+                    if (clickObject.name == "Candy")
+                    {
+                        draggedObject = Instantiate(origObjectCandy, mouseWorldPos, Quaternion.identity);
 
-                    draggedObject.SetActive(true);
-                    draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
+                        draggedObject.SetActive(true);
+                        draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
+                    }
+                    else if (clickObject.name == "Cookies")
+                    {
+                        draggedObject = Instantiate(origObjectCookie, mouseWorldPos, Quaternion.identity);
 
-                    Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);                    
+                        draggedObject.SetActive(true);
+                        draggedObject.transform.localScale = new Vector3(0.015f, 0.015f, 0f);
+                    }
+
+                    Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);
 
                     Debug.Log("Started dragging clone of: " + clickObject.name);
                 }

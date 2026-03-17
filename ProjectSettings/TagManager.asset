@@ -9,6 +9,7 @@ TagManager:
   - Script
   - Draggable
   - GiveOrder
+  - PlaceOrder
   layers:
   - Default
   - TransparentFX

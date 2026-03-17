@@ -5,7 +5,6 @@ public class OrderScript : MonoBehaviour
 {
     private int orderQuantity;
     public Text quantityText;
-
     public void addScoreToOrder()
     {
         orderQuantity = orderQuantity + 1;
