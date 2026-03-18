@@ -12,10 +12,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public GameObject origObjectCookie;
     private GameObject draggedObject;
 
+    public GameObject candyObject, cookiesObject;
+
     public Texture2D defaultCursor;
     public Texture2D dragCursor;
 
     public OrderScript orderScript;
+    public ItemsLeft itemsLeft;
 
     void Start()
     {
@@ -115,8 +118,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
                 if (cs != null)
                 {
+                    string cleanDraggedName = draggedObject.name.Replace("(Clone)", "").Trim();
+                    Debug.Log($"Dragged Object: {cleanDraggedName}");
+
+                    if (cleanDraggedName.Equals("Piece of Candy"))
+                    {
+                        itemsLeft.DecreaseCandy();
+                        
+                        int candyLeft = itemsLeft.candyLeft;
+
+                        if (candyLeft == 0)
+                        {
+                            candyObject.SetActive(false);
+                        }
+                    }
+                    else if (cleanDraggedName.Equals("Cookie"))
+                    {
+                        itemsLeft.DecreaseCookie();
+                        
+                        int cookieLeft = itemsLeft.cookieLeft;
+
+                        if (cookieLeft == 0)
+                        {
+                            cookiesObject.SetActive(false);
+                        }
+                    }
+
                     orderScript.addScoreToOrder();
-                    cs.ResetSprite(); // reset when dropped
+                    cs.ResetSprite();
                 }
             }
 
