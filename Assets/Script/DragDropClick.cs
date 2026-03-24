@@ -73,6 +73,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                     Debug.Log("Started dragging clone of: " + clickObject.name);
                 }
+
+                if (clickObject.CompareTag("Cart"))
+                { 
+                    GiveItemToCatFromCart();
+                    itemsInCart.ClearCart();
+                }
             }
 
             Debug.Log("Clicked on object: " + clickObject.name);
@@ -148,7 +154,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                         itemsLeft.DecreaseCookie();
                     }
 
-                    orderScript.addScoreToOrder();
+                    orderScript.addScoreToOrder(1);
                     cs.ResetSprite();
                 }
             }
@@ -184,5 +190,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
     
         if (itemsLeft.cookieLeft == 0)
         { cookiesObject.SetActive(false); }
+    }
+
+    void GiveItemToCatFromCart()
+    {
+        int totalItemsInCart = itemsInCart.GetTotalItems();
+
+        if (totalItemsInCart > 0)
+        {
+            orderScript.addScoreToOrder(totalItemsInCart);
+            itemsInCart.ClearCart();
+        }
     }
 }

@@ -8,8 +8,10 @@ public class ItemsInCart : MonoBehaviour
     private int totalItems = 0;
     public Text totalItemsText;
 
-    private int totalCandy = 0;
+    private int totalCandy = 0; 
     private int totalCookie = 0;
+
+    public Text totalCandyText, totalCookieText;
 
     private List<string> cartItems = new List<string>();
 
@@ -29,22 +31,23 @@ public class ItemsInCart : MonoBehaviour
     public void AddItemsInCart()
     {
         totalItems++;
-        UpdateTotalItemsText();
+        UpdateTotalText();
     }
-    void UpdateTotalItemsText()
+
+    public void UpdateTotalText()
     {
         totalItemsText.text = $"Total Items: {totalItems}";
+        totalCandyText.text = $"Candy: {totalCandy}";
+        totalCookieText.text = $"Cookie: {totalCookie}";
     }
 
-    public void OnClick()
+    public void ClearCart()
     {
-        //itemsLeft.candyLeft = 10;
-        //itemsLeft.cookieLeft = 10;
-
+        totalItems = 0;
         totalCandy = 0;
         totalCookie = 0;
-
-        totalItems = 0;
-        UpdateTotalItemsText();
+        UpdateTotalText();
     }
+    public int GetTotalItems()
+    { return totalItems; }
 }
