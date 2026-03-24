@@ -347,6 +347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderScript
   quantityText: {fileID: 44311425}
+  getCandy: {fileID: 1451081686}
+  getCookie: {fileID: 1724944741}
 --- !u!114 &284351484
 MonoBehaviour:
   m_ObjectHideFlags: 0
