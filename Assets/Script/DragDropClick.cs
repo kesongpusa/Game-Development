@@ -64,17 +64,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     {
                         draggedObject = Instantiate(origObjectCandy, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
-
-                        //itemsInCart.AddItem("Piece of Candy");
-                        //itemsLeft.DecreaseCandy();
                     }
                     else if (clickObject.name == "Cookies")
                     {
                         draggedObject = Instantiate(origObjectCookie, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.015f, 0.015f, 0f);
-
-                        //itemsInCart.AddItem("Cookie");
-                        //itemsLeft.DecreaseCookie();
                     }
 
                     Debug.Log("Started dragging clone of: " + clickObject.name);
@@ -148,24 +142,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     if (cleanDraggedName.Equals("Piece of Candy"))
                     {
                         itemsLeft.DecreaseCandy();
-                        
-                        int candyLeft = itemsLeft.candyLeft;
-
-                        if (candyLeft == 0)
-                        {
-                            candyObject.SetActive(false);
-                        }
                     }
                     else if (cleanDraggedName.Equals("Cookie"))
                     {
                         itemsLeft.DecreaseCookie();
-                        
-                        int cookieLeft = itemsLeft.cookieLeft;
-
-                        if (cookieLeft == 0)
-                        {
-                            cookiesObject.SetActive(false);
-                        }
                     }
 
                     orderScript.addScoreToOrder();
@@ -185,12 +165,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     itemsInCart.AddItem("Cookie");
                     itemsLeft.DecreaseCookie();
                 }
-                draggedObject = null;
-                clickObject = null;
             }
 
             Destroy(draggedObject);
+            draggedObject = null;
+            clickObject = null;
+
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
         }
+
+        CheckItemsLeft();
+    }
+
+    void CheckItemsLeft()
+    {
+        if (itemsLeft.candyLeft == 0)
+        { candyObject.SetActive(false); }
+    
+        if (itemsLeft.cookieLeft == 0)
+        { cookiesObject.SetActive(false); }
     }
 }
