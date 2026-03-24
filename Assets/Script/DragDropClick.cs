@@ -19,6 +19,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public OrderScript orderScript;
     public ItemsLeft itemsLeft;
+    public ItemsInCart itemsInCart;
+
+    private float mouseHoldTime;
+    public float holdThreshold;
+    private bool isDragging = false;
+
 
     void Start()
     {
@@ -51,22 +57,25 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                 if (clickObject.CompareTag("Draggable"))
                 {
+                    mouseHoldTime = 0f;
+                    isDragging = false;
+
                     if (clickObject.name == "Candy")
                     {
                         draggedObject = Instantiate(origObjectCandy, mouseWorldPos, Quaternion.identity);
-
-                        draggedObject.SetActive(true);
                         draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
+
+                        //itemsInCart.AddItem("Piece of Candy");
+                        //itemsLeft.DecreaseCandy();
                     }
                     else if (clickObject.name == "Cookies")
                     {
                         draggedObject = Instantiate(origObjectCookie, mouseWorldPos, Quaternion.identity);
-
-                        draggedObject.SetActive(true);
                         draggedObject.transform.localScale = new Vector3(0.015f, 0.015f, 0f);
-                    }
 
-                    Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);
+                        //itemsInCart.AddItem("Cookie");
+                        //itemsLeft.DecreaseCookie();
+                    }
 
                     Debug.Log("Started dragging clone of: " + clickObject.name);
                 }
@@ -78,30 +87,47 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // While dragging, move the clone with the mouse
         if (Input.GetMouseButton(0) && draggedObject != null)
         {
-            draggedObject.transform.position = mouseWorldPos;
-
-            Debug.Log($"Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");
-
-            if (nextHoverObject != null)
+            if (mouseHoldTime >= holdThreshold)
             {
-                if (nextHoverObject.CompareTag("GiveOrder"))
-                {
-                    ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
-                    if (cs != null)
-                    {
-                        cs.HighlightSprite();
-                    }
-                }
+                isDragging = true;
+                draggedObject.SetActive(true);
+                Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);
             }
             else
             {
-                // If nothing is hovered, reset the previous Cat Eat
-                if (prevHoverObject != null && prevHoverObject.CompareTag("GiveOrder"))
+                mouseHoldTime += Time.deltaTime;
+                isDragging = false;
+            }
+
+            Debug.Log($"Mouse hold time: {mouseHoldTime:F2} seconds, IsDragging: {isDragging}");
+
+            if (isDragging)
+            {
+                draggedObject.transform.position = mouseWorldPos;
+
+                Debug.Log($"Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");
+
+                if (nextHoverObject != null)
                 {
-                    ChangeSprite csPrev = prevHoverObject.GetComponent<ChangeSprite>();
-                    if (csPrev != null)
+                    if (nextHoverObject.CompareTag("GiveOrder"))
                     {
-                        csPrev.ResetSprite();
+                        ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
+                        if (cs != null)
+                        {
+                            cs.HighlightSprite();
+                        }
+                    }
+                }
+                else
+                {
+                    // If nothing is hovered, reset the previous Cat Eat
+                    if (prevHoverObject != null && prevHoverObject.CompareTag("GiveOrder"))
+                    {
+                        ChangeSprite csPrev = prevHoverObject.GetComponent<ChangeSprite>();
+                        if (csPrev != null)
+                        {
+                            csPrev.ResetSprite();
+                        }
                     }
                 }
             }
@@ -111,8 +137,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // Mouse released, stop dragging and check for drop
         if (Input.GetMouseButtonUp(0))
         {
-            clickObject = null;
-
             if (draggedObject != null && nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
             {
                 ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
@@ -147,6 +171,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     orderScript.addScoreToOrder();
                     cs.ResetSprite();
                 }
+            }
+
+            if (!isDragging && (mouseHoldTime < holdThreshold))
+            {
+                if (clickObject.name.Equals("Candy"))
+                {
+                    itemsInCart.AddItem("Piece of Candy");
+                    itemsLeft.DecreaseCandy();
+                }
+                else if (clickObject.name.Equals("Cookies"))
+                {
+                    itemsInCart.AddItem("Cookie");
+                    itemsLeft.DecreaseCookie();
+                }
+                draggedObject = null;
+                clickObject = null;
             }
 
             Destroy(draggedObject);
