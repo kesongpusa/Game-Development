@@ -1,7 +1,9 @@
+using NUnit.Framework;
 using System.Data.Common;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class DragDropClick : MonoBehaviour
 {
     Vector3 mousePosition;
     RaycastHit2D raycastHit2D;
@@ -25,6 +27,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float holdThreshold;
     private bool isDragging = false;
 
+    private List<string> itemsRequest;
+    private List<int> quantityItemRequest;
+    private int copyList = 0;
+
     void Start()
     {
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -33,11 +39,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int roll = orderScript.getRoll();
-        Debug.Log($"[DRAGDROPCLICK] Current Roll: {roll}");
-
-        string itemRequest = orderScript.getItemRequest(roll);
-        int quantityItemRequest = orderScript.getQuantityItemRequest(roll);
+        if (copyList == 0)
+        {
+            GetItemListRequestAndQuantity();
+            copyList++;
+        }
 
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0;
@@ -117,7 +123,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                 if (nextHoverObject != null)
                 {
-                    if (nextHoverObject.CompareTag("GiveOrder") && cleanDraggedName.Equals(itemRequest))
+                    int indexOfQuantity = -1;
+                    if (itemsRequest.Contains(cleanDraggedName))
+                    {
+                        int indexOf = itemsRequest.IndexOf(cleanDraggedName);
+                        Debug.Log($"[HOLDMOUSE] Position of {cleanDraggedName}: {indexOf}");
+
+                        indexOfQuantity = quantityItemRequest[indexOf];
+                    }
+                    
+
+                    if (nextHoverObject.CompareTag("GiveOrder") && itemsRequest.Contains(cleanDraggedName) && 
+                        indexOfQuantity > 0)
                     {
                         ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
                         if (cs != null)
@@ -154,29 +171,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     string cleanDraggedName = draggedObject.name.Replace("(Clone)", "").Trim();
                     Debug.Log($"[MOUSEUP] Dragged Object: {cleanDraggedName}");
 
-                    /*
-                    if (cleanDraggedName.Equals("Piece of Candy"))
+                    int indexOfQuantity = -1;
+                    if (itemsRequest.Contains(cleanDraggedName))
                     {
-                        itemsLeft.DecreaseCandy();
+                        int indexOf = itemsRequest.IndexOf(cleanDraggedName);
+                        Debug.Log($"[HOLDMOUSE] Position of {cleanDraggedName}: {indexOf}");
+
+                        indexOfQuantity = quantityItemRequest[indexOf];
                     }
-                    else if (cleanDraggedName.Equals("Cookie"))
+
+                    if (itemsRequest.Contains(cleanDraggedName) && indexOfQuantity > 0)
                     {
-                        itemsLeft.DecreaseCookie();
-                    }
+                        itemsLeft.DecreaseItem(cleanDraggedName);
 
-                    orderScript.addScoreToOrder(1);
-                    cs.ResetSprite();
-                    */
-
-                    if (cleanDraggedName.Equals(itemRequest))
-                    {
-                        itemsLeft.DecreaseItem(itemRequest);
-
-                        orderScript.DecreaseItemRequest(roll, quantityItemRequest);
+                        orderScript.DecreaseItemRequest(cleanDraggedName);
 
                         orderScript.addScoreToOrder(1);
                     }
-
+                    
                     cs.ResetSprite();
                 }
             }
@@ -225,4 +237,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
             itemsInCart.ClearCart();
         }
     }
+
+    void GetItemListRequestAndQuantity()
+    {
+        itemsRequest = new List<string>(orderScript.getItemsRequest());
+        quantityItemRequest = new List<int>(orderScript.getQuantitiesRequest());
+
+        for (int i = 0; i < itemsRequest.Count; i++)
+        {
+            Debug.Log($"[DRAGDROPCLICK] Item Request {i + 1}: {itemsRequest[i]}, Quantity: {quantityItemRequest[i]}");
+        }
+    }
+
+    public void setItemsRequest(List<string> itemsRequest) { this.itemsRequest = itemsRequest; }
+    public void setQuantitiesRequest(List<int> quantityItemRequest) { this.quantityItemRequest = quantityItemRequest; }
+    public List<string> getItemsRequest() { return itemsRequest; }
+    public List<int> getQuantitiesRequest() { return quantityItemRequest; }
 }

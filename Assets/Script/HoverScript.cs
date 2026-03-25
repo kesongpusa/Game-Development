@@ -40,9 +40,9 @@ public class HoverScript : MonoBehaviour
         raycastHit2d = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
         nextHoverObject = raycastHit2d ? raycastHit2d.collider.transform : null;
 
-        Debug.Log($"Current Position: {currentPos}");
-        Debug.Log($"Heading to: {toPosition}");
-        Debug.Log($"Hover Object: {nextHoverObject}");
+        //Debug.Log($"Current Position: {currentPos}");
+        //Debug.Log($"Heading to: {toPosition}");
+        //Debug.Log($"Hover Object: {nextHoverObject}");
 
         // Move the Camera to the Right
         if (currentPos == 1)
@@ -69,7 +69,7 @@ public class HoverScript : MonoBehaviour
                     leftHitbox.SetActive(true);
                 }
 
-                Debug.Log("Moving Camera to the Right Pane");
+                //Debug.Log("Moving Camera to the Right Pane");
                 cameraTargetPos = new Vector3(8.64f, camera.transform.position.y, camera.transform.position.z);
 
                 camera.transform.position =
@@ -81,10 +81,10 @@ public class HoverScript : MonoBehaviour
 
                 if (isCameraAtClosePosition())
                 {
-                    Debug.Log("Camera and Hitboxes has reached the target right pane position.");
+                    //Debug.Log("Camera and Hitboxes has reached the target right pane position.");
 
                     currentPos = 2;
-                    Debug.Log($"Current Position at {currentPos}");
+                    //Debug.Log($"Current Position at {currentPos}");
                 }
 
                 if (isCameraAtExactPosition()) { hasMoved = false; }
@@ -96,7 +96,7 @@ public class HoverScript : MonoBehaviour
                     rightHitbox.SetActive(true);
                 }
 
-                Debug.Log("Moving Camera to the Left Pane");
+                //Debug.Log("Moving Camera to the Left Pane");
                 cameraTargetPos = new Vector3(-17.64f, camera.transform.position.y, camera.transform.position.z);
 
                 camera.transform.position =
@@ -108,10 +108,10 @@ public class HoverScript : MonoBehaviour
 
                 if (isCameraAtClosePosition())
                 {
-                    Debug.Log("Camera and Hitboxes has reached the target left pane rotation.");
+                    //Debug.Log("Camera and Hitboxes has reached the target left pane rotation.");
 
                     currentPos = 0;
-                    Debug.Log($"Current Position at {currentPos}");
+                    //Debug.Log($"Current Position at {currentPos}");
                 }
 
                 if (isCameraAtExactPosition()) { hasMoved = false; }
@@ -134,7 +134,7 @@ public class HoverScript : MonoBehaviour
                     rightHitbox.SetActive(true);
                 }
 
-                Debug.Log("Moving Camera to the Center Pane");
+                //Debug.Log("Moving Camera to the Center Pane");
                 cameraTargetPos = new Vector3(0f, camera.transform.position.y, camera.transform.position.z);
 
                 camera.transform.position =
@@ -146,10 +146,10 @@ public class HoverScript : MonoBehaviour
 
                 if (isCameraAtClosePosition())
                 {
-                    Debug.Log("Camera and Hitboxes has reached the original position.");
+                    //Debug.Log("Camera and Hitboxes has reached the original position.");
 
                     currentPos = 1;
-                    Debug.Log($"Current Position at {currentPos}");
+                    //Debug.Log($"Current Position at {currentPos}");
                 }
 
                 if (isCameraAtExactPosition()) { hasMoved = false; }
@@ -173,7 +173,7 @@ public class HoverScript : MonoBehaviour
                     leftHitbox.SetActive(true);
                 }
 
-                Debug.Log("Moving Camera to the Center Pane");
+                //Debug.Log("Moving Camera to the Center Pane");
                 cameraTargetPos = new Vector3(0f, camera.transform.position.y, camera.transform.position.z);
 
                 camera.transform.position =
@@ -185,10 +185,10 @@ public class HoverScript : MonoBehaviour
 
                 if (isCameraAtClosePosition())
                 {
-                    Debug.Log("Camera and Hitboxes has reached the original position.");
+                    //Debug.Log("Camera and Hitboxes has reached the original position.");
 
                     currentPos = 1;
-                    Debug.Log($"Current Position at {currentPos}");
+                    //Debug.Log($"Current Position at {currentPos}");
                 }
 
                 if (isCameraAtExactPosition()) { hasMoved = false; }

@@ -433,6 +433,7 @@ MonoBehaviour:
   candyQuantityText: {fileID: 110017995}
   cookieQuantityText: {fileID: 1899013501}
   customer: {fileID: 802106832}
+  dragDropClick: {fileID: 284351481}
 --- !u!114 &284351484
 MonoBehaviour:
   m_ObjectHideFlags: 0

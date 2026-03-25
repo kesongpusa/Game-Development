@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class OrderScript : MonoBehaviour
 {
@@ -12,10 +14,13 @@ public class OrderScript : MonoBehaviour
     public Text candyQuantityText;
     public Text cookieQuantityText;
 
-    private int roll, quantity;
-    private int[] quantities;
+    private int manyItems, whatItemRoll;
+    private List<string> itemName;
+    private List<int> itemQuantities;
 
     public GameObject customer;
+
+    public DragDropClick dragDropClick;
 
     private void Start()
     {
@@ -31,122 +36,164 @@ public class OrderScript : MonoBehaviour
 
     void GetOrderRandomizer()
     {
-        roll = Random.Range(0, 2);
+        manyItems = Random.Range(1, 3);
+
+        itemName = new List<string>(); 
+        itemQuantities = new List<int>();
 
         /*
-        0 = Candy
-        1 = Cookie
-        2 = Candy + Cookie
+        1 = 1 item
+        2 = 2 items
         */
 
-        if (roll == 0)
-        { Debug.Log("Random: Piece of Candy"); }
-        else if (roll == 1)
-        { Debug.Log("Random: Cookie"); }
-        else
-        { Debug.Log("Random: Candy + Cookie"); }
-
-        GetQuantityOrderRandomizer(roll);
-    }
-
-    void GetQuantityOrderRandomizer(int roll)
-    {
-        quantity = Random.Range(1, 10);
-
-        if (roll == 0)
+        if (manyItems == 1)
         {
-            candyQuantityText.enabled = true;
+            Debug.Log("[ORDER] Items: 1");
 
-            Debug.Log($"Quantity (Piece of Candy): {quantity}");
-            candyQuantityText.text = $"Candy Req: {quantity}";
-        }
-        else if (roll == 1)
-        {
-            cookieQuantityText.enabled = true;
+            whatItemRoll = Random.Range(0, 2);
 
-            Debug.Log($"Quantity (Cookie): {quantity}");
-            cookieQuantityText.text = $"Cookie Req: {quantity}";
-        }
-        else
-        {
-            quantities = new int[2];
+            /*
+            1 = Candy
+            2 = Cookie
+            */
 
-            for (int i = 0; i < 2; i++)
-            {
-                quantities[i] = Random.Range(1, 10);
+            if (whatItemRoll == 0)
+            { Debug.Log("[ORDER] Item: Piece of Candy");
+                itemName.Add("Piece of Candy");
+            }
+            else if (whatItemRoll == 1)
+            { Debug.Log("[ORDER] Item: Cookie");
+                itemName.Add("Cookie");
             }
 
-            candyQuantityText.enabled = true;
-            cookieQuantityText.enabled = true;
-
-            Debug.Log($"Quantity (Candy): {quantities[0]}");
-            Debug.Log($"Quantity (Cookie): {quantities[1]}");
-
-            candyQuantityText.text = $"Candy Req: {quantity}";
-            cookieQuantityText.text = $"Candy Req: {quantity}";
+            GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
-    }
+        else if (manyItems == 2)
+        { Debug.Log("[ORDER] Items: 2");
+            itemName.Add("Piece of Candy");
+            itemName.Add("Cookie");
 
-    public void DecreaseItemRequest(int roll, int quantityReq)
-    {
-        if (roll == 0)
-        { //"Piece of Candy";
-            if (quantityReq >= 0)
-            {
-                quantity--;
-                quantityReq--;
-                candyQuantityText.text = $"Candy Req: {quantity}";
-                Debug.Log("[ORDER] Decreased Candy Req!");
-
-                if (quantity == 0)
-                {
-                    customer.SetActive(false);
-                    Debug.Log("[ORDER] Cat is full!");
-                }
-            }
-
-            
+            GetQuantityOrderRandomizer(manyItems, itemName.Count);
         }
-        else if (roll == 1)
-        { //"Cookie";
-            if (quantityReq >= 0)
-            {
-                quantity--;
-                quantityReq--;
-                cookieQuantityText.text = $"Cookie Req: {quantity}";
-                Debug.Log("[ORDER] Decreased Cookie Req!");
 
-                if (quantity == 0)
-                {
-                    customer.SetActive(false);
-                    Debug.Log("[ORDER] Cat is full!");
-                }
-            }
+        for (int i = 0; i < itemName.Count; i++)
+        {
+            Debug.Log($"[ORDER] Item {i + 1}: {itemName[i]}");
         }
-        else
-        { //"Candy + Cookie";
+
         
+    }
+
+    void GetQuantityOrderRandomizer(int randItems, int whatItem)
+    {
+        int quantity = Random.Range(1, 11);
+
+        if (randItems == 1)
+        {
+            if (whatItem == 0)
+            {
+                candyQuantityText.enabled = true;
+
+                Debug.Log($"[ORDER] Quantity (Piece of Candy): {quantity}");
+                candyQuantityText.text = $"Candy Req: {quantity}";
+            }
+            else if (whatItem == 1)
+            {
+                cookieQuantityText.enabled = true;
+
+                Debug.Log($"[ORDER] Quantity (Cookie): {quantity}");
+                cookieQuantityText.text = $"Cookie Req: {quantity}";
+            }
+
+            itemQuantities.Add(quantity);
+        }
+        // 2 items order will always be both candy and cookie with random quantity (not yet implemented)
+        else if (randItems == itemName.Count)
+        {
+            for (int i = 0; i < randItems; i++)
+            {
+                int quantityItems = Random.Range(1, 10);
+                Debug.Log($"[ORDER] Quantity for Item {i + 1}: {quantityItems}");
+
+                itemQuantities.Add(quantityItems);
+            }
+
+            candyQuantityText.enabled = true;
+            cookieQuantityText.enabled = true;
+
+            candyQuantityText.text = $"Candy Req: {itemQuantities[0]}";
+            cookieQuantityText.text = $"Cookie Req: {itemQuantities[1]}";
         }
     }
 
-    public string getItemRequest(int roll) 
-    { 
-        if (roll == 0)
-        { return "Piece of Candy"; }
-        else if (roll == 1)
-        { return "Cookie"; }
-        else
-        { return "Candy + Cookie"; }
-    }
-
-    public int getQuantityItemRequest(int roll)
+    public void DecreaseItemRequest(string itemName)
     {
-        if (roll == 0 || roll == 1)
-        { return quantity; }
-        else
-        { return quantities[0] + quantities[1]; }
+        if (itemName == "Piece of Candy")
+        {
+            //get current position of Piece of Candy in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity--;
+                itemQuantities[index] = quantity;
+
+                candyQuantityText.text = $"Candy Req: {quantity}";
+                Debug.Log($"[ORDER] Decreased Piece of Candy quantity. New quantity: {quantity}");
+            }
+
+            if (quantity == 0)
+            {
+                Debug.Log("[ORDER] Piece of Candy order complete!");
+                candyQuantityText.enabled = false;
+            }
+        }
+        else if (itemName == "Cookie")
+        {
+            //get current position of Cookie in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity--;
+                itemQuantities[index] = quantity;
+
+                cookieQuantityText.text = $"Cookie Req: {quantity}";
+                Debug.Log($"[ORDER] Decreased Cookie quantity. New quantity: {quantity}");
+            }
+
+            if (quantity == 0)
+            {
+                Debug.Log("[ORDER] Cookie order complete!");
+                cookieQuantityText.enabled = false;
+            }
+        }
+
+        if (itemQuantities.TrueForAll(q => q == 0))
+        {
+            customer.SetActive(false);
+            Debug.Log("[ORDER] Order complete! Customer is happy!");
+        }
+
+        UpdateListFromDragDropClick();
+
     }
 
-    public int getRoll()
-    { return roll; }
+    private void UpdateListFromDragDropClick()
+    {
+        dragDropClick.setItemsRequest(itemName);
+        dragDropClick.setQuantitiesRequest(itemQuantities);
+
+        List<string> items = dragDropClick.getItemsRequest();
+        List<int> quantities = dragDropClick.getQuantitiesRequest();
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            Debug.Log($"[ORDER] Updated List from DragDropClick - Item {i + 1}: {items[i]}, Quantity: {quantities[i]}");
+        }
+    }
+    public List<string> getItemsRequest() { return itemName; }
+    public List<int> getQuantitiesRequest() { return itemQuantities; }
 }
