@@ -32,6 +32,18 @@ public class ItemsLeft : MonoBehaviour
         }
     }
 
+    public void DecreaseItem(string item)
+    {
+        if (item.Equals("Piece of Candy"))
+        {
+            DecreaseCandy();
+        }
+        else if (item.Equals("Cookie"))
+        {
+            DecreaseCookie();
+        }
+    }
+
     void UpdateCandyText()
     {
         candyLeftText.text = $"{candyLeft}";

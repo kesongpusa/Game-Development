@@ -25,7 +25,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float holdThreshold;
     private bool isDragging = false;
 
-
     void Start()
     {
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -34,6 +33,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int roll = orderScript.getRoll();
+        Debug.Log($"[DRAGDROPCLICK] Current Roll: {roll}");
+
+        string itemRequest = orderScript.getItemRequest(roll);
+        int quantityItemRequest = orderScript.getQuantityItemRequest(roll);
+
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0;
 
@@ -71,7 +76,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                         draggedObject.transform.localScale = new Vector3(0.015f, 0.015f, 0f);
                     }
 
-                    Debug.Log("Started dragging clone of: " + clickObject.name);
+                    Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
                 }
 
                 if (clickObject.CompareTag("Cart"))
@@ -87,6 +92,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
         // While dragging, move the clone with the mouse
         if (Input.GetMouseButton(0) && draggedObject != null)
         {
+            string cleanDraggedName = draggedObject.name.Replace("(Clone)", "").Trim();
+            Debug.Log($"[HOLDMOUSE] Dragged Object: {cleanDraggedName}");
+
             if (mouseHoldTime >= holdThreshold)
             {
                 isDragging = true;
@@ -99,17 +107,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 isDragging = false;
             }
 
-            Debug.Log($"Mouse hold time: {mouseHoldTime:F2} seconds, IsDragging: {isDragging}");
+            Debug.Log($"[HOLDMOUSE] Mouse hold time: {mouseHoldTime:F2} seconds, IsDragging: {isDragging}");
 
             if (isDragging)
             {
                 draggedObject.transform.position = mouseWorldPos;
 
-                Debug.Log($"Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");
+                Debug.Log($"[HOLDMOUSE] Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");
 
                 if (nextHoverObject != null)
                 {
-                    if (nextHoverObject.CompareTag("GiveOrder"))
+                    if (nextHoverObject.CompareTag("GiveOrder") && cleanDraggedName.Equals(itemRequest))
                     {
                         ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
                         if (cs != null)
@@ -134,17 +142,19 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
 
 
-        // Mouse released, stop dragging and check for drop
+        // Mouse released
         if (Input.GetMouseButtonUp(0))
         {
+            // Order to the cat if dropped on the cat
             if (draggedObject != null && nextHoverObject != null && nextHoverObject.CompareTag("GiveOrder"))
             {
                 ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
                 if (cs != null)
                 {
                     string cleanDraggedName = draggedObject.name.Replace("(Clone)", "").Trim();
-                    Debug.Log($"Dragged Object: {cleanDraggedName}");
+                    Debug.Log($"[MOUSEUP] Dragged Object: {cleanDraggedName}");
 
+                    /*
                     if (cleanDraggedName.Equals("Piece of Candy"))
                     {
                         itemsLeft.DecreaseCandy();
@@ -156,9 +166,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
                     orderScript.addScoreToOrder(1);
                     cs.ResetSprite();
+                    */
+
+                    if (cleanDraggedName.Equals(itemRequest))
+                    {
+                        itemsLeft.DecreaseItem(itemRequest);
+
+                        orderScript.DecreaseItemRequest(roll, quantityItemRequest);
+
+                        orderScript.addScoreToOrder(1);
+                    }
+
+                    cs.ResetSprite();
                 }
             }
 
+            // If it was a click (not a drag), add item to cart
             if (!isDragging && (mouseHoldTime < holdThreshold))
             {
                 if (clickObject.name.Equals("Candy"))
