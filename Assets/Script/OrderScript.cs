@@ -21,6 +21,7 @@ public class OrderScript : MonoBehaviour
     public GameObject customer;
 
     public DragDropClick dragDropClick;
+    public RestartGameScript restartGameScript;
 
     private void Start()
     {
@@ -174,6 +175,8 @@ public class OrderScript : MonoBehaviour
         if (itemQuantities.TrueForAll(q => q == 0))
         {
             customer.SetActive(false);
+            restartGameScript.ShowRestartButton();
+
             Debug.Log("[ORDER] Order complete! Customer is happy!");
         }
 
