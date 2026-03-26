@@ -22,9 +22,9 @@ public class ItemsInCart : MonoBehaviour
         Debug.Log("Added to cart: " + ItemName);
 
         if (ItemName.Equals("Piece of Candy"))
-        { totalCandy++; }
+        { totalCandy++; Debug.Log($"Added Candy to Cart"); }
         else if (ItemName.Equals("Cookie"))
-        { totalCookie++; }
+        { totalCookie++; Debug.Log($"Added Cookie to Cart"); }
 
         AddItemsInCart();
     }
@@ -43,11 +43,22 @@ public class ItemsInCart : MonoBehaviour
 
     public void ClearCart()
     {
+        cartItems.Clear();
+
         totalItems = 0;
         totalCandy = 0;
         totalCookie = 0;
+
         UpdateTotalText();
     }
     public int GetTotalItems()
     { return totalItems; }
+
+    public List<string> GetCartItems()
+    { return cartItems; }
+
+    public int GetTotalCandy()
+    { return totalCandy; }
+    public int GetTotalCookie() 
+    { return totalCookie; }
 }

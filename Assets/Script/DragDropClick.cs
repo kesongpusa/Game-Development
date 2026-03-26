@@ -1,7 +1,9 @@
 using NUnit.Framework;
-using System.Data.Common;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using UnityEngine;
 
 public class DragDropClick : MonoBehaviour
 {
@@ -83,12 +85,6 @@ public class DragDropClick : MonoBehaviour
                     }
 
                     Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
-                }
-
-                if (clickObject.CompareTag("Cart"))
-                { 
-                    GiveItemToCatFromCart();
-                    itemsInCart.ClearCart();
                 }
             }
 
@@ -184,7 +180,7 @@ public class DragDropClick : MonoBehaviour
                     {
                         itemsLeft.DecreaseItem(cleanDraggedName);
 
-                        orderScript.DecreaseItemRequest(cleanDraggedName);
+                        orderScript.DecreaseItemRequest(cleanDraggedName, 1);
 
                         orderScript.addScoreToOrder(1);
                     }
@@ -205,6 +201,13 @@ public class DragDropClick : MonoBehaviour
                 {
                     itemsInCart.AddItem("Cookie");
                     itemsLeft.DecreaseCookie();
+                }
+
+                // If the click was on the cart, give items to cat
+                if (clickObject.CompareTag("Cart"))
+                {
+                    GiveItemToCatFromCart();
+                    itemsInCart.ClearCart();
                 }
             }
 
@@ -231,10 +234,29 @@ public class DragDropClick : MonoBehaviour
     {
         int totalItemsInCart = itemsInCart.GetTotalItems();
 
-        if (totalItemsInCart > 0)
+        List<string> cartItems = itemsInCart.GetCartItems();
+
+        if (cartItems.Any(item => itemsRequest.Contains(item)))
         {
-            orderScript.addScoreToOrder(totalItemsInCart);
-            itemsInCart.ClearCart();
+            Debug.Log("[CART] Giving items to cat from cart...");
+            int totalCandy = itemsInCart.GetTotalCandy();
+            int totalCookie = itemsInCart.GetTotalCookie();
+
+            if (itemsRequest.Contains("Piece of Candy") && totalCandy > 0)
+            {
+                int candyToGive = Mathf.Min(totalCandy, quantityItemRequest[itemsRequest.IndexOf("Piece of Candy")]);
+                orderScript.DecreaseItemRequest("Piece of Candy", candyToGive);
+                orderScript.addScoreToOrder(candyToGive);
+                totalItemsInCart -= candyToGive;
+            }
+
+            if (itemsRequest.Contains("Cookie") && totalCookie > 0)
+            {
+                int cookieToGive = Mathf.Min(totalCookie, quantityItemRequest[itemsRequest.IndexOf("Cookie")]);
+                orderScript.DecreaseItemRequest("Cookie", cookieToGive);
+                orderScript.addScoreToOrder(cookieToGive);
+                totalItemsInCart -= cookieToGive;
+            }
         }
     }
 

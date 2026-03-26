@@ -31,7 +31,7 @@ public class OrderScript : MonoBehaviour
         orderQuantity = orderQuantity + addItemsOrder;
         quantityText.text = $"Cat Ate: {orderQuantity.ToString()}";
 
-        Debug.Log($"Order quantity updated: {orderQuantity}");
+        Debug.Log($"[ORDER] Order quantity updated: {orderQuantity}");
     }
 
     void GetOrderRandomizer()
@@ -126,7 +126,7 @@ public class OrderScript : MonoBehaviour
         }
     }
 
-    public void DecreaseItemRequest(string itemName)
+    public void DecreaseItemRequest(string itemName, int itemToGive)
     {
         if (itemName == "Piece of Candy")
         {
@@ -136,7 +136,7 @@ public class OrderScript : MonoBehaviour
 
             if (quantity > 0)
             {
-                quantity--;
+                quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
                 candyQuantityText.text = $"Candy Req: {quantity}";
@@ -157,7 +157,7 @@ public class OrderScript : MonoBehaviour
 
             if (quantity > 0)
             {
-                quantity--;
+                quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
                 cookieQuantityText.text = $"Cookie Req: {quantity}";
