@@ -3,6 +3,7 @@ using UnityEngine;
 public class ChangeSprite : MonoBehaviour
 {
     public Sprite defaultSprite;
+    public Sprite noAcceptSprite;
     public Sprite newSprite;
     private SpriteRenderer sr;
 
@@ -17,6 +18,15 @@ public class ChangeSprite : MonoBehaviour
         if (sr != null && newSprite != null)
         {
             sr.sprite = newSprite;
+            Debug.Log("Highlight applied to: " + sr.gameObject.name);
+        }
+    }
+
+    public void noAcceptItemSprite()
+    {
+        if (sr != null && noAcceptSprite != null)
+        {
+            sr.sprite = noAcceptSprite;
             Debug.Log("Highlight applied to: " + sr.gameObject.name);
         }
     }

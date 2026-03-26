@@ -138,6 +138,14 @@ public class DragDropClick : MonoBehaviour
                             cs.HighlightSprite();
                         }
                     }
+                    else
+                    {
+                        ChangeSprite cs = nextHoverObject.GetComponent<ChangeSprite>();
+                        if (cs != null)
+                        {
+                            cs.noAcceptItemSprite();
+                        }
+                    }
                 }
                 else
                 {
