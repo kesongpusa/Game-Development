@@ -3,24 +3,27 @@ using UnityEngine.UI;
 
 public class ItemsLeft : MonoBehaviour
 {
-    public int candyLeft = 10;
-    public int cookieLeft = 10;
+    private int candyLeft;
+    private int cookieLeft;
 
     public Text candyLeftText;
     public Text cookieLeftText;
 
     void Start()
     {
-        UpdateCandyText();
-        UpdateCookieText();
+        candyLeft = 10;
+        cookieLeft = 10;
+
+        UpdateCandyLeftText();
+        UpdateCookieLeftText();
     }
     public void DecreaseCandy()
     {
         if (candyLeft > 0)
         {
             candyLeft--;
-            UpdateCandyText();
         }
+        UpdateCandyLeftText();
     }
 
     public void DecreaseCookie()
@@ -28,8 +31,9 @@ public class ItemsLeft : MonoBehaviour
         if (cookieLeft > 0)
         {
             cookieLeft--;
-            UpdateCookieText();
         }
+
+        UpdateCookieLeftText();
     }
 
     public void DecreaseItem(string item)
@@ -44,13 +48,33 @@ public class ItemsLeft : MonoBehaviour
         }
     }
 
-    void UpdateCandyText()
+    void UpdateCandyLeftText()
     {
         candyLeftText.text = $"{candyLeft}";
+        Debug.Log($"[ITEMSLEFT] Candy left: {candyLeft}");
     }
 
-    void UpdateCookieText()
+    void UpdateCookieLeftText()
     {
         cookieLeftText.text = $"{cookieLeft}";
+        Debug.Log($"[ITEMSLEFT] Cookies left: {cookieLeft}");
     }
+
+    public void SetCandyLeft(int candyLeft)
+    {
+        this.candyLeft = candyLeft;
+        UpdateCandyLeftText();
+    }
+
+    public void SetCookieLeft(int cookieLeft)
+    {
+        this.cookieLeft = cookieLeft;
+        UpdateCookieLeftText();
+    }
+
+    public int GetCandyLeft()
+    { return candyLeft; }
+
+    public int GetCookieLeft()
+    { return cookieLeft; }
 }

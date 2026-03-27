@@ -59,6 +59,8 @@ public class DragDropClick : MonoBehaviour
         raycastHit2D = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
         nextHoverObject = raycastHit2D ? raycastHit2D.collider.transform : null;
 
+        CheckItemsLeft();
+
         // Handle mouse click to start dragging
         if (Input.GetMouseButtonDown(0))
         {            
@@ -88,7 +90,8 @@ public class DragDropClick : MonoBehaviour
                 }
             }
 
-            Debug.Log("Clicked on object: " + clickObject.name);
+            if (clickObject != null)
+            { Debug.Log("Clicked on object: " + clickObject.name); }
         }
 
         // While dragging, move the clone with the mouse
@@ -200,22 +203,25 @@ public class DragDropClick : MonoBehaviour
             // If it was a click (not a drag), add item to cart
             if (!isDragging && (mouseHoldTime < holdThreshold))
             {
-                if (clickObject.name.Equals("Candy"))
+                if (clickObject != null)
                 {
-                    itemsInCart.AddItem("Piece of Candy");
-                    itemsLeft.DecreaseCandy();
-                }
-                else if (clickObject.name.Equals("Cookies"))
-                {
-                    itemsInCart.AddItem("Cookie");
-                    itemsLeft.DecreaseCookie();
-                }
+                    if (clickObject.name.Equals("Candy"))
+                    {
+                        itemsInCart.AddItem("Piece of Candy");
+                        itemsLeft.DecreaseCandy();
+                    }
+                    else if (clickObject.name.Equals("Cookies"))
+                    {
+                        itemsInCart.AddItem("Cookie");
+                        itemsLeft.DecreaseCookie();
+                    }
 
-                // If the click was on the cart, give items to cat
-                if (clickObject.CompareTag("Cart"))
-                {
-                    GiveItemToCatFromCart();
-                    itemsInCart.ClearCart();
+                    // If the click was on the cart, give items to cat
+                    if (clickObject.CompareTag("Cart"))
+                    {
+                        GiveItemToCatFromCart();
+                        itemsInCart.ClearCart();
+                    }
                 }
             }
 
@@ -225,16 +231,19 @@ public class DragDropClick : MonoBehaviour
 
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
         }
-
-        CheckItemsLeft();
     }
 
     void CheckItemsLeft()
     {
-        if (itemsLeft.candyLeft == 0)
+        int candyLeft = itemsLeft.GetCandyLeft();
+        int cookieLeft = itemsLeft.GetCookieLeft();
+
+        Debug.Log($"[CHECKITEMSLEFT] Candy Left: {candyLeft}, Cookie Left: {cookieLeft}");
+
+        if (candyLeft == 0)
         { candyObject.SetActive(false); }
     
-        if (itemsLeft.cookieLeft == 0)
+        if (cookieLeft == 0)
         { cookiesObject.SetActive(false); }
     }
 
