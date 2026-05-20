@@ -279,6 +279,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44311423}
   m_CullTransparentMesh: 1
+--- !u!1 &84200906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84200908}
+  - component: {fileID: 84200907}
+  m_Layer: 0
+  m_Name: DisablingUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &84200907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84200906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adff85d928df8744b2d1884cbf8c75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisablingUI
+  shopButton: {fileID: 2019467690}
+  closeShopButton: {fileID: 262409853}
+  textItemRequestsAndScore: {fileID: 44311423}
+  textItemLeft: {fileID: 1472093069}
+  textTotalItems: {fileID: 1743131655}
+  items: {fileID: 347835362}
+  hoverObjects: {fileID: 1450257452}
+  cart: {fileID: 1148572597}
+--- !u!4 &84200908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84200906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.16, y: 0.43146, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86831712
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: 449}
+  m_AnchoredPosition: {x: 14, y: 425.6}
   m_SizeDelta: {x: 373.666, y: 150.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &249430641
@@ -631,7 +683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 868, y: 430}
+  m_AnchoredPosition: {x: 866.8, y: 487.8}
   m_SizeDelta: {x: 127.3, y: 56.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262409855
@@ -681,6 +733,18 @@ MonoBehaviour:
       - m_Target: {fileID: 284351488}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: CloseInventoryShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 84200907}
+        m_TargetAssemblyTypeName: DisablingUI, Assembly-CSharp
+        m_MethodName: EnableBelowUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2635,7 +2699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 773.3226, y: 497.48}
+  m_AnchoredPosition: {x: 7, y: 499}
   m_SizeDelta: {x: 317.3515, y: 53.325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119810717
@@ -5010,6 +5074,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 84200907}
+        m_TargetAssemblyTypeName: DisablingUI, Assembly-CSharp
+        m_MethodName: DisableBelowUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2019467693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5237,5 +5313,6 @@ SceneRoots:
   - {fileID: 733511161}
   - {fileID: 2012701921}
   - {fileID: 284351482}
-  - {fileID: 2016674234}
   - {fileID: 499462662}
+  - {fileID: 2016674234}
+  - {fileID: 84200908}
