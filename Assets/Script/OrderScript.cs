@@ -22,6 +22,7 @@ public class OrderScript : MonoBehaviour
 
     public DragDropClick dragDropClick;
     public RestartGameScript restartGameScript;
+    public PayingCustomer payingCustomer;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class OrderScript : MonoBehaviour
         Debug.Log($"[ORDER] Order quantity updated: {orderQuantity}");
     }
 
-    void GetOrderRandomizer()
+    private void GetOrderRandomizer()
     {
         manyItems = Random.Range(1, 3);
 
@@ -85,7 +86,7 @@ public class OrderScript : MonoBehaviour
         
     }
 
-    void GetQuantityOrderRandomizer(int randItems, int whatItem)
+    private void GetQuantityOrderRandomizer(int randItems, int whatItem)
     {
         int quantity = Random.Range(1, 11);
 
@@ -108,7 +109,6 @@ public class OrderScript : MonoBehaviour
 
             itemQuantities.Add(quantity);
         }
-        // 2 items order will always be both candy and cookie with random quantity (not yet implemented)
         else if (randItems == itemName.Count)
         {
             for (int i = 0; i < randItems; i++)
@@ -175,6 +175,9 @@ public class OrderScript : MonoBehaviour
         if (itemQuantities.TrueForAll(q => q == 0))
         {
             customer.SetActive(false);
+
+            payingCustomer.PayForTotalAmount();
+
             restartGameScript.ShowRestartButton();
 
             Debug.Log("[ORDER] Order complete! Customer is happy!");
