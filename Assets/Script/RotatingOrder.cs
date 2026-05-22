@@ -5,6 +5,7 @@ public class RotatingOrder : MonoBehaviour
 {
     public OrderScript orderScript;
     public DragDropClick dragDropClick;
+    public LimitingCustomers limitingCustomers;
 
     public Text textPayingCustomer;
 

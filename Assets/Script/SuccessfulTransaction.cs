@@ -10,7 +10,6 @@ public class SuccessfulTransaction : MonoBehaviour
     public PayingCustomer payingCustomer;
     public void Success()
     {
-        //restartGameScript.ShowRestartButton();
         Debug.Log("[TRANSACTION] Transaction successful! Playing success sound.");
         Debug.Log("[TRANSACTION] Order complete! Customer is happy!");
 
