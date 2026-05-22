@@ -31,22 +31,17 @@ public class DragDropClick : MonoBehaviour
 
     private List<string> itemsRequest;
     private List<int> quantityItemRequest;
-    private int copyList = 0;
 
     void Start()
     {
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+
+        GetItemListRequestAndQuantity();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (copyList == 0)
-        {
-            GetItemListRequestAndQuantity();
-            copyList++;
-        }
-
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0;
 
@@ -247,7 +242,7 @@ public class DragDropClick : MonoBehaviour
         { cookiesObject.SetActive(false); }
     }
 
-    void GiveItemToCatFromCart()
+    private void GiveItemToCatFromCart()
     {
         int totalItemsInCart = itemsInCart.GetTotalItems();
 
@@ -277,7 +272,7 @@ public class DragDropClick : MonoBehaviour
         }
     }
 
-    void GetItemListRequestAndQuantity()
+    public void GetItemListRequestAndQuantity()
     {
         itemsRequest = new List<string>(orderScript.getItemsRequest());
         quantityItemRequest = new List<int>(orderScript.getQuantitiesRequest());

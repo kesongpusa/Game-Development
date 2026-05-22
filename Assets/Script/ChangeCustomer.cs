@@ -33,7 +33,7 @@ public class ChangeCustomers : MonoBehaviour
 
         Debug.Log($"[CHANGECUSTOMER] Randomly picked customer index: {randomCustomer}, name: {lineupCustomers[randomCustomer].name}");
 
-        while (isCustomerDone(nextCustomerName))
+        while (isCustomerDone(customerName))
         {
             randomCustomer = Random.Range(0, lineupCustomers.Length);
             currectCustomer.GetComponent<SpriteRenderer>().sprite = lineupCustomers[randomCustomer];
@@ -50,7 +50,7 @@ public class ChangeCustomers : MonoBehaviour
         Debug.Log($"[CHANGECUSTOMER] Updated score text: Customers Served: {rotation}");
     }
 
-    private bool isCustomerDone(string spriteName)
+    private bool isCustomerDone(List<string> spriteName)
     {
         foreach (string name in customerName)
         {

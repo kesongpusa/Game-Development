@@ -6,6 +6,7 @@ public class SuccessfulTransaction : MonoBehaviour
     public GameObject customer;
     public RestartGameScript restartGameScript;
     public ChangeCustomers changeCustomers;
+    public RotatingOrder rotatingOrder;
 
     public Text textCustomerPay;
     public void Success()
@@ -17,5 +18,7 @@ public class SuccessfulTransaction : MonoBehaviour
         Debug.Log("[TRANSACTION] Order complete! Customer is happy!");
 
         changeCustomers.RandomCustomerPicker();
+
+        rotatingOrder.StartOrder();
     }
 }
