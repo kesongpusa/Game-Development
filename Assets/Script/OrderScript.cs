@@ -46,42 +46,75 @@ public class OrderScript : MonoBehaviour
 
         if (manyItems == 1)
         {
+            item1.SetActive(true);
             Debug.Log("[ORDER] Items: 1");
 
-            whatItemRoll = Random.Range(0, 2);
+            whatItemRoll = Random.Range(0, 5);
 
             /*
             1 = Goya Candy
             2 = Mentos
+            3 = Rice
+            4 = Soy Sauce
+            5 = Vinegar
             */
 
             if (whatItemRoll == 0)
-            { Debug.Log("[ORDER] Item: Goya Candy");
+            {
+                Debug.Log("[ORDER] Item: Goya Candy");
                 itemName.Add("Goya Candy");
 
-                item1.SetActive(true);
                 item1.GetComponent<SpriteRenderer>().sprite = items[0];
             }
             else if (whatItemRoll == 1)
-            { Debug.Log("[ORDER] Item: Mentos");
+            {
+                Debug.Log("[ORDER] Item: Mentos");
                 itemName.Add("Mentos");
 
-                item2.SetActive(true);
-                item2.GetComponent<SpriteRenderer>().sprite = items[1];
+                item1.GetComponent<SpriteRenderer>().sprite = items[1];
+            }
+            else if (whatItemRoll == 2)
+            {
+                Debug.Log("[ORDER] Item: Rice");
+                itemName.Add("Rice");
+
+                item1.GetComponent<SpriteRenderer>().sprite = items[2];
+            }
+            else if (whatItemRoll == 3)
+            {
+                Debug.Log("[ORDER] Item: Soy Sauce");
+                itemName.Add("Soy Sauce");
+
+                item1.GetComponent<SpriteRenderer>().sprite = items[3];
+            }
+            else if (whatItemRoll == 4)
+            {
+                Debug.Log("[ORDER] Item: Vinegar");
+                itemName.Add("Vinegar");
+
+                item1.GetComponent<SpriteRenderer>().sprite = items[4];
             }
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
         else if (manyItems == 2)
         { Debug.Log("[ORDER] Items: 2");
 
+            int whatItemRoll1 = Random.Range(0, 5);
+            int whatItemRoll2 = Random.Range(0, 5);
+
+            while (whatItemRoll1 == whatItemRoll2)
+            {
+                whatItemRoll2 = Random.Range(0, 5);
+            }
+
             item1.SetActive(true);
             item2.SetActive(true);
-            
-            itemName.Add("Goya Candy");
-            itemName.Add("Mentos");
 
-            item1.GetComponent<SpriteRenderer>().sprite = items[0];
-            item2.GetComponent<SpriteRenderer>().sprite = items[1];
+            itemName.Add(items[whatItemRoll1].name);
+            itemName.Add(items[whatItemRoll2].name);
+
+            item1.GetComponent<SpriteRenderer>().sprite = items[whatItemRoll1];
+            item2.GetComponent<SpriteRenderer>().sprite = items[whatItemRoll2];
 
             GetQuantityOrderRandomizer(manyItems, itemName.Count);
         }
@@ -100,19 +133,12 @@ public class OrderScript : MonoBehaviour
 
         if (randItems == 1)
         {
-            if (whatItem == 0)
+            if (whatItem >= 0)
             {
                 goyaCandyQuantityText.enabled = true;
 
                 Debug.Log($"[ORDER] Quantity (Goya Candy): {quantity}");
                 goyaCandyQuantityText.text = $"{quantity}";
-            }
-            else if (whatItem == 1)
-            {
-                mentosQuantityText.enabled = true;
-
-                Debug.Log($"[ORDER] Quantity (Mentos): {quantity}");
-                mentosQuantityText.text = $"{quantity}";
             }
 
             itemQuantities.Add(quantity);
