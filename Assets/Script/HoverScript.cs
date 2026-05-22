@@ -72,7 +72,7 @@ public class HoverScript : MonoBehaviour
                         camera.transform.position,
                         cameraTargetPos,
                         speedCam * Time.deltaTime
-                    );                
+                    );
 
                 if (isCameraAtClosePosition())
                 {
@@ -82,8 +82,8 @@ public class HoverScript : MonoBehaviour
                     //Debug.Log($"Current Position at {currentPos}");
                 }
 
-                if (isCameraAtExactPosition()) 
-                { 
+                if (isCameraAtExactPosition())
+                {
                     EnableHoverObjects(); rightHitbox.SetActive(false);
                     hasMoved = false;
                 }
@@ -116,6 +116,16 @@ public class HoverScript : MonoBehaviour
                     hasMoved = false;
                 }
             }
+
+            if (!hasMoved && !isObjectActive(leftHitbox) && (toPosition == 0 || currentPos == 0))
+            {
+                rightHitbox.SetActive(true);
+            }
+
+            if (!hasMoved && !isObjectActive(rightHitbox) && (toPosition == 2 || currentPos == 2))
+            {
+                leftHitbox.SetActive(true);
+            }
         }
         else if (currentPos == 0)
         {
@@ -137,7 +147,7 @@ public class HoverScript : MonoBehaviour
                         camera.transform.position,
                         cameraTargetPos,
                         speedCamToLeft * Time.deltaTime
-                    );                
+                    );
 
                 if (isCameraAtClosePosition())
                 {
@@ -153,12 +163,18 @@ public class HoverScript : MonoBehaviour
                     hasMoved = false;
                 }
             }
+
+            if (!hasMoved && (!isObjectActive(rightHitbox) && !isObjectActive(leftHitbox)))
+            {
+                EnableHoverObjects();
+            }
+
         }
         // After Disabling the Right Hover, Move the Camera to the Left
         else if (currentPos == 2)
         {
             if (!hasMoved && nextHoverObject != null && nextHoverObject.name == "LeftObject")
-            { 
+            {
                 hasMoved = true;
                 toPosition = 1;
 
@@ -175,7 +191,7 @@ public class HoverScript : MonoBehaviour
                         camera.transform.position,
                         cameraTargetPos,
                         speedCam * Time.deltaTime
-                    );                
+                    );
 
                 if (isCameraAtClosePosition())
                 {
@@ -189,6 +205,11 @@ public class HoverScript : MonoBehaviour
                     EnableHoverObjects();
                     hasMoved = false;
                 }
+            }
+
+            if (!hasMoved && (!isObjectActive(rightHitbox) && !isObjectActive(leftHitbox)))
+            {
+                EnableHoverObjects();
             }
         }
     }
