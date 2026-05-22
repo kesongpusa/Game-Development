@@ -8,9 +8,12 @@ public class PayingCustomer : MonoBehaviour
     public ItemPrice itemPrice;
     public OrderScript orderScript;
     public PlayerCurrency playerCurrency;
+    public CalculatorScript calculatorScript;
+    public ChangeScript changeScript;
 
     public Text textPayingCustomer;
 
+    private float finalCustomerGiveMoney = 0f;
     private float paymentAmount = 0f;
     private float totalPrice = 0f;
 
@@ -47,15 +50,33 @@ public class PayingCustomer : MonoBehaviour
 
     public void PayForTotalAmount()
     {
-        float customerGiveMoney = UnityEngine.Random.Range(itemPrice.GetTotalPrice() + 2f, itemPrice.GetTotalPrice() + 10f);
+        float minGiveMoney = itemPrice.GetTotalPrice() + 2f;
+        float maxGiveMoney = itemPrice.GetTotalPrice() + 10f;
+        float step = 0.05f;
 
-        customerGiveMoney = (float)Math.Round(customerGiveMoney, 2);
-        Debug.Log("[PAYINGCUSTOMER] Customer gives: ₱" + customerGiveMoney);
+        int minSteps = Mathf.RoundToInt(minGiveMoney / step);
+        int maxSteps = Mathf.RoundToInt(maxGiveMoney / step);
 
-        float currentCurrency = playerCurrency.GetCurrentCurrency();
-        playerCurrency.SetCurrentCurrency(currentCurrency + customerGiveMoney);
+        int customerGiveMoney = UnityEngine.Random.Range(minSteps, maxSteps);
+
+        finalCustomerGiveMoney = customerGiveMoney * step;
+
+        Debug.Log("[PAYINGCUSTOMER] Customer gives: ₱" + finalCustomerGiveMoney);
+
+        totalPrice = (float)Math.Round(totalPrice, 2);
+
+        /*float currentCurrency = playerCurrency.GetCurrentCurrency();
+        playerCurrency.SetCurrentCurrency(currentCurrency + finalCustomerGiveMoney);*/
 
         textPayingCustomer.enabled = true;
-        textPayingCustomer.text = $"Customer pays: ₱{customerGiveMoney}";
+        textPayingCustomer.text = $"Customer pays: ₱{finalCustomerGiveMoney}";
+
+        changeScript.CalculateChange();
     }
+
+    public float GetTotalPrice()
+    { return totalPrice; }
+
+    public float GetFinalCustomerGiveMoney()
+    { return finalCustomerGiveMoney; }
 }

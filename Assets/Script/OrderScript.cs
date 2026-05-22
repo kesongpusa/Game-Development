@@ -18,10 +18,7 @@ public class OrderScript : MonoBehaviour
     private List<string> itemName;
     private List<int> itemQuantities;
 
-    public GameObject customer;
-
     public DragDropClick dragDropClick;
-    public RestartGameScript restartGameScript;
     public PayingCustomer payingCustomer;
 
     private void Start()
@@ -173,15 +170,7 @@ public class OrderScript : MonoBehaviour
         }
 
         if (itemQuantities.TrueForAll(q => q == 0))
-        {
-            customer.SetActive(false);
-
-            payingCustomer.PayForTotalAmount();
-
-            restartGameScript.ShowRestartButton();
-
-            Debug.Log("[ORDER] Order complete! Customer is happy!");
-        }
+        { payingCustomer.PayForTotalAmount(); }
 
         UpdateListFromDragDropClick();
 
