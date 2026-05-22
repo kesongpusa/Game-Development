@@ -4729,8 +4729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeCustomers
   limitCustomers: {fileID: 1418303961}
-  currentCustomer: {fileID: 802106832}
-  restartButton: {fileID: 894980267}
+  currectCustomer: {fileID: 802106832}
   lineupCustomers:
   - {fileID: 21300000, guid: c731af23eadaf5c459c1c165cae5698f, type: 3}
   - {fileID: 21300000, guid: 1897dfc94e17f0c4eb65dc7bdb6506c5, type: 3}
@@ -4760,7 +4759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RotatingOrder
   orderScript: {fileID: 196513654}
   dragDropClick: {fileID: 284351481}
-  limitingCustomers: {fileID: 1418303961}
+  limitingCustomers: {fileID: 0}
   textPayingCustomer: {fileID: 22255431}
 --- !u!114 &1418303961
 MonoBehaviour:
