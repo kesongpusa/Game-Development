@@ -31,7 +31,7 @@ public class ChangeScript : MonoBehaviour
     private void SetTextChange()
     {
         textChange.enabled = true;
-        textChange.text = $"Change: ₱{change}";
+        textChange.text = $"Change: ₱{change.ToString("F2")}";
     }
 
     public float GetChange()

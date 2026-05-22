@@ -13,7 +13,7 @@ public class PlayerCurrency : MonoBehaviour
 
     public void UpdateCurrencyText()
     {
-        textCurrency.text = $"Currency: ₱{currentCurrency}";
+        textCurrency.text = $"Currency: ₱{currentCurrency.ToString("F2")}";
     }
 
     public void SetCurrentCurrency(float updatedCurrency)

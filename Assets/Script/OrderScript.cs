@@ -33,7 +33,7 @@ public class OrderScript : MonoBehaviour
         Debug.Log($"[ORDER] Order quantity updated: {orderQuantity}");
     }
 
-    private void GetOrderRandomizer()
+    public void GetOrderRandomizer()
     {
         manyItems = Random.Range(1, 3);
 
@@ -188,6 +188,12 @@ public class OrderScript : MonoBehaviour
         {
             Debug.Log($"[ORDER] Updated List from DragDropClick - Item {i + 1}: {items[i]}, Quantity: {quantities[i]}");
         }
+    }
+
+    public void ClearItemsList()
+    {
+        itemName.Clear();
+        itemQuantities.Clear();
     }
     public List<string> getItemsRequest() { return itemName; }
     public List<int> getQuantitiesRequest() { return itemQuantities; }
