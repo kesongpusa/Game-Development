@@ -185,8 +185,6 @@ public class DragDropClick : MonoBehaviour
                         itemsLeft.DecreaseItem(cleanDraggedName);
 
                         orderScript.DecreaseItemRequest(cleanDraggedName, 1);
-
-                        orderScript.addScoreToOrder(1);
                     }
                     
                     cs.ResetSprite();
@@ -260,7 +258,6 @@ public class DragDropClick : MonoBehaviour
             {
                 int goyaCandyToGive = Mathf.Min(totalGoyaCandy, quantityItemRequest[itemsRequest.IndexOf("Goya Candy")]);
                 orderScript.DecreaseItemRequest("Goya Candy", goyaCandyToGive);
-                orderScript.addScoreToOrder(goyaCandyToGive);
                 totalItemsInCart -= goyaCandyToGive;
             }
 
@@ -268,7 +265,6 @@ public class DragDropClick : MonoBehaviour
             {
                 int mentosToGive = Mathf.Min(totalMentos, quantityItemRequest[itemsRequest.IndexOf("Mentos")]);
                 orderScript.DecreaseItemRequest("Mentos", mentosToGive);
-                orderScript.addScoreToOrder(mentosToGive);
                 totalItemsInCart -= mentosToGive;
             }
         }

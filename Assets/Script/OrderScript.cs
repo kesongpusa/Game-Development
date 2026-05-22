@@ -6,10 +6,15 @@ using System.Collections.Generic;
 public class OrderScript : MonoBehaviour
 {
     private int orderQuantity;
-    public Text quantityText;
 
     public GameObject getGoyaCandy; 
     public GameObject getMentos;
+
+    public GameObject requestItem;
+    public GameObject item1;
+    public GameObject item2;
+
+    public Sprite[] items;
 
     public Text goyaCandyQuantityText;
     public Text mentosQuantityText;
@@ -25,16 +30,10 @@ public class OrderScript : MonoBehaviour
     {
         GetOrderRandomizer();
     }
-    public void addScoreToOrder(int addItemsOrder)
-    {
-        orderQuantity = orderQuantity + addItemsOrder;
-        quantityText.text = $"Cat Ate: {orderQuantity.ToString()}";
-
-        Debug.Log($"[ORDER] Order quantity updated: {orderQuantity}");
-    }
 
     public void GetOrderRandomizer()
     {
+        requestItem.SetActive(true);
         manyItems = Random.Range(1, 3);
 
         itemName = new List<string>(); 
@@ -59,18 +58,30 @@ public class OrderScript : MonoBehaviour
             if (whatItemRoll == 0)
             { Debug.Log("[ORDER] Item: Goya Candy");
                 itemName.Add("Goya Candy");
+
+                item1.SetActive(true);
+                item1.GetComponent<SpriteRenderer>().sprite = items[0];
             }
             else if (whatItemRoll == 1)
             { Debug.Log("[ORDER] Item: Mentos");
                 itemName.Add("Mentos");
-            }
 
+                item2.SetActive(true);
+                item2.GetComponent<SpriteRenderer>().sprite = items[1];
+            }
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
         else if (manyItems == 2)
         { Debug.Log("[ORDER] Items: 2");
+
+            item1.SetActive(true);
+            item2.SetActive(true);
+            
             itemName.Add("Goya Candy");
             itemName.Add("Mentos");
+
+            item1.GetComponent<SpriteRenderer>().sprite = items[0];
+            item2.GetComponent<SpriteRenderer>().sprite = items[1];
 
             GetQuantityOrderRandomizer(manyItems, itemName.Count);
         }
@@ -94,14 +105,14 @@ public class OrderScript : MonoBehaviour
                 goyaCandyQuantityText.enabled = true;
 
                 Debug.Log($"[ORDER] Quantity (Goya Candy): {quantity}");
-                goyaCandyQuantityText.text = $"Goya Req: {quantity}";
+                goyaCandyQuantityText.text = $"{quantity}";
             }
             else if (whatItem == 1)
             {
                 mentosQuantityText.enabled = true;
 
                 Debug.Log($"[ORDER] Quantity (Mentos): {quantity}");
-                mentosQuantityText.text = $"Mentos Req: {quantity}";
+                mentosQuantityText.text = $"{quantity}";
             }
 
             itemQuantities.Add(quantity);
@@ -119,8 +130,8 @@ public class OrderScript : MonoBehaviour
             goyaCandyQuantityText.enabled = true;
             mentosQuantityText.enabled = true;
 
-            goyaCandyQuantityText.text = $"Goya Req: {itemQuantities[0]}";
-            mentosQuantityText.text = $"Mentos Req: {itemQuantities[1]}";
+            goyaCandyQuantityText.text = $"{itemQuantities[0]}";
+            mentosQuantityText.text = $"{itemQuantities[1]}";
         }
     }
 
@@ -137,7 +148,7 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                goyaCandyQuantityText.text = $"Goya Req: {quantity}";
+                goyaCandyQuantityText.text = $"{quantity}";
                 Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
             }
 
@@ -158,7 +169,7 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                mentosQuantityText.text = $"Mentos Req: {quantity}";
+                mentosQuantityText.text = $"{quantity}";
                 Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
             }
 
@@ -170,7 +181,13 @@ public class OrderScript : MonoBehaviour
         }
 
         if (itemQuantities.TrueForAll(q => q == 0))
-        { payingCustomer.PayForTotalAmount(); }
+        { 
+            payingCustomer.PayForTotalAmount();
+            requestItem.SetActive(false);
+
+            item1.SetActive(false);
+            item2.SetActive(false);
+        }
 
         UpdateListFromDragDropClick();
 
