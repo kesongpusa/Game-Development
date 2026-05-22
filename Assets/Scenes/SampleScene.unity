@@ -303,12 +303,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42805181}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1460.4067, y: 220.86012, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1460.9248, y: 219.58815, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 284351482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &42805184
 MonoBehaviour:
@@ -469,12 +469,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84200906}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 0.43146, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.35812744, y: -0.84051263, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 284351482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86831712
 GameObject:
@@ -977,6 +977,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169043933}
   m_CullTransparentMesh: 1
+--- !u!1 &196513652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196513655}
+  - component: {fileID: 196513654}
+  - component: {fileID: 196513653}
+  m_Layer: 0
+  m_Name: Customer Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &196513653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196513652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d235d0424d7b945b299bd479c7c849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchaseScript
+  shopBuyItems: {fileID: 1561664081}
+  purchaseButton: {fileID: 2019467690}
+  candyItem: {fileID: 1925081868}
+  cookieItem: {fileID: 290691160}
+  itemsLeft: {fileID: 284351484}
+  playerCurrency: {fileID: 499462661}
+--- !u!114 &196513654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196513652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6191ee2bcff7042a310b074d1a7fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrderScript
+  quantityText: {fileID: 44311425}
+  getCandy: {fileID: 1451081686}
+  getCookie: {fileID: 1724944741}
+  candyQuantityText: {fileID: 110017995}
+  cookieQuantityText: {fileID: 1899013501}
+  dragDropClick: {fileID: 284351481}
+  payingCustomer: {fileID: 499462663}
+--- !u!4 &196513655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196513652}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.35812744, y: -0.79510266, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 284351482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249430639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: CloseInventoryShop
         m_Mode: 1
@@ -1211,11 +1281,9 @@ GameObject:
   m_Component:
   - component: {fileID: 284351482}
   - component: {fileID: 284351481}
-  - component: {fileID: 284351483}
   - component: {fileID: 284351484}
   - component: {fileID: 284351486}
   - component: {fileID: 284351487}
-  - component: {fileID: 284351488}
   m_Layer: 0
   m_Name: Logic Manager
   m_TagString: Untagged
@@ -1241,7 +1309,7 @@ MonoBehaviour:
   cookiesObject: {fileID: 499485914}
   defaultCursor: {fileID: 2800000, guid: 851f18f1082faea44ab23fbfb085d503, type: 3}
   dragCursor: {fileID: 2800000, guid: 5309d031ad8983842ba0f0235fc80537, type: 3}
-  orderScript: {fileID: 284351483}
+  orderScript: {fileID: 196513654}
   itemsLeft: {fileID: 284351484}
   itemsInCart: {fileID: 284351486}
   holdThreshold: 0.5
@@ -1257,28 +1325,15 @@ Transform:
   m_LocalPosition: {x: -0.51812744, y: 1.2719727, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1292793528}
+  - {fileID: 499462662}
+  - {fileID: 42805183}
+  - {fileID: 196513655}
+  - {fileID: 84200908}
+  - {fileID: 2053033506}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &284351483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284351480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6191ee2bcff7042a310b074d1a7fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OrderScript
-  quantityText: {fileID: 44311425}
-  getCandy: {fileID: 1451081686}
-  getCookie: {fileID: 1724944741}
-  candyQuantityText: {fileID: 110017995}
-  cookieQuantityText: {fileID: 1899013501}
-  dragDropClick: {fileID: 284351481}
-  payingCustomer: {fileID: 499462663}
 --- !u!114 &284351484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,24 +1377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RestartGameScript
   restartButton: {fileID: 894980267}
---- !u!114 &284351488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284351480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d235d0424d7b945b299bd479c7c849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PurchaseScript
-  shopBuyItems: {fileID: 1561664081}
-  purchaseButton: {fileID: 2019467690}
-  candyItem: {fileID: 1925081868}
-  cookieItem: {fileID: 290691160}
-  itemsLeft: {fileID: 284351484}
-  playerCurrency: {fileID: 499462661}
 --- !u!1 &290691158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1460,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 2
@@ -2006,12 +2043,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499462660}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 948.86536, y: 621.4548, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 949.3835, y: 620.1828, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 284351482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &499462663
 MonoBehaviour:
@@ -2026,7 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PayingCustomer
   itemPrice: {fileID: 1292793527}
-  orderScript: {fileID: 284351483}
+  orderScript: {fileID: 196513654}
   playerCurrency: {fileID: 499462661}
   calculatorScript: {fileID: 42805184}
   changeScript: {fileID: 499462664}
@@ -3824,7 +3861,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Currency: \u20B10"
+  m_Text: "Currency: \u20B10.00"
 --- !u!222 &1119810718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4433,12 +4470,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292793526}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48627, y: 1.43278, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.0043974, y: 0.16080737, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 284351482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1374150394
 GameObject:
@@ -6377,7 +6414,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 2
@@ -6786,7 +6823,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: ShowPurchaseItems
         m_Mode: 1
@@ -6980,6 +7017,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044151582}
   m_CullTransparentMesh: 1
+--- !u!1 &2053033505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053033506}
+  - component: {fileID: 2053033508}
+  - component: {fileID: 2053033507}
+  m_Layer: 0
+  m_Name: Cart Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053033506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053033505}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 284351482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053033507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053033505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26dc55d585fdda4419acc767d30fa0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsInCart
+  totalItemsText: {fileID: 1743131657}
+  totalCandyText: {fileID: 1194639950}
+  totalCookieText: {fileID: 20785247}
+  itemsLeft: {fileID: 2053033508}
+--- !u!114 &2053033508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053033505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3415038dc84a284bbd43c3cd213a248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsLeft
+  candyLeftText: {fileID: 1130398712}
+  cookieLeftText: {fileID: 308395723}
 --- !u!1 &2064294897
 GameObject:
   m_ObjectHideFlags: 0
@@ -7170,8 +7270,4 @@ SceneRoots:
   - {fileID: 733511161}
   - {fileID: 2012701921}
   - {fileID: 284351482}
-  - {fileID: 1292793528}
-  - {fileID: 499462662}
-  - {fileID: 42805183}
-  - {fileID: 84200908}
   - {fileID: 2016674234}
