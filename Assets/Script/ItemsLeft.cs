@@ -3,78 +3,78 @@ using UnityEngine.UI;
 
 public class ItemsLeft : MonoBehaviour
 {
-    private int candyLeft;
-    private int cookieLeft;
+    private int goyaCandyLeft;
+    private int mentosLeft;
 
-    public Text candyLeftText;
-    public Text cookieLeftText;
+    public Text goyaCandyLeftText;
+    public Text mentosLeftText;
 
     void Start()
     {
-        candyLeft = 10;
-        cookieLeft = 10;
+        goyaCandyLeft = 10;
+        mentosLeft = 10;
 
-        UpdateCandyLeftText();
-        UpdateCookieLeftText();
+        UpdateGoyaCandyLeftText();
+        UpdateMentosLeftText();
     }
-    public void DecreaseCandy()
+    public void DecreaseGoyaCandy()
     {
-        if (candyLeft > 0)
+        if (goyaCandyLeft > 0)
         {
-            candyLeft--;
+            goyaCandyLeft--;
         }
-        UpdateCandyLeftText();
+        UpdateGoyaCandyLeftText();
     }
 
-    public void DecreaseCookie()
+    public void DecreaseMentos()
     {
-        if (cookieLeft > 0)
+        if (mentosLeft > 0)
         {
-            cookieLeft--;
+            mentosLeft--;
         }
 
-        UpdateCookieLeftText();
+        UpdateMentosLeftText();
     }
 
     public void DecreaseItem(string item)
     {
-        if (item.Equals("Piece of Candy"))
+        if (item.Equals("Goya Candy"))
         {
-            DecreaseCandy();
+            DecreaseGoyaCandy();
         }
-        else if (item.Equals("Cookie"))
+        else if (item.Equals("Mentos"))
         {
-            DecreaseCookie();
+            DecreaseMentos();
         }
     }
 
-    void UpdateCandyLeftText()
+    void UpdateGoyaCandyLeftText()
     {
-        candyLeftText.text = $"{candyLeft}";
-        Debug.Log($"[ITEMSLEFT] Candy left: {candyLeft}");
+        goyaCandyLeftText.text = $"{goyaCandyLeft}";
+        Debug.Log($"[ITEMSLEFT] Goya Candy left: {goyaCandyLeft}");
     }
 
-    void UpdateCookieLeftText()
+    void UpdateMentosLeftText()
     {
-        cookieLeftText.text = $"{cookieLeft}";
-        Debug.Log($"[ITEMSLEFT] Cookies left: {cookieLeft}");
+        mentosLeftText.text = $"{mentosLeft}";
+        Debug.Log($"[ITEMSLEFT] Mentos left: {mentosLeft}");
     }
 
-    public void SetCandyLeft(int candyLeft)
+    public void SetGoyaCandyLeft(int goyaCandyLeft)
     {
-        this.candyLeft = candyLeft;
-        UpdateCandyLeftText();
+        this.goyaCandyLeft = goyaCandyLeft;
+        UpdateGoyaCandyLeftText();
     }
 
-    public void SetCookieLeft(int cookieLeft)
+    public void SetMentosLeft(int mentosLeft)
     {
-        this.cookieLeft = cookieLeft;
-        UpdateCookieLeftText();
+        this.mentosLeft = mentosLeft;
+        UpdateMentosLeftText();
     }
 
-    public int GetCandyLeft()
-    { return candyLeft; }
+    public int GetGoyaCandyLeft()
+    { return goyaCandyLeft; }
 
-    public int GetCookieLeft()
-    { return cookieLeft; }
+    public int GetMentosLeft()
+    { return mentosLeft; }
 }

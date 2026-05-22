@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 20785248}
   - component: {fileID: 20785247}
   m_Layer: 5
-  m_Name: Cookie
+  m_Name: Mentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cookie: 0'
+  m_Text: 'Mentos: 0'
 --- !u!222 &20785248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 110017996}
   - component: {fileID: 110017995}
   m_Layer: 5
-  m_Name: 'Candy Request '
+  m_Name: 'Goya Request '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -719,7 +719,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Candy Req: 0'
+  m_Text: 'Goya Req: 0'
 --- !u!222 &110017996
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 129722670}
   - component: {fileID: 129722669}
   m_Layer: 5
-  m_Name: Cookie Price
+  m_Name: Mentos Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,7 +798,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Price: \u20B160"
+  m_Text: "Price: \u20B184"
 --- !u!222 &129722670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1102,10 +1102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrderScript
   quantityText: {fileID: 44311425}
-  getCandy: {fileID: 1451081686}
-  getCookie: {fileID: 1724944741}
-  candyQuantityText: {fileID: 110017995}
-  cookieQuantityText: {fileID: 1899013501}
+  getGoyaCandy: {fileID: 1451081686}
+  getMentos: {fileID: 1724944741}
+  goyaCandyQuantityText: {fileID: 110017995}
+  mentosQuantityText: {fileID: 1899013501}
   dragDropClick: {fileID: 284351481}
   payingCustomer: {fileID: 196513656}
 --- !u!4 &196513655
@@ -1529,10 +1529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ec0277c3cc13544af388e5fb6d8fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  origObjectCandy: {fileID: 1451081686}
-  origObjectCookie: {fileID: 1724944741}
-  candyObject: {fileID: 987730896}
-  cookiesObject: {fileID: 499485914}
+  origObjectGoyaCandy: {fileID: 1451081686}
+  origObjectMentos: {fileID: 1724944741}
+  goyaJarObject: {fileID: 987730896}
+  mentosJarObject: {fileID: 499485914}
   defaultCursor: {fileID: 2800000, guid: 851f18f1082faea44ab23fbfb085d503, type: 3}
   dragCursor: {fileID: 2800000, guid: 5309d031ad8983842ba0f0235fc80537, type: 3}
   orderScript: {fileID: 196513654}
@@ -1587,8 +1587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PurchaseScript
   shopBuyItems: {fileID: 1561664081}
   purchaseButton: {fileID: 2019467690}
-  candyItem: {fileID: 1925081868}
-  cookieItem: {fileID: 290691160}
+  goyaCandyItem: {fileID: 1925081868}
+  mentosItem: {fileID: 290691160}
   itemsLeft: {fileID: 2053033508}
   playerCurrency: {fileID: 499462661}
 --- !u!1 &290691158
@@ -1604,7 +1604,7 @@ GameObject:
   - component: {fileID: 290691161}
   - component: {fileID: 290691160}
   m_Layer: 5
-  m_Name: Cookie Buy Button
+  m_Name: Mentos Buy Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 308395724}
   - component: {fileID: 308395723}
   m_Layer: 5
-  m_Name: Cookies
+  m_Name: Mentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2308,7 +2308,7 @@ GameObject:
   - component: {fileID: 499485917}
   - component: {fileID: 499485916}
   m_Layer: 0
-  m_Name: Cookies
+  m_Name: Mentos Jar
   m_TagString: Draggable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2323,8 +2323,8 @@ Transform:
   m_GameObject: {fileID: 499485914}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2200007, y: 4.25, z: -1}
-  m_LocalScale: {x: 0.05765805, y: 0.09109974, z: 0.09109974}
+  m_LocalPosition: {x: -2.273, y: 4.2505, z: -1}
+  m_LocalScale: {x: 0.05602748, y: 0.08852344, z: 0.08852344}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1724944742}
@@ -2364,17 +2364,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.000002861023, y: 0.18597746}
+  m_Offset: {x: -0.047516823, y: -1.762106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 25, y: 25}
+    oldSize: {x: 13.08, y: 19.38}
     newSize: {x: 25, y: 25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 16.569082, y: 23.636177}
+  m_Size: {x: 13.05303, y: 15.178633}
   m_EdgeRadius: 0
 --- !u!212 &499485917
 SpriteRenderer:
@@ -2425,7 +2425,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2859ef5021931744fbf81cd964e1ef65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5399012ecac581545a5bad7dad9788c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2775,7 +2775,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy Cookies
+  m_Text: Buy Mentos
 --- !u!222 &606540369
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2928,7 +2928,7 @@ GameObject:
   - component: {fileID: 644545783}
   - component: {fileID: 644545782}
   m_Layer: 5
-  m_Name: Cookie
+  m_Name: Mentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2989,7 +2989,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cookie
+  m_Text: Mentos
 --- !u!222 &644545783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3777,7 +3777,7 @@ GameObject:
   - component: {fileID: 987730898}
   - component: {fileID: 987730899}
   m_Layer: 0
-  m_Name: Candy
+  m_Name: Goya Jar
   m_TagString: Draggable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3848,7 +3848,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f063f86a93799db4c866c388d81431dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e7d48a3b0bc393418622347e3bd038b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3892,17 +3892,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.000002861023, y: 0.18597746}
+  m_Offset: {x: 0.09233618, y: -1.8455276}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 25, y: 25}
+    oldSize: {x: 12.87, y: 19.14}
     newSize: {x: 25, y: 25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 16.569082, y: 23.636177}
+  m_Size: {x: 12.506085, y: 14.402065}
   m_EdgeRadius: 0
 --- !u!1 &1032428517
 GameObject:
@@ -4218,7 +4218,7 @@ GameObject:
   - component: {fileID: 1130398713}
   - component: {fileID: 1130398712}
   m_Layer: 5
-  m_Name: Candy
+  m_Name: Goya
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4435,7 +4435,7 @@ GameObject:
   - component: {fileID: 1194639951}
   - component: {fileID: 1194639950}
   m_Layer: 5
-  m_Name: Candy
+  m_Name: Goya
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4493,7 +4493,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Candy: 0'
+  m_Text: 'Goya: 0'
 --- !u!222 &1194639951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4593,7 +4593,7 @@ GameObject:
   - component: {fileID: 1256306745}
   - component: {fileID: 1256306744}
   m_Layer: 5
-  m_Name: Cookie Package
+  m_Name: Mentos Package
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4651,7 +4651,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cookie Package: 20 pcs'
+  m_Text: 'Mentos Package: 24 pcs'
 --- !u!222 &1256306745
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4797,8 +4797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76139bd3cca8fe24ba5d4f5150dfb831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPrice
-  candyPrice: 0.5
-  cookiePrice: 1
+  goyaCandyPrice: 2
+  mentosPrice: 5
 --- !u!4 &1292793528
 Transform:
   m_ObjectHideFlags: 0
@@ -4905,7 +4905,7 @@ GameObject:
   - component: {fileID: 1391831769}
   - component: {fileID: 1391831768}
   m_Layer: 5
-  m_Name: Candy Price
+  m_Name: Goya Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4963,7 +4963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Price: \u20B150"
+  m_Text: "Price: \u20B162.50"
 --- !u!222 &1391831769
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5337,7 +5337,7 @@ GameObject:
   - component: {fileID: 1451081687}
   - component: {fileID: 1451081688}
   m_Layer: 0
-  m_Name: Piece of Candy
+  m_Name: Goya Candy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5405,9 +5405,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f9e2f8cc3b2764c47a1c681eb7020b23, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7846d8340f615c348ac88a1fd54b9bdf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5676,7 +5676,7 @@ GameObject:
   - component: {fileID: 1552950035}
   - component: {fileID: 1552950034}
   m_Layer: 5
-  m_Name: Candy Package
+  m_Name: Goya Package
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5734,7 +5734,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Candy Package: 20 pcs'
+  m_Text: 'Goya Candy Package: 50 pcs'
 --- !u!222 &1552950035
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6097,7 +6097,7 @@ GameObject:
   - component: {fileID: 1724944742}
   - component: {fileID: 1724944743}
   m_Layer: 0
-  m_Name: Cookie
+  m_Name: Mentos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6112,8 +6112,8 @@ Transform:
   m_GameObject: {fileID: 1724944741}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1, y: -2.2, z: -0.13}
-  m_LocalScale: {x: 0.18203378, y: 0.18203378, z: 0.18203378}
+  m_LocalPosition: {x: 0.3, y: -2.2, z: -0.13}
+  m_LocalScale: {x: 0.4506577, y: 0.4506577, z: 0.4506577}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 499485915}
@@ -6165,9 +6165,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: eae50a80513a72549957bc0621b36d09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11e5a61f0cd9fc84fbb6fd4ef151c082, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6460,7 +6460,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy Candy
+  m_Text: Buy Goya Candy
 --- !u!222 &1855435255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6613,7 +6613,7 @@ GameObject:
   - component: {fileID: 1899013502}
   - component: {fileID: 1899013501}
   m_Layer: 5
-  m_Name: Cookie Request
+  m_Name: Mentos Request
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6671,7 +6671,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cookie Req: 0'
+  m_Text: 'Mentos Req: 0'
 --- !u!222 &1899013502
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6847,7 +6847,7 @@ GameObject:
   - component: {fileID: 1925081869}
   - component: {fileID: 1925081868}
   m_Layer: 5
-  m_Name: Candy Buy Button
+  m_Name: Goya Buy Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7566,8 +7566,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemsInCart
   totalItemsText: {fileID: 1743131657}
-  totalCandyText: {fileID: 1194639950}
-  totalCookieText: {fileID: 20785247}
+  totalGoyaCandyText: {fileID: 1194639950}
+  totalMentosText: {fileID: 20785247}
   itemsLeft: {fileID: 2053033508}
 --- !u!114 &2053033508
 MonoBehaviour:
@@ -7581,8 +7581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3415038dc84a284bbd43c3cd213a248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemsLeft
-  candyLeftText: {fileID: 1130398712}
-  cookieLeftText: {fileID: 308395723}
+  goyaCandyLeftText: {fileID: 1130398712}
+  mentosLeftText: {fileID: 308395723}
 --- !u!1 &2064294897
 GameObject:
   m_ObjectHideFlags: 0
@@ -7691,7 +7691,7 @@ GameObject:
   - component: {fileID: 2132986918}
   - component: {fileID: 2132986917}
   m_Layer: 5
-  m_Name: Candy
+  m_Name: Goya
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7717,7 +7717,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -316, y: 261}
-  m_SizeDelta: {x: 373.666, y: 150.3}
+  m_SizeDelta: {x: 454.19, y: 150.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132986917
 MonoBehaviour:
@@ -7752,7 +7752,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Candy
+  m_Text: Goya Candy
 --- !u!222 &2132986918
 CanvasRenderer:
   m_ObjectHideFlags: 0

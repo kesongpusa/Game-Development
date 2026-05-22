@@ -8,10 +8,10 @@ public class ItemsInCart : MonoBehaviour
     private int totalItems = 0;
     public Text totalItemsText;
 
-    private int totalCandy = 0; 
-    private int totalCookie = 0;
+    private int totalGoyaCandy = 0; 
+    private int totalMentos = 0;
 
-    public Text totalCandyText, totalCookieText;
+    public Text totalGoyaCandyText, totalMentosText;
 
     private List<string> cartItems = new List<string>();
 
@@ -21,10 +21,10 @@ public class ItemsInCart : MonoBehaviour
         cartItems.Add(ItemName);
         Debug.Log("Added to cart: " + ItemName);
 
-        if (ItemName.Equals("Piece of Candy"))
-        { totalCandy++; Debug.Log($"Added Candy to Cart"); }
-        else if (ItemName.Equals("Cookie"))
-        { totalCookie++; Debug.Log($"Added Cookie to Cart"); }
+        if (ItemName.Equals("Goya Candy"))
+        { totalGoyaCandy++; Debug.Log($"Added Goya Candy to Cart"); }
+        else if (ItemName.Equals("Mentos"))
+        { totalMentos++; Debug.Log($"Added Mentos to Cart"); }
 
         AddItemsInCart();
     }
@@ -37,8 +37,8 @@ public class ItemsInCart : MonoBehaviour
     public void UpdateTotalText()
     {
         totalItemsText.text = $"Total Items: {totalItems}";
-        totalCandyText.text = $"Candy: {totalCandy}";
-        totalCookieText.text = $"Cookie: {totalCookie}";
+        totalGoyaCandyText.text = $"Goya: {totalGoyaCandy}";
+        totalMentosText.text = $"Mentos: {totalMentos}";
     }
 
     public void ClearCart()
@@ -46,8 +46,8 @@ public class ItemsInCart : MonoBehaviour
         cartItems.Clear();
 
         totalItems = 0;
-        totalCandy = 0;
-        totalCookie = 0;
+        totalGoyaCandy = 0;
+        totalMentos = 0;
 
         UpdateTotalText();
     }
@@ -57,8 +57,8 @@ public class ItemsInCart : MonoBehaviour
     public List<string> GetCartItems()
     { return cartItems; }
 
-    public int GetTotalCandy()
-    { return totalCandy; }
-    public int GetTotalCookie() 
-    { return totalCookie; }
+    public int GetTotalGoyaCandy()
+    { return totalGoyaCandy; }
+    public int GetTotalMentos() 
+    { return totalMentos; }
 }

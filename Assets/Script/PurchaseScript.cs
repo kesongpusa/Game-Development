@@ -6,8 +6,8 @@ public class PurchaseScript : MonoBehaviour
     public GameObject shopBuyItems;
     public GameObject purchaseButton;
 
-    public Button candyItem;
-    public Button cookieItem;
+    public Button goyaCandyItem;
+    public Button mentosItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -32,38 +32,38 @@ public class PurchaseScript : MonoBehaviour
         float currentCurrency = playerCurrency.GetCurrentCurrency();
         Debug.Log($"[PURCHASE] Current currency: {currentCurrency}");
 
-        if (cleanedItemName.Equals("Candy"))
+        if (cleanedItemName.Equals("Goya Candy"))
         {
-            if (currentCurrency >= 50f)
+            if (currentCurrency >= 62.50f)
             {
-                int currentCandy = itemsLeft.GetCandyLeft();
+                int currentGoyaCandy = itemsLeft.GetGoyaCandyLeft();
 
-                itemsLeft.SetCandyLeft(currentCandy + 20);
-                Debug.Log($"[PURCHASE] Current Candy: {itemsLeft.GetCandyLeft()}");
+                itemsLeft.SetGoyaCandyLeft(currentGoyaCandy + 50);
+                Debug.Log($"[PURCHASE] Current Candy: {itemsLeft.GetGoyaCandyLeft()}");
 
-                playerCurrency.SetCurrentCurrency(currentCurrency - 50f);
+                playerCurrency.SetCurrentCurrency(currentCurrency - 62.50f);
                 Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
             }
             else
             {
-                Debug.Log("[PURCHASE] Not enough currency to purchase Candy.");
+                Debug.Log("[PURCHASE] Not enough currency to purchase Goya Candy.");
             }
         }
-        else if (cleanedItemName.Equals("Cookies"))
+        else if (cleanedItemName.Equals("Mentos"))
         {
-            if (currentCurrency >= 60f)
+            if (currentCurrency >= 84f)
             {
-                int currentCookie = itemsLeft.GetCookieLeft();
+                int currentMentos = itemsLeft.GetMentosLeft();
 
-                itemsLeft.SetCookieLeft(currentCookie + 20);
-                Debug.Log($"[PURCHASE] Current Cookies: {itemsLeft.GetCookieLeft()}");
+                itemsLeft.SetMentosLeft(currentMentos + 24);
+                Debug.Log($"[PURCHASE] Current Mentos: {itemsLeft.GetMentosLeft()}");
 
-                playerCurrency.SetCurrentCurrency(currentCurrency - 60f);
+                playerCurrency.SetCurrentCurrency(currentCurrency - 84f);
                 Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
             }
             else
             {
-                Debug.Log("[PURCHASE] Not enough currency to purchase Cookies.");
+                Debug.Log("[PURCHASE] Not enough currency to purchase Mentos.");
             }
         }
     }

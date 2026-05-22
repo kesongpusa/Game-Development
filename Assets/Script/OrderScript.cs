@@ -8,11 +8,11 @@ public class OrderScript : MonoBehaviour
     private int orderQuantity;
     public Text quantityText;
 
-    public GameObject getCandy; 
-    public GameObject getCookie;
+    public GameObject getGoyaCandy; 
+    public GameObject getMentos;
 
-    public Text candyQuantityText;
-    public Text cookieQuantityText;
+    public Text goyaCandyQuantityText;
+    public Text mentosQuantityText;
 
     private int manyItems, whatItemRoll;
     private List<string> itemName;
@@ -52,25 +52,25 @@ public class OrderScript : MonoBehaviour
             whatItemRoll = Random.Range(0, 2);
 
             /*
-            1 = Candy
-            2 = Cookie
+            1 = Goya Candy
+            2 = Mentos
             */
 
             if (whatItemRoll == 0)
-            { Debug.Log("[ORDER] Item: Piece of Candy");
-                itemName.Add("Piece of Candy");
+            { Debug.Log("[ORDER] Item: Goya Candy");
+                itemName.Add("Goya Candy");
             }
             else if (whatItemRoll == 1)
-            { Debug.Log("[ORDER] Item: Cookie");
-                itemName.Add("Cookie");
+            { Debug.Log("[ORDER] Item: Mentos");
+                itemName.Add("Mentos");
             }
 
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
         else if (manyItems == 2)
         { Debug.Log("[ORDER] Items: 2");
-            itemName.Add("Piece of Candy");
-            itemName.Add("Cookie");
+            itemName.Add("Goya Candy");
+            itemName.Add("Mentos");
 
             GetQuantityOrderRandomizer(manyItems, itemName.Count);
         }
@@ -91,17 +91,17 @@ public class OrderScript : MonoBehaviour
         {
             if (whatItem == 0)
             {
-                candyQuantityText.enabled = true;
+                goyaCandyQuantityText.enabled = true;
 
-                Debug.Log($"[ORDER] Quantity (Piece of Candy): {quantity}");
-                candyQuantityText.text = $"Candy Req: {quantity}";
+                Debug.Log($"[ORDER] Quantity (Goya Candy): {quantity}");
+                goyaCandyQuantityText.text = $"Goya Req: {quantity}";
             }
             else if (whatItem == 1)
             {
-                cookieQuantityText.enabled = true;
+                mentosQuantityText.enabled = true;
 
-                Debug.Log($"[ORDER] Quantity (Cookie): {quantity}");
-                cookieQuantityText.text = $"Cookie Req: {quantity}";
+                Debug.Log($"[ORDER] Quantity (Mentos): {quantity}");
+                mentosQuantityText.text = $"Mentos Req: {quantity}";
             }
 
             itemQuantities.Add(quantity);
@@ -116,19 +116,19 @@ public class OrderScript : MonoBehaviour
                 itemQuantities.Add(quantityItems);
             }
 
-            candyQuantityText.enabled = true;
-            cookieQuantityText.enabled = true;
+            goyaCandyQuantityText.enabled = true;
+            mentosQuantityText.enabled = true;
 
-            candyQuantityText.text = $"Candy Req: {itemQuantities[0]}";
-            cookieQuantityText.text = $"Cookie Req: {itemQuantities[1]}";
+            goyaCandyQuantityText.text = $"Goya Req: {itemQuantities[0]}";
+            mentosQuantityText.text = $"Mentos Req: {itemQuantities[1]}";
         }
     }
 
     public void DecreaseItemRequest(string itemName, int itemToGive)
     {
-        if (itemName == "Piece of Candy")
+        if (itemName == "Goya Candy")
         {
-            //get current position of Piece of Candy in itemName/itemQuantities list
+            //get current position of Goya Candy in itemName/itemQuantities list
             int index = this.itemName.IndexOf(itemName);
             int quantity = itemQuantities[index];
 
@@ -137,19 +137,19 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                candyQuantityText.text = $"Candy Req: {quantity}";
-                Debug.Log($"[ORDER] Decreased Piece of Candy quantity. New quantity: {quantity}");
+                goyaCandyQuantityText.text = $"Goya Req: {quantity}";
+                Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
             }
 
             if (quantity == 0)
             {
-                Debug.Log("[ORDER] Piece of Candy order complete!");
-                candyQuantityText.enabled = false;
+                Debug.Log("[ORDER] Goya Candy order complete!");
+                goyaCandyQuantityText.enabled = false;
             }
         }
-        else if (itemName == "Cookie")
+        else if (itemName == "Mentos")
         {
-            //get current position of Cookie in itemName/itemQuantities list
+            //get current position of Mentos in itemName/itemQuantities list
             int index = this.itemName.IndexOf(itemName);
             int quantity = itemQuantities[index];
 
@@ -158,14 +158,14 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                cookieQuantityText.text = $"Cookie Req: {quantity}";
-                Debug.Log($"[ORDER] Decreased Cookie quantity. New quantity: {quantity}");
+                mentosQuantityText.text = $"Mentos Req: {quantity}";
+                Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
             }
 
             if (quantity == 0)
             {
-                Debug.Log("[ORDER] Cookie order complete!");
-                cookieQuantityText.enabled = false;
+                Debug.Log("[ORDER] Mentos order complete!");
+                mentosQuantityText.enabled = false;
             }
         }
 

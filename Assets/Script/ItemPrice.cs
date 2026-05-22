@@ -2,8 +2,8 @@
 
 public class ItemPrice : MonoBehaviour
 {
-    public float candyPrice = 0.5f;
-    public float cookiePrice = 1.0f;
+    public float goyaCandyPrice = 2.00f;
+    public float mentosPrice = 5.0f;
 
     private float totalPrice = 0f;
 
@@ -11,10 +11,10 @@ public class ItemPrice : MonoBehaviour
     {
         switch (itemName.ToLower())
         {
-            case "piece of candy":
-                return candyPrice;
-            case "cookie":
-                return cookiePrice;
+            case "goya candy":
+                return goyaCandyPrice;
+            case "mentos":
+                return mentosPrice;
             default:
                 Debug.LogWarning("Unknown item: " + itemName);
                 return 0f;

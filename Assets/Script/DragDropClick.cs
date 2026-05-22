@@ -12,11 +12,11 @@ public class DragDropClick : MonoBehaviour
     Transform prevHoverObject, nextHoverObject;
 
     private GameObject clickObject;
-    public GameObject origObjectCandy;
-    public GameObject origObjectCookie;
+    public GameObject origObjectGoyaCandy;
+    public GameObject origObjectMentos;
     private GameObject draggedObject;
 
-    public GameObject candyObject, cookiesObject;
+    public GameObject goyaJarObject, mentosJarObject;
 
     public Texture2D defaultCursor;
     public Texture2D dragCursor;
@@ -68,15 +68,15 @@ public class DragDropClick : MonoBehaviour
                     mouseHoldTime = 0f;
                     isDragging = false;
 
-                    if (clickObject.name == "Candy")
+                    if (clickObject.name == "Goya Jar")
                     {
-                        draggedObject = Instantiate(origObjectCandy, mouseWorldPos, Quaternion.identity);
-                        draggedObject.transform.localScale = new Vector3(0.12f, 0.12f, 0f);
+                        draggedObject = Instantiate(origObjectGoyaCandy, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
-                    else if (clickObject.name == "Cookies")
+                    else if (clickObject.name == "Mentos Jar")
                     {
-                        draggedObject = Instantiate(origObjectCookie, mouseWorldPos, Quaternion.identity);
-                        draggedObject.transform.localScale = new Vector3(0.015f, 0.015f, 0f);
+                        draggedObject = Instantiate(origObjectMentos, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
 
                     Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
@@ -198,15 +198,15 @@ public class DragDropClick : MonoBehaviour
             {
                 if (clickObject != null)
                 {
-                    if (clickObject.name.Equals("Candy"))
+                    if (clickObject.name.Equals("Goya Jar"))
                     {
-                        itemsInCart.AddItem("Piece of Candy");
-                        itemsLeft.DecreaseCandy();
+                        itemsInCart.AddItem("Goya Candy");
+                        itemsLeft.DecreaseGoyaCandy();
                     }
-                    else if (clickObject.name.Equals("Cookies"))
+                    else if (clickObject.name.Equals("Mentos Jar"))
                     {
-                        itemsInCart.AddItem("Cookie");
-                        itemsLeft.DecreaseCookie();
+                        itemsInCart.AddItem("Mentos");
+                        itemsLeft.DecreaseMentos();
                     }
 
                     // If the click was on the cart, give items to cat
@@ -230,18 +230,18 @@ public class DragDropClick : MonoBehaviour
 
     void CheckItemsLeft()
     {
-        int candyLeft = itemsLeft.GetCandyLeft();
-        int cookieLeft = itemsLeft.GetCookieLeft();
+        int goyaCandyLeft = itemsLeft.GetGoyaCandyLeft();
+        int mentosLeft = itemsLeft.GetMentosLeft();
 
-        Debug.Log($"[CHECKITEMSLEFT] Candy Left: {candyLeft}, Cookie Left: {cookieLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}, Mentos Left: {mentosLeft}");
 
-        if (candyLeft == 0)
-        { candyObject.SetActive(false); }
-        else {  candyObject.SetActive(true); }
+        if (goyaCandyLeft == 0)
+        { goyaJarObject.SetActive(false); }
+        else {  goyaJarObject.SetActive(true); }
 
-        if (cookieLeft == 0)
-        { cookiesObject.SetActive(false); }
-        else { cookiesObject.SetActive(true); }
+        if (mentosLeft == 0)
+        { mentosJarObject.SetActive(false); }
+        else { mentosJarObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -253,23 +253,23 @@ public class DragDropClick : MonoBehaviour
         if (cartItems.Any(item => itemsRequest.Contains(item)))
         {
             Debug.Log("[CART] Giving items to cat from cart...");
-            int totalCandy = itemsInCart.GetTotalCandy();
-            int totalCookie = itemsInCart.GetTotalCookie();
+            int totalGoyaCandy = itemsInCart.GetTotalGoyaCandy();
+            int totalMentos = itemsInCart.GetTotalMentos();
 
-            if (itemsRequest.Contains("Piece of Candy") && totalCandy > 0)
+            if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
-                int candyToGive = Mathf.Min(totalCandy, quantityItemRequest[itemsRequest.IndexOf("Piece of Candy")]);
-                orderScript.DecreaseItemRequest("Piece of Candy", candyToGive);
-                orderScript.addScoreToOrder(candyToGive);
-                totalItemsInCart -= candyToGive;
+                int goyaCandyToGive = Mathf.Min(totalGoyaCandy, quantityItemRequest[itemsRequest.IndexOf("Goya Candy")]);
+                orderScript.DecreaseItemRequest("Goya Candy", goyaCandyToGive);
+                orderScript.addScoreToOrder(goyaCandyToGive);
+                totalItemsInCart -= goyaCandyToGive;
             }
 
-            if (itemsRequest.Contains("Cookie") && totalCookie > 0)
+            if (itemsRequest.Contains("Mentos") && totalMentos > 0)
             {
-                int cookieToGive = Mathf.Min(totalCookie, quantityItemRequest[itemsRequest.IndexOf("Cookie")]);
-                orderScript.DecreaseItemRequest("Cookie", cookieToGive);
-                orderScript.addScoreToOrder(cookieToGive);
-                totalItemsInCart -= cookieToGive;
+                int mentosToGive = Mathf.Min(totalMentos, quantityItemRequest[itemsRequest.IndexOf("Mentos")]);
+                orderScript.DecreaseItemRequest("Mentos", mentosToGive);
+                orderScript.addScoreToOrder(mentosToGive);
+                totalItemsInCart -= mentosToGive;
             }
         }
     }
