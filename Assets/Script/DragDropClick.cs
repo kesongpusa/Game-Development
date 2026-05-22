@@ -59,8 +59,6 @@ public class DragDropClick : MonoBehaviour
         raycastHit2D = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
         nextHoverObject = raycastHit2D ? raycastHit2D.collider.transform : null;
 
-        CheckItemsLeft();
-
         // Handle mouse click to start dragging
         if (Input.GetMouseButtonDown(0))
         {            
@@ -230,6 +228,8 @@ public class DragDropClick : MonoBehaviour
             clickObject = null;
 
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+
+            CheckItemsLeft();
         }
     }
 

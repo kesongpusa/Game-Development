@@ -69,7 +69,7 @@ public class PayingCustomer : MonoBehaviour
         playerCurrency.SetCurrentCurrency(currentCurrency + finalCustomerGiveMoney);*/
 
         textPayingCustomer.enabled = true;
-        textPayingCustomer.text = $"Customer pays: ₱{finalCustomerGiveMoney}";
+        textPayingCustomer.text = $"Customer pays: ₱{finalCustomerGiveMoney.ToString("F2")}";
 
         changeScript.CalculateChange();
     }
