@@ -16,7 +16,7 @@ public class ChangeScript : MonoBehaviour
     public void CalculateChange()
     {
         float totalprice = payingCustomer.GetTotalPrice();
-        float customerGiveMoney = payingCustomer.GetFinalCustomerGiveMoney();
+        float customerGiveMoney = payingCustomer.GetCustomerGiveMoney();
 
         change = customerGiveMoney - totalprice;
 

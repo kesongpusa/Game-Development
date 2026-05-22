@@ -8,6 +8,7 @@ public class CalculatorScript : MonoBehaviour
     public PlayerCurrency playerCurrency;
     public PlayerIncome playerIncome;
     public SuccessfulTransaction successfulTransaction;
+    public ItemPrice itemPrice;
 
     public GameObject calculator;
 
@@ -104,6 +105,8 @@ public class CalculatorScript : MonoBehaviour
             playerIncome.AddIncome();
 
             PressClearCalcu();
+            itemPrice.ResetTotalPrice();
+
             calculator.SetActive(false);
             
             successfulTransaction.Success();

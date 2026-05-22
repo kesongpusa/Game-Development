@@ -13,7 +13,7 @@ public class PayingCustomer : MonoBehaviour
 
     public Text textPayingCustomer;
 
-    private float finalCustomerGiveMoney = 0f;
+    private float customerGiveMoney = 0f;
     private float paymentAmount = 0f;
     private float totalPrice = 0f;
 
@@ -48,39 +48,30 @@ public class PayingCustomer : MonoBehaviour
         itemPrice.SetTotalPrice(paymentAmount);
         Debug.Log("[PAYINGCUSTOMER] Total price updated: ₱" + itemPrice.GetTotalPrice());
 
-        totalPrice = itemPrice.GetTotalPrice();
+        totalPrice = (float)Math.Round(itemPrice.GetTotalPrice(), 2);
         Debug.Log("[PAYINGCUSTOMER] Total price: ₱" + itemPrice.GetTotalPrice());
     }
 
     public void PayForTotalAmount()
     {
         float minGiveMoney = itemPrice.GetTotalPrice() + 2f;
-        float maxGiveMoney = itemPrice.GetTotalPrice() + 10f;
-        float step = 0.05f;
+        float maxGiveMoney = itemPrice.GetTotalPrice() + 5f;
 
-        int minSteps = Mathf.RoundToInt(minGiveMoney / step);
-        int maxSteps = Mathf.RoundToInt(maxGiveMoney / step);
+        customerGiveMoney = UnityEngine.Random.Range(minGiveMoney, maxGiveMoney);
+        customerGiveMoney = RoundToNearestFive(customerGiveMoney);
 
-        int customerGiveMoney = UnityEngine.Random.Range(minSteps, maxSteps);
-
-        finalCustomerGiveMoney = customerGiveMoney * step;
-
-        Debug.Log("[PAYINGCUSTOMER] Customer gives: ₱" + finalCustomerGiveMoney);
-
-        totalPrice = (float)Math.Round(totalPrice, 2);
-
-        /*float currentCurrency = playerCurrency.GetCurrentCurrency();
-        playerCurrency.SetCurrentCurrency(currentCurrency + finalCustomerGiveMoney);*/
+        Debug.Log("[PAYINGCUSTOMER] Customer gives: ₱" + customerGiveMoney);
 
         textPayingCustomer.enabled = true;
-        textPayingCustomer.text = $"Customer pays: ₱{finalCustomerGiveMoney.ToString("F2")}";
+        textPayingCustomer.text = $"Customer pays: ₱{customerGiveMoney.ToString("F2")}";
 
         changeScript.CalculateChange();
     }
-
+    private float RoundToNearestFive(float value)
+    { return Mathf.Round(value / 5f) * 5f; }
     public float GetTotalPrice()
     { return totalPrice; }
 
-    public float GetFinalCustomerGiveMoney()
-    { return finalCustomerGiveMoney; }
+    public float GetCustomerGiveMoney()
+    { return customerGiveMoney; }
 }

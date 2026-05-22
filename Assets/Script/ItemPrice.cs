@@ -27,6 +27,12 @@ public class ItemPrice : MonoBehaviour
         Debug.Log("[ITEMPRICE] Total price set to: ₱" + totalPrice);
     }
 
+    public void ResetTotalPrice()
+    {
+        totalPrice = 0f;
+        Debug.Log("[ITEMPRICE] Total price reset to: ₱" + totalPrice);
+    }
+
     public float GetTotalPrice()
     {
         Debug.Log("[ITEMPRICE] Total price: ₱" + totalPrice);

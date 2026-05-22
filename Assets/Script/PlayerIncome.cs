@@ -9,7 +9,7 @@ public class PlayerIncome : MonoBehaviour
     public void AddIncome()
     {
         float change = changeScript.GetChange();
-        float customerMoney = payingCustomer.GetFinalCustomerGiveMoney();
+        float customerMoney = payingCustomer.GetCustomerGiveMoney();
 
         float income = customerMoney - change;
 
