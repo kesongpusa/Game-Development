@@ -237,9 +237,11 @@ public class DragDropClick : MonoBehaviour
 
         if (candyLeft == 0)
         { candyObject.SetActive(false); }
-    
+        else {  candyObject.SetActive(true); }
+
         if (cookieLeft == 0)
         { cookiesObject.SetActive(false); }
+        else { cookiesObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
