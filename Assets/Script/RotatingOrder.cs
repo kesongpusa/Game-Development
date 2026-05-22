@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotatingOrder : MonoBehaviour
 {
     public OrderScript orderScript;
     public DragDropClick dragDropClick;
+
+    public Text textPayingCustomer;
 
     public void StartOrder()
     {
@@ -15,5 +18,7 @@ public class RotatingOrder : MonoBehaviour
 
         dragDropClick.GetItemListRequestAndQuantity();
         Debug.Log("[ROTATINGORDER] Updated DragDropClick with new order items and quantities.");
+
+        textPayingCustomer.enabled = false;
     }
 }

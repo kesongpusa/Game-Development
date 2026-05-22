@@ -7,18 +7,17 @@ public class SuccessfulTransaction : MonoBehaviour
     public RestartGameScript restartGameScript;
     public ChangeCustomers changeCustomers;
     public RotatingOrder rotatingOrder;
-
-    public Text textCustomerPay;
+    public PayingCustomer payingCustomer;
     public void Success()
     {
         //restartGameScript.ShowRestartButton();
-
-        textCustomerPay.text = $"Customer is Paid";
         Debug.Log("[TRANSACTION] Transaction successful! Playing success sound.");
         Debug.Log("[TRANSACTION] Order complete! Customer is happy!");
 
         changeCustomers.RandomCustomerPicker();
 
         rotatingOrder.StartOrder();
+
+        payingCustomer.StartCounting();
     }
 }

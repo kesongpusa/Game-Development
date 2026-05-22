@@ -33,10 +33,13 @@ public class ChangeCustomers : MonoBehaviour
 
         Debug.Log($"[CHANGECUSTOMER] Randomly picked customer index: {randomCustomer}, name: {lineupCustomers[randomCustomer].name}");
 
-        while (isCustomerDone(customerName))
+        while (isCustomerDone(nextCustomerName))
         {
             randomCustomer = Random.Range(0, lineupCustomers.Length);
             currectCustomer.GetComponent<SpriteRenderer>().sprite = lineupCustomers[randomCustomer];
+
+            nextCustomer = currectCustomer.GetComponent<SpriteRenderer>().sprite;
+            nextCustomerName = nextCustomer.name;
             Debug.Log($"[CHANGECUSTOMER] Customer {nextCustomerName} is already done. " +
                 $"Picking another customer index: {randomCustomer}");
         }
@@ -50,17 +53,14 @@ public class ChangeCustomers : MonoBehaviour
         Debug.Log($"[CHANGECUSTOMER] Updated score text: Customers Served: {rotation}");
     }
 
-    private bool isCustomerDone(List<string> spriteName)
+    private bool isCustomerDone(string name)
     {
-        foreach (string name in customerName)
+        if (customerName.Contains(name))
         {
-            if (name == currectCustomer.name)
-            {
-                Debug.Log($"[CHANGECUSTOMER] Customer {name} is already done.");
-                return true;
-            }
+            Debug.Log($"[CHANGECUSTOMER] Customer {name} is already done.");
+            return true;
         }
-
+        
         return false;
     }
 }

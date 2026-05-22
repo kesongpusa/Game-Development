@@ -77,7 +77,7 @@ public class CalculatorScript : MonoBehaviour
     }
     public void PressClearCalcu()
     {
-        currentValue = 0f;
+        currentValue = 0.00f;
             
         textCalcu.text = currentValue.ToString("F2");
         Debug.Log("[CALCULATOR] Clear button pressed. Current value reset to 0.");
@@ -89,8 +89,9 @@ public class CalculatorScript : MonoBehaviour
             Debug.Log("[CALCULATOR] Change amount is exact. Proceeding with transaction.");
             playerIncome.AddIncome();
 
+            PressClearCalcu();
             calculator.SetActive(false);
-
+            
             successfulTransaction.Success();
         }
         else

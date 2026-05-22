@@ -22,6 +22,11 @@ public class PayingCustomer : MonoBehaviour
 
     void Start()
     {
+        StartCounting();
+    }
+
+    public void StartCounting()
+    {
         itemName = orderScript.getItemsRequest();
         itemQuantities = orderScript.getQuantitiesRequest();
 
@@ -35,7 +40,6 @@ public class PayingCustomer : MonoBehaviour
             }
         }
     }
-
     public void PayForItem(string itemName)
     {
         paymentAmount = itemPrice.GetPrice(itemName);
