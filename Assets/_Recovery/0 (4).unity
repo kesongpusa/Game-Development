@@ -988,6 +988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 196513655}
   - component: {fileID: 196513654}
+  - component: {fileID: 196513653}
   m_Layer: 0
   m_Name: Customer Logic
   m_TagString: Untagged
@@ -995,6 +996,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &196513653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196513652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d235d0424d7b945b299bd479c7c849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchaseScript
+  shopBuyItems: {fileID: 1561664081}
+  purchaseButton: {fileID: 2019467690}
+  candyItem: {fileID: 1925081868}
+  cookieItem: {fileID: 290691160}
+  itemsLeft: {fileID: 284351484}
+  playerCurrency: {fileID: 499462661}
 --- !u!114 &196513654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,7 +1164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 880, y: 411}
+  m_AnchoredPosition: {x: 866.8, y: 487.8}
   m_SizeDelta: {x: 127.3, y: 56.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262409855
@@ -1192,7 +1211,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: CloseInventoryShop
         m_Mode: 1
@@ -1264,8 +1283,9 @@ GameObject:
   m_Component:
   - component: {fileID: 284351482}
   - component: {fileID: 284351481}
+  - component: {fileID: 284351484}
+  - component: {fileID: 284351486}
   - component: {fileID: 284351487}
-  - component: {fileID: 284351488}
   m_Layer: 0
   m_Name: Logic Manager
   m_TagString: Untagged
@@ -1292,8 +1312,8 @@ MonoBehaviour:
   defaultCursor: {fileID: 2800000, guid: 851f18f1082faea44ab23fbfb085d503, type: 3}
   dragCursor: {fileID: 2800000, guid: 5309d031ad8983842ba0f0235fc80537, type: 3}
   orderScript: {fileID: 196513654}
-  itemsLeft: {fileID: 2053033508}
-  itemsInCart: {fileID: 2053033507}
+  itemsLeft: {fileID: 284351484}
+  itemsInCart: {fileID: 284351486}
   holdThreshold: 0.5
 --- !u!4 &284351482
 Transform:
@@ -1316,6 +1336,36 @@ Transform:
   - {fileID: 2053033506}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &284351484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284351480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3415038dc84a284bbd43c3cd213a248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsLeft
+  candyLeftText: {fileID: 1130398712}
+  cookieLeftText: {fileID: 308395723}
+--- !u!114 &284351486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284351480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26dc55d585fdda4419acc767d30fa0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemsInCart
+  totalItemsText: {fileID: 1743131657}
+  totalCandyText: {fileID: 1194639950}
+  totalCookieText: {fileID: 20785247}
+  itemsLeft: {fileID: 284351484}
 --- !u!114 &284351487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,24 +1379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RestartGameScript
   restartButton: {fileID: 894980267}
---- !u!114 &284351488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284351480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d235d0424d7b945b299bd479c7c849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PurchaseScript
-  shopBuyItems: {fileID: 1561664081}
-  purchaseButton: {fileID: 2019467690}
-  candyItem: {fileID: 1925081868}
-  cookieItem: {fileID: 290691160}
-  itemsLeft: {fileID: 2053033508}
-  playerCurrency: {fileID: 499462661}
 --- !u!1 &290691158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,7 +1462,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 2
@@ -4741,7 +4773,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 720b3dcb479964b478e2b6d3f097f4c5, type: 3}
   - {fileID: 21300000, guid: cffd90c7e8f66a3469488ecfc839176a, type: 3}
   - {fileID: 21300000, guid: d252788727ae8354e897abd6981e0d30, type: 3}
-  textScore: {fileID: 1553353370}
+  textScore: {fileID: 0}
 --- !u!114 &1418303960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4754,7 +4786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7beadbe12bbc4eb4d8b12833e5017640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotatingOrder
-  orderScript: {fileID: 196513654}
+  orderScript: {fileID: 0}
 --- !u!1 &1433840114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,8 +5562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 674, y: 478}
-  m_SizeDelta: {x: 550.2, y: 86.6}
+  m_AnchoredPosition: {x: 741, y: 478}
+  m_SizeDelta: {x: 404.3, y: 86.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553353370
 MonoBehaviour:
@@ -6538,7 +6570,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 2
@@ -6947,7 +6979,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284351488}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseScript, Assembly-CSharp
         m_MethodName: ShowPurchaseItems
         m_Mode: 1

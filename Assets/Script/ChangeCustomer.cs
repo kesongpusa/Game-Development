@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangeCustomers : MonoBehaviour
 {
@@ -8,33 +9,48 @@ public class ChangeCustomers : MonoBehaviour
 
     public Sprite[] lineupCustomers;
 
+    public Text textScore;
+
     private int rotation = 0;
     private List<string> customerName = new List<string>();
 
     public void RandomCustomerPicker()
     {
-        rotation++;
+        rotation += 1;
 
-        string currectCustomerName = currectCustomer.name;
+        Sprite currentSprite = currectCustomer.GetComponent<SpriteRenderer>().sprite;
+        string currectCustomerName = currentSprite.name;
+
         Debug.Log($"[CHANGECUSTOMER] Current Customer Name: {currectCustomerName}");
 
         customerName.Add(currectCustomerName);
 
         int randomCustomer = Random.Range(0, lineupCustomers.Length);
         currectCustomer.GetComponent<SpriteRenderer>().sprite = lineupCustomers[randomCustomer];
+
+        Sprite nextCustomer = currectCustomer.GetComponent<SpriteRenderer>().sprite;
+        string nextCustomerName = nextCustomer.name;
+
         Debug.Log($"[CHANGECUSTOMER] Randomly picked customer index: {randomCustomer}, name: {lineupCustomers[randomCustomer].name}");
 
-        while (!isCustomerDone(customerName))
+        while (isCustomerDone(nextCustomerName))
         {
             randomCustomer = Random.Range(0, lineupCustomers.Length);
             currectCustomer.GetComponent<SpriteRenderer>().sprite = lineupCustomers[randomCustomer];
-            Debug.Log($"[CHANGECUSTOMER] Customer {lineupCustomers[randomCustomer].name} is already done. " +
+            Debug.Log($"[CHANGECUSTOMER] Customer {nextCustomerName} is already done. " +
                 $"Picking another customer index: {randomCustomer}");
         }
 
+        SetTextScore();
     }
 
-    private bool isCustomerDone(List<string> customerName)
+    public void SetTextScore()
+    {
+        textScore.text = $"Customers Served: {rotation.ToString()}";
+        Debug.Log($"[CHANGECUSTOMER] Updated score text: Customers Served: {rotation}");
+    }
+
+    private bool isCustomerDone(string spriteName)
     {
         foreach (string name in customerName)
         {
