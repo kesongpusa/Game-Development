@@ -189,13 +189,23 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                goyaCandyQuantityText.text = $"{quantity}";
-                Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                Debug.Log($"[ORDER] Value of manyItems: {manyItems}");
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    goyaCandyQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
             }
 
-            if (manyItems == 1)
+            if (manyItems == 1 && quantity == 0)
             {
-                Debug.Log("[ORDER] White Rabbit order complete!");
+                Debug.Log("[ORDER] Goya Candy order complete!");
                 oneItemRequest.enabled = false;
             }
 
@@ -216,11 +226,21 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                mentosQuantityText.text = $"{quantity}";
-                Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                Debug.Log($"[ORDER] Value of manyItems: {manyItems}");
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    mentosQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                }
             }
 
-            if (manyItems == 1)
+            if (manyItems == 1 && quantity == 0)
             {
                 Debug.Log("[ORDER] Mentos order complete!");
                 oneItemRequest.enabled = false;
@@ -243,11 +263,19 @@ public class OrderScript : MonoBehaviour
                 quantity -= itemToGive;
                 itemQuantities[index] = quantity;
 
-                mentosQuantityText.text = $"{quantity}";
-                Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    whiteRabbitQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
             }
 
-            if (manyItems == 1)
+            if (manyItems == 1 && quantity == 0)
             {
                 Debug.Log("[ORDER] White Rabbit order complete!");
                 oneItemRequest.enabled = false;
