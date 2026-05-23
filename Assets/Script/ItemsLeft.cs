@@ -12,6 +12,9 @@ public class ItemsLeft : MonoBehaviour
     private int joyLeft;
     private int surfLeft;
 
+    public GameObject joyItem;
+    public GameObject surfItem;
+
     public Text goyaCandyLeftText;
     public Text mentosLeftText;
     public Text whiteRabbitLeftText;
@@ -96,6 +99,23 @@ public class ItemsLeft : MonoBehaviour
         {
             joyLeft--;
         }
+
+        int joyChildCount = joyItem.transform.childCount;
+        //Debug.Log($"[ITEMSLEFT] Joy item child count: {joyChildCount}");
+
+        if (joyLeft <= joyChildCount)
+        {
+            if (joyLeft == 2)
+            {
+                joyItem.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (joyLeft == 1)
+            {
+                joyItem.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            Debug.Log($"[ITEMSLEFT] Deactivating Joy item. Remaining: {joyLeft}");
+        }
+
         UpdateJoyLeftText();
     }
     public void DecreaseSurf()
@@ -103,6 +123,21 @@ public class ItemsLeft : MonoBehaviour
         if (surfLeft > 0)
         {
             surfLeft--;
+        }
+
+        int surfChildCount = surfItem.transform.childCount;
+
+        if (surfLeft <= surfChildCount)
+        {
+            if (surfLeft == 2)
+            {
+                surfItem.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (surfLeft == 1)
+            {
+                surfItem.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            Debug.Log($"[ITEMSLEFT] Deactivating Surf item. Remaining: {surfLeft}");
         }
         UpdateSurfLeftText();
     }
