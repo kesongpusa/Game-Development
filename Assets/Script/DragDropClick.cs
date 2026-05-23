@@ -19,7 +19,8 @@ public class DragDropClick : MonoBehaviour
 
     public GameObject 
         riceObject, soySauceObject, vinegarObject,
-        joyObject, surfObject;
+        joyObject, surfObject,
+        paylessXtraBigObject, luckyMeObject, cupNoodleObject;
 
     public GameObject goyaJarObject, mentosJarObject,
         whiteRabbitJarObject;
@@ -107,11 +108,34 @@ public class DragDropClick : MonoBehaviour
                     else if (clickObject.name == "Joy")
                     {
                         draggedObject = Instantiate(joyObject, mouseWorldPos, Quaternion.identity);
+                        foreach (Transform child in draggedObject.transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
                     else if (clickObject.name == "Surf")
                     {
                         draggedObject = Instantiate(surfObject, mouseWorldPos, Quaternion.identity);
+                        foreach (Transform child in draggedObject.transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Payless Xtra Big")
+                    {
+                        draggedObject = Instantiate(paylessXtraBigObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Lucky Me")
+                    {
+                        draggedObject = Instantiate(luckyMeObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Cup Noodle")
+                    {
+                        draggedObject = Instantiate(cupNoodleObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
                     draggedObject.SetActive(false);
@@ -274,6 +298,21 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("Surf");
                         itemsLeft.DecreaseSurf();
                     }
+                    else if (clickObject.name.Equals("Payless Xtra Big"))
+                    {
+                        itemsInCart.AddItem("Payless Xtra Big");
+                        itemsLeft.DecreasePaylessXtraBig();
+                    }
+                    else if (clickObject.name.Equals("Lucky Me"))
+                    {
+                        itemsInCart.AddItem("Lucky Me");
+                        itemsLeft.DecreaseLuckyMe();
+                    }
+                    else if (clickObject.name.Equals("Cup Noodle"))
+                    {
+                        itemsInCart.AddItem("Cup Noodle");
+                        itemsLeft.DecreaseCupNoodle();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -304,6 +343,9 @@ public class DragDropClick : MonoBehaviour
         int vinegarLeft = itemsLeft.GetVinegarLeft();
         int joyLeft = itemsLeft.GetJoyLeft();
         int surfLeft = itemsLeft.GetSurfLeft();
+        int paylessXtraBigLeft = itemsLeft.GetPaylessXtraBigLeft();
+        int luckyMeLeft = itemsLeft.GetLuckyMeLeft();
+        int cupNoodleLeft = itemsLeft.GetCupNoodleLeft();
 
         Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Mentos Left: {mentosLeft}");
@@ -340,11 +382,51 @@ public class DragDropClick : MonoBehaviour
 
         if (joyLeft == 0)
         { joyObject.SetActive(false); }
-        else { joyObject.SetActive(true); }
+        else 
+        {
+            if (joyLeft == 2)
+            {
+                joyObject.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (joyLeft == 1)
+            {
+                joyObject.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                joyObject.SetActive(true);
+                joyObject.transform.GetChild(0).gameObject.SetActive(true);
+                joyObject.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
 
         if (surfLeft == 0)
         { surfObject.SetActive(false); }
-        else { surfObject.SetActive(true); }
+        else 
+        {
+            if (surfLeft == 2)
+            { surfObject.transform.GetChild(1).gameObject.SetActive(false); }
+            else if (surfLeft == 1)
+            { surfObject.transform.GetChild(0).gameObject.SetActive(false); }
+            else
+            {
+                surfObject.SetActive(true);
+                surfObject.transform.GetChild(0).gameObject.SetActive(true);
+                surfObject.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+
+        if (paylessXtraBigLeft == 0)
+        { paylessXtraBigObject.SetActive(false); }
+        else { paylessXtraBigObject.SetActive(true); }
+
+        if (luckyMeLeft == 0)
+        { luckyMeObject.SetActive(false); }
+        else { luckyMeObject.SetActive(true); }
+
+        if (cupNoodleLeft == 0)
+        { cupNoodleObject.SetActive(false); }
+        else { cupNoodleObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -364,6 +446,9 @@ public class DragDropClick : MonoBehaviour
             int totalVinegar = itemsInCart.GetTotalVinegar();
             int totalJoy = itemsInCart.GetTotalJoy();
             int totalSurf = itemsInCart.GetTotalSurf();
+            int totalPaylessXtraBig = itemsInCart.GetTotalPaylessXtraBig();
+            int totalLuckyMe = itemsInCart.GetTotalLuckyMe();
+            int totalCupNoodle = itemsInCart.GetTotalCupNoodle();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -419,6 +504,27 @@ public class DragDropClick : MonoBehaviour
                 int surfToGive = Mathf.Min(totalSurf, quantityItemRequest[itemsRequest.IndexOf("Surf")]);
                 orderScript.DecreaseItemRequest("Surf", surfToGive);
                 totalItemsInCart -= surfToGive;
+            }
+
+            if (itemsRequest.Contains("Payless Xtra Big") && totalPaylessXtraBig > 0)
+            {
+                int paylessXtraBigToGive = Mathf.Min(totalPaylessXtraBig, quantityItemRequest[itemsRequest.IndexOf("Payless Xtra Big")]);
+                orderScript.DecreaseItemRequest("Payless Xtra Big", paylessXtraBigToGive);
+                totalItemsInCart -= paylessXtraBigToGive;
+            }
+
+            if (itemsRequest.Contains("Lucky Me") && totalLuckyMe > 0)
+            {
+                int luckyMeToGive = Mathf.Min(totalLuckyMe, quantityItemRequest[itemsRequest.IndexOf("Lucky Me")]);
+                orderScript.DecreaseItemRequest("Lucky Me", luckyMeToGive);
+                totalItemsInCart -= luckyMeToGive;
+            }
+
+            if (itemsRequest.Contains("Cup Noodle") && totalCupNoodle > 0)
+            {
+                int cupNoodleToGive = Mathf.Min(totalCupNoodle, quantityItemRequest[itemsRequest.IndexOf("Cup Noodle")]);
+                orderScript.DecreaseItemRequest("Cup Noodle", cupNoodleToGive);
+                totalItemsInCart -= cupNoodleToGive;
             }
         }
     }

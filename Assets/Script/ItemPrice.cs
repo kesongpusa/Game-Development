@@ -10,6 +10,9 @@ public class ItemPrice : MonoBehaviour
     public float whiteRabbitPrice = 0.25f;
     public float surfPrice = 2.00f;
     public float joyPrice = 2.00f;
+    public float paylessXtraBigPrice = 6.00f;
+    public float luckyMePrice = 5.00f;
+    public float cupNoodlePrice = 12.00f;
 
     private float totalPrice = 0f;
 
@@ -33,6 +36,12 @@ public class ItemPrice : MonoBehaviour
                 return joyPrice;
             case "surf":
                 return surfPrice;
+            case "payless xtra big":
+                return paylessXtraBigPrice;
+            case "lucky me":
+                return luckyMePrice;
+            case "cup noodle":
+                return cupNoodlePrice;
             default:
                 Debug.LogWarning("Unknown item: " + itemName);
                 return 0f;

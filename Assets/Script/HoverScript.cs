@@ -10,8 +10,12 @@ public class HoverScript : MonoBehaviour
     RaycastHit2D raycastHit2d;
     Transform prevHoverObject, nextHoverObject;
     private Vector3 cameraTargetPos;
-    public GameObject camera, hitboxes, 
+
+    public GameObject mainCamera, hitboxes, 
         rightHitbox, leftHitbox;
+
+    public GameObject middlePaneRemainItemsText, leftPanelRemainItemsText, rightPanelRemainItemsText;
+    public GameObject itemRequestText;
 
     public float speedCam = 11;
     private float speedCamToLeft = 17;
@@ -25,7 +29,7 @@ public class HoverScript : MonoBehaviour
     {
         if (currentPos == 1)
         {
-            camera.transform.position = new Vector3(0, camera.transform.position.y, camera.transform.position.z);
+            mainCamera.transform.position = new Vector3(0, mainCamera.transform.position.y, mainCamera.transform.position.z);
         }
     }
 
@@ -39,10 +43,6 @@ public class HoverScript : MonoBehaviour
 
         raycastHit2d = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
         nextHoverObject = raycastHit2d ? raycastHit2d.collider.transform : null;
-
-        //Debug.Log($"Current Position: {currentPos}");
-        //Debug.Log($"Heading to: {toPosition}");
-        //Debug.Log($"Hover Object: {nextHoverObject}");
 
         // Move the Camera to the Right
         if (currentPos == 1)
@@ -64,67 +64,51 @@ public class HoverScript : MonoBehaviour
 
             if (hasMoved && toPosition == 2)
             {
-                //Debug.Log("Moving Camera to the Right Pane");
-                cameraTargetPos = new Vector3(8.64f, camera.transform.position.y, camera.transform.position.z);
+                cameraTargetPos = new Vector3(8.64f, mainCamera.transform.position.y, mainCamera.transform.position.z);
 
-                camera.transform.position =
+                mainCamera.transform.position =
                     Vector3.MoveTowards(
-                        camera.transform.position,
+                        mainCamera.transform.position,
                         cameraTargetPos,
                         speedCam * Time.deltaTime
                     );
 
+                middlePaneRemainItemsText.SetActive(false);
+                leftPanelRemainItemsText.SetActive(false);
+                rightPanelRemainItemsText.SetActive(true);
+                itemRequestText.SetActive(false);
+
                 if (isCameraAtClosePosition())
                 {
-                    //Debug.Log("Camera and Hitboxes has reached the target right pane position.");
-
+                    mainCamera.transform.position = cameraTargetPos;
+                    leftHitbox.SetActive(true);
                     currentPos = 2;
-                    //Debug.Log($"Current Position at {currentPos}");
-                }
-
-                if (isCameraAtExactPosition())
-                {
-                    EnableHoverObjects(); rightHitbox.SetActive(false);
                     hasMoved = false;
                 }
             }
             else if (hasMoved && toPosition == 0)
             {
-                //Debug.Log("Moving Camera to the Left Pane");
-                cameraTargetPos = new Vector3(-17.64f, camera.transform.position.y, camera.transform.position.z);
+                cameraTargetPos = new Vector3(-17.64f, mainCamera.transform.position.y, mainCamera.transform.position.z);
 
-                camera.transform.position =
+                mainCamera.transform.position =
                     Vector3.MoveTowards(
-                        camera.transform.position,
+                        mainCamera.transform.position,
                         cameraTargetPos,
                         speedCamToLeft * Time.deltaTime
                     );
 
-                rightHitbox.SetActive(false);
+                middlePaneRemainItemsText.SetActive(false);
+                leftPanelRemainItemsText.SetActive(true);
+                rightPanelRemainItemsText.SetActive(false);
+                itemRequestText.SetActive(false);
 
                 if (isCameraAtClosePosition())
                 {
-                    //Debug.Log("Camera and Hitboxes has reached the target left pane rotation.");
-
+                    mainCamera.transform.position = cameraTargetPos;
+                    rightHitbox.SetActive(true);
                     currentPos = 0;
-                    //Debug.Log($"Current Position at {currentPos}");
-                }
-
-                if (isCameraAtExactPosition())
-                {
-                    EnableHoverObjects(); leftHitbox.SetActive(false);
                     hasMoved = false;
                 }
-            }
-
-            if (!hasMoved && !isObjectActive(leftHitbox) && (toPosition == 0 || currentPos == 0))
-            {
-                rightHitbox.SetActive(true);
-            }
-
-            if (!hasMoved && !isObjectActive(rightHitbox) && (toPosition == 2 || currentPos == 2))
-            {
-                leftHitbox.SetActive(true);
             }
         }
         else if (currentPos == 0)
@@ -139,38 +123,29 @@ public class HoverScript : MonoBehaviour
 
             if (hasMoved && toPosition == 1)
             {
-                //Debug.Log("Moving Camera to the Center Pane");
-                cameraTargetPos = new Vector3(0f, camera.transform.position.y, camera.transform.position.z);
+                cameraTargetPos = new Vector3(0f, mainCamera.transform.position.y, mainCamera.transform.position.z);
 
-                camera.transform.position =
+                mainCamera.transform.position =
                     Vector3.MoveTowards(
-                        camera.transform.position,
+                        mainCamera.transform.position,
                         cameraTargetPos,
                         speedCamToLeft * Time.deltaTime
                     );
 
+                middlePaneRemainItemsText.SetActive(true);
+                leftPanelRemainItemsText.SetActive(false);
+                rightPanelRemainItemsText.SetActive(false);
+                itemRequestText.SetActive(true);
+
                 if (isCameraAtClosePosition())
                 {
-                    //Debug.Log("Camera and Hitboxes has reached the original position.");
-
-                    currentPos = 1;
-                    //Debug.Log($"Current Position at {currentPos}");
-                }
-
-                if (isCameraAtExactPosition())
-                {
+                    mainCamera.transform.position = cameraTargetPos;
                     EnableHoverObjects();
+                    currentPos = 1;
                     hasMoved = false;
                 }
             }
-
-            if (!hasMoved && (!isObjectActive(rightHitbox) && !isObjectActive(leftHitbox)))
-            {
-                EnableHoverObjects();
-            }
-
         }
-        // After Disabling the Right Hover, Move the Camera to the Left
         else if (currentPos == 2)
         {
             if (!hasMoved && nextHoverObject != null && nextHoverObject.name == "LeftObject")
@@ -183,33 +158,27 @@ public class HoverScript : MonoBehaviour
 
             if (hasMoved && toPosition == 1)
             {
-                //Debug.Log("Moving Camera to the Center Pane");
-                cameraTargetPos = new Vector3(0f, camera.transform.position.y, camera.transform.position.z);
+                cameraTargetPos = new Vector3(0f, mainCamera.transform.position.y, mainCamera.transform.position.z);
 
-                camera.transform.position =
+                mainCamera.transform.position =
                     Vector3.MoveTowards(
-                        camera.transform.position,
+                        mainCamera.transform.position,
                         cameraTargetPos,
                         speedCam * Time.deltaTime
                     );
 
+                middlePaneRemainItemsText.SetActive(true);
+                leftPanelRemainItemsText.SetActive(false);
+                rightPanelRemainItemsText.SetActive(false);
+                itemRequestText.SetActive(true);
+
                 if (isCameraAtClosePosition())
                 {
-                    //Debug.Log("Camera and Hitboxes has reached the original position.");
-                    currentPos = 1;
-                    //Debug.Log($"Current Position at {currentPos}");
-                }
-
-                if (isCameraAtExactPosition())
-                {
+                    mainCamera.transform.position = cameraTargetPos;
                     EnableHoverObjects();
+                    currentPos = 1;
                     hasMoved = false;
                 }
-            }
-
-            if (!hasMoved && (!isObjectActive(rightHitbox) && !isObjectActive(leftHitbox)))
-            {
-                EnableHoverObjects();
             }
         }
     }
@@ -227,11 +196,8 @@ public class HoverScript : MonoBehaviour
     }
 
     bool isCameraAtClosePosition()
-    { return Vector3.Distance(camera.transform.position, cameraTargetPos) < tolerance; }
+    { return Vector3.Distance(mainCamera.transform.position, cameraTargetPos) < tolerance; }
 
     bool isCameraAtExactPosition()
-    { return camera.transform.position == cameraTargetPos; }
-
-    bool isObjectActive(GameObject obj)
-    { return obj.activeSelf; }
+    { return mainCamera.transform.position == cameraTargetPos; }
 }

@@ -11,6 +11,9 @@ public class ItemsLeft : MonoBehaviour
     private int vinegarLeft;
     private int joyLeft;
     private int surfLeft;
+    private int paylessXtraBigLeft;
+    private int luckyMeLeft;
+    private int cupNoodleLeft;
 
     public GameObject joyItem;
     public GameObject surfItem;
@@ -23,6 +26,9 @@ public class ItemsLeft : MonoBehaviour
     public Text vinegarLeftText;
     public Text joyLeftText;
     public Text surfLeftText;
+    public Text paylessXtraBigLeftText;
+    public Text luckyMeLeftText;
+    public Text cupNoodleLeftText;
 
     void Start()
     {
@@ -34,6 +40,9 @@ public class ItemsLeft : MonoBehaviour
         vinegarLeft = 10;
         joyLeft = 10;
         surfLeft = 10;
+        paylessXtraBigLeft = 10;
+        luckyMeLeft = 10;
+        cupNoodleLeft = 10;
 
         UpdateGoyaCandyLeftText();
         UpdateMentosLeftText();
@@ -43,6 +52,9 @@ public class ItemsLeft : MonoBehaviour
         UpdateVinegarLeftText();
         UpdateSurfLeftText();
         UpdateJoyLeftText();
+        UpdatePaylessXtraBigLeftText();
+        UpdateLuckyMeLeftText();
+        UpdateCupNoodleLeftText();
     }
     public void DecreaseGoyaCandy()
     {
@@ -99,23 +111,7 @@ public class ItemsLeft : MonoBehaviour
         {
             joyLeft--;
         }
-
-        int joyChildCount = joyItem.transform.childCount;
-        //Debug.Log($"[ITEMSLEFT] Joy item child count: {joyChildCount}");
-
-        if (joyLeft <= joyChildCount)
-        {
-            if (joyLeft == 2)
-            {
-                joyItem.transform.GetChild(1).gameObject.SetActive(false);
-            }
-            else if (joyLeft == 1)
-            {
-                joyItem.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            Debug.Log($"[ITEMSLEFT] Deactivating Joy item. Remaining: {joyLeft}");
-        }
-
+        
         UpdateJoyLeftText();
     }
     public void DecreaseSurf()
@@ -124,57 +120,57 @@ public class ItemsLeft : MonoBehaviour
         {
             surfLeft--;
         }
-
-        int surfChildCount = surfItem.transform.childCount;
-
-        if (surfLeft <= surfChildCount)
-        {
-            if (surfLeft == 2)
-            {
-                surfItem.transform.GetChild(1).gameObject.SetActive(false);
-            }
-            else if (surfLeft == 1)
-            {
-                surfItem.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            Debug.Log($"[ITEMSLEFT] Deactivating Surf item. Remaining: {surfLeft}");
-        }
+        
         UpdateSurfLeftText();
+    }
+    public void DecreasePaylessXtraBig()
+    {
+        if (paylessXtraBigLeft > 0)
+        {
+            paylessXtraBigLeft--;
+        }
+        UpdatePaylessXtraBigLeftText();
+    }
+    public void DecreaseLuckyMe()
+    {
+        if (luckyMeLeft > 0)
+        {
+            luckyMeLeft--;
+        }
+        UpdateLuckyMeLeftText();
+    }
+    public void DecreaseCupNoodle()
+    {
+        if (cupNoodleLeft > 0)
+        {
+            cupNoodleLeft--;
+        }
+        UpdateCupNoodleLeftText();
     }
     public void DecreaseItem(string item)
     {
         if (item.Equals("Goya Candy"))
-        {
-            DecreaseGoyaCandy();
-        }
+        { DecreaseGoyaCandy(); }
         else if (item.Equals("Mentos"))
-        {
-            DecreaseMentos();
-        }
+        { DecreaseMentos(); }
         else if (item.Equals("White Rabbit"))
-        {
-            DecreaseWhiteRabbit();
-        }
+        { DecreaseWhiteRabbit(); }
         else if (item.Equals("Rice"))
-        {
-            DecreaseRice();
-        }
+        { DecreaseRice(); }
         else if (item.Equals("Soy Sauce"))
-        {
-            DecreaseSoySauce();
-        }
+        { DecreaseSoySauce(); }
         else if (item.Equals("Vinegar"))
-        {
-            DecreaseVinegar();
-        }
+        { DecreaseVinegar(); }
         else if (item.Equals("Joy"))
-        {
-            DecreaseJoy();
-        }
+        { DecreaseJoy(); }
         else if (item.Equals("Surf"))
-        {
-            DecreaseSurf();
-        }
+        { DecreaseSurf(); }
+        else if (item.Equals("Payless Xtra Big"))
+        { DecreasePaylessXtraBig(); }
+        else if (item.Equals("Lucky Me"))
+        { DecreaseLuckyMe(); }
+        else if (item.Equals("Cup Noodle"))
+        { DecreaseCupNoodle(); }
     }
 
     void UpdateGoyaCandyLeftText()
@@ -217,6 +213,21 @@ public class ItemsLeft : MonoBehaviour
         surfLeftText.text = $"{surfLeft}";
         Debug.Log($"[ITEMSLEFT] Surf left: {surfLeft}");
     }
+    void UpdatePaylessXtraBigLeftText()
+    {
+        paylessXtraBigLeftText.text = $"{paylessXtraBigLeft}";
+        Debug.Log($"[ITEMSLEFT] Payless Xtra Big left: {paylessXtraBigLeft}");
+    }
+    void UpdateLuckyMeLeftText()
+    {
+        luckyMeLeftText.text = $"{luckyMeLeft}";
+        Debug.Log($"[ITEMSLEFT] Lucky Me left: {luckyMeLeft}");
+    }
+    void UpdateCupNoodleLeftText()
+    {
+        cupNoodleLeftText.text = $"{cupNoodleLeft}";
+        Debug.Log($"[ITEMSLEFT] Cup Noodle left: {cupNoodleLeft}");
+    }
 
     public void SetGoyaCandyLeft(int goyaCandyLeft)
     {
@@ -258,15 +269,28 @@ public class ItemsLeft : MonoBehaviour
         this.surfLeft = surfLeft;
         UpdateSurfLeftText();
     }
+    public void SetPaylessXtraBigLeft(int paylessXtraBigLeft)
+    {
+        this.paylessXtraBigLeft = paylessXtraBigLeft;
+        UpdatePaylessXtraBigLeftText();
+    }
+    public void SetLuckyMeLeft(int luckyMeLeft)
+    {
+        this.luckyMeLeft = luckyMeLeft;
+        UpdateLuckyMeLeftText();
+    }
+    public void SetCupNoodleLeft(int cupNoodleLeft)
+    {
+        this.cupNoodleLeft = cupNoodleLeft;
+        UpdateCupNoodleLeftText();
+    }
+    
     public int GetGoyaCandyLeft()
     { return goyaCandyLeft; }
-
     public int GetMentosLeft()
     { return mentosLeft; }
-
     public int GetWhiteRabbitLeft()
     { return whiteRabbitLeft; }
-
     public int GetRiceLeft() 
     { return riceLeft; }
     public int GetSoySauceLeft() 
@@ -277,4 +301,10 @@ public class ItemsLeft : MonoBehaviour
     { return joyLeft; }
     public int GetSurfLeft() 
     { return surfLeft; }
+    public int GetPaylessXtraBigLeft() 
+    { return paylessXtraBigLeft; }
+    public int GetLuckyMeLeft() 
+    { return luckyMeLeft; }
+    public int GetCupNoodleLeft() 
+    { return cupNoodleLeft; }
 }

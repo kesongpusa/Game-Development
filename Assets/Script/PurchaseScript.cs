@@ -14,6 +14,9 @@ public class PurchaseScript : MonoBehaviour
     public Button vinegarItem;
     public Button surfItem;
     public Button joyItem;
+    public Button paylessXtraBigItem;
+    public Button luckyMeItem;
+    public Button cupNoodleItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -160,6 +163,51 @@ public class PurchaseScript : MonoBehaviour
             else
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase Surf.");
+            }
+        }
+        else if (cleanedItemName.Equals("Payless Xtra Big"))
+        {
+            if (currentCurrency >= 54f)
+            {
+                int currentPaylessXtraBig = itemsLeft.GetPaylessXtraBigLeft();
+                itemsLeft.SetPaylessXtraBigLeft(currentPaylessXtraBig + 12);
+                Debug.Log($"[PURCHASE] Current Payless Xtrabig: {itemsLeft.GetPaylessXtraBigLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 54f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Payless Xtra Big.");
+            }
+        }
+        else if (cleanedItemName.Equals("Lucky Me"))
+        {
+            if (currentCurrency >= 84f)
+            {
+                int currentLuckyMe = itemsLeft.GetLuckyMeLeft();
+                itemsLeft.SetLuckyMeLeft(currentLuckyMe + 24);
+                Debug.Log($"[PURCHASE] Current Lucky Me: {itemsLeft.GetLuckyMeLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 84f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Lucky Me.");
+            }
+        }
+        else if (cleanedItemName.Equals("Cup Noodle"))
+        {
+            if (currentCurrency >= 108f)
+            {
+                int currentCupNoodle = itemsLeft.GetCupNoodleLeft();
+                itemsLeft.SetCupNoodleLeft(currentCupNoodle + 12);
+                Debug.Log($"[PURCHASE] Current Cup Noodle: {itemsLeft.GetCupNoodleLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 108f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Cup Noodle.");
             }
         }
         else

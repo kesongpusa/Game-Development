@@ -67,6 +67,9 @@ public class OrderScript : MonoBehaviour
             6 = White Rabbit
             7 = Joy
             8 = Surf
+            9 = Payless Xtrabig
+            10 = Lucky Me
+            11 = Cup Noodle
             */
 
             if (whatItemRoll == 0)
@@ -111,8 +114,8 @@ public class OrderScript : MonoBehaviour
 
                 item1.GetComponent<SpriteRenderer>().sprite = items[5];
             }
-            else if (whatItemRoll == 6) 
-            {                 
+            else if (whatItemRoll == 6)
+            {
                 Debug.Log("[ORDER] Item: Joy");
                 itemName.Add("Joy");
 
@@ -124,7 +127,26 @@ public class OrderScript : MonoBehaviour
                 itemName.Add("Surf");
                 item1.GetComponent<SpriteRenderer>().sprite = items[7];
             }
-             NormalizeSpriteScale(item1, items[whatItemRoll], item1OriginalScale);
+            else if (whatItemRoll == 8)
+            {
+                Debug.Log("[ORDER] Item: Payless Xtra Big");
+                itemName.Add("Payless Xtra Big");
+                item1.GetComponent<SpriteRenderer>().sprite = items[8];
+            }
+            else if (whatItemRoll == 9)
+            {
+                Debug.Log("[ORDER] Item: Lucky Me");
+                itemName.Add("Lucky Me");
+                item1.GetComponent<SpriteRenderer>().sprite = items[9];
+            }
+            else if (whatItemRoll == 10)
+            {
+                Debug.Log("[ORDER] Item: Cup Noodle");
+                itemName.Add("Cup Noodle");
+                item1.GetComponent<SpriteRenderer>().sprite = items[10];
+            }
+
+            NormalizeSpriteScale(item1, items[whatItemRoll], item1OriginalScale);
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
         else if (manyItems == 2)
@@ -601,6 +623,161 @@ public class OrderScript : MonoBehaviour
                     {
                         item2QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Surf order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Payless Xtra Big")
+        {
+            //get current position of Payless Xtrabig in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Payless Xtra Big order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (manyItems != 1 && quantity == 0)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Lucky Me")
+        {
+            //get current position of Lucky Me in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Lucky Me order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (manyItems != 1 && quantity == 0)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Cup Noodle")
+        {
+            //get current position of Cup Noodle in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
                     }
                 }
             }
