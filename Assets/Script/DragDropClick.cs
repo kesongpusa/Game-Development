@@ -14,9 +14,11 @@ public class DragDropClick : MonoBehaviour
     private GameObject clickObject;
     public GameObject origObjectGoyaCandy;
     public GameObject origObjectMentos;
+    public GameObject origObjectWhiteRabbit;
     private GameObject draggedObject;
 
-    public GameObject goyaJarObject, mentosJarObject;
+    public GameObject goyaJarObject, mentosJarObject,
+        whiteRabbitJarObject;
 
     public Texture2D defaultCursor;
     public Texture2D dragCursor;
@@ -76,6 +78,11 @@ public class DragDropClick : MonoBehaviour
                     else if (clickObject.name == "Mentos Jar")
                     {
                         draggedObject = Instantiate(origObjectMentos, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "White Rabbit Jar")
+                    {
+                        draggedObject = Instantiate(origObjectWhiteRabbit, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
 
@@ -206,6 +213,11 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("Mentos");
                         itemsLeft.DecreaseMentos();
                     }
+                    else if (clickObject.name.Equals("White Rabbit Jar"))
+                    {
+                        itemsInCart.AddItem("White Rabbit");
+                        itemsLeft.DecreaseWhiteRabbit();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -230,6 +242,7 @@ public class DragDropClick : MonoBehaviour
     {
         int goyaCandyLeft = itemsLeft.GetGoyaCandyLeft();
         int mentosLeft = itemsLeft.GetMentosLeft();
+        int whiteRabbitLeft = itemsLeft.GetWhiteRabbitLeft();
 
         Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}, Mentos Left: {mentosLeft}");
 
@@ -253,6 +266,7 @@ public class DragDropClick : MonoBehaviour
             Debug.Log("[CART] Giving items to cat from cart...");
             int totalGoyaCandy = itemsInCart.GetTotalGoyaCandy();
             int totalMentos = itemsInCart.GetTotalMentos();
+            int totalWhiteRabbit = itemsInCart.GetTotalWhiteRabbit();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -266,6 +280,13 @@ public class DragDropClick : MonoBehaviour
                 int mentosToGive = Mathf.Min(totalMentos, quantityItemRequest[itemsRequest.IndexOf("Mentos")]);
                 orderScript.DecreaseItemRequest("Mentos", mentosToGive);
                 totalItemsInCart -= mentosToGive;
+            }
+
+            if (itemsRequest.Contains("White Rabbit") && totalWhiteRabbit > 0)
+            {
+                int whiteRabbitToGive = Mathf.Min(totalWhiteRabbit, quantityItemRequest[itemsRequest.IndexOf("White Rabbit")]);
+                orderScript.DecreaseItemRequest("White Rabbit", whiteRabbitToGive);
+                totalItemsInCart -= whiteRabbitToGive;
             }
         }
     }

@@ -5,17 +5,21 @@ public class ItemsLeft : MonoBehaviour
 {
     private int goyaCandyLeft;
     private int mentosLeft;
+    private int whiteRabbitLeft;
 
     public Text goyaCandyLeftText;
     public Text mentosLeftText;
+    public Text whiteRabbitText;
 
     void Start()
     {
         goyaCandyLeft = 10;
         mentosLeft = 10;
+        whiteRabbitLeft = 10;
 
         UpdateGoyaCandyLeftText();
         UpdateMentosLeftText();
+        UpdateWhiteRabbitLeftText();
     }
     public void DecreaseGoyaCandy()
     {
@@ -35,6 +39,14 @@ public class ItemsLeft : MonoBehaviour
 
         UpdateMentosLeftText();
     }
+    public void DecreaseWhiteRabbit()
+    {
+        if (whiteRabbitLeft > 0)
+        {
+            whiteRabbitLeft--;
+        }
+        UpdateWhiteRabbitLeftText();
+    }
 
     public void DecreaseItem(string item)
     {
@@ -45,6 +57,10 @@ public class ItemsLeft : MonoBehaviour
         else if (item.Equals("Mentos"))
         {
             DecreaseMentos();
+        }
+        else if (item.Equals("White Rabbit"))
+        {
+            DecreaseWhiteRabbit();
         }
     }
 
@@ -60,6 +76,12 @@ public class ItemsLeft : MonoBehaviour
         Debug.Log($"[ITEMSLEFT] Mentos left: {mentosLeft}");
     }
 
+    void UpdateWhiteRabbitLeftText()
+    {
+        whiteRabbitText.text = $"{whiteRabbitLeft}";
+        Debug.Log($"[ITEMSLEFT] White Rabbit left: {whiteRabbitLeft}");
+    }
+
     public void SetGoyaCandyLeft(int goyaCandyLeft)
     {
         this.goyaCandyLeft = goyaCandyLeft;
@@ -72,9 +94,18 @@ public class ItemsLeft : MonoBehaviour
         UpdateMentosLeftText();
     }
 
+    public void SetWhiteRabbitLeft(int whiteRabbitLeft)
+    {
+        this.whiteRabbitLeft = whiteRabbitLeft;
+        UpdateWhiteRabbitLeftText();
+    }
+
     public int GetGoyaCandyLeft()
     { return goyaCandyLeft; }
 
     public int GetMentosLeft()
     { return mentosLeft; }
+
+    public int GetWhiteRabbitLeft()
+    { return whiteRabbitLeft; }
 }

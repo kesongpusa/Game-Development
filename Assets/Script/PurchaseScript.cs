@@ -8,6 +8,7 @@ public class PurchaseScript : MonoBehaviour
 
     public Button goyaCandyItem;
     public Button mentosItem;
+    public Button whiteRabbitItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -64,6 +65,21 @@ public class PurchaseScript : MonoBehaviour
             else
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase Mentos.");
+            }
+        }
+        else if (cleanedItemName.Equals("White Rabbit"))
+        {
+            if (currentCurrency >= 20f)
+            {
+                int currentWhiteRabbit = itemsLeft.GetWhiteRabbitLeft();
+                itemsLeft.SetWhiteRabbitLeft(currentWhiteRabbit + 10);
+                Debug.Log($"[PURCHASE] Current White Rabbit: {itemsLeft.GetWhiteRabbitLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 20f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase White Rabbit.");
             }
         }
     }

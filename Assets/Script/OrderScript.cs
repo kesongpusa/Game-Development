@@ -9,6 +9,7 @@ public class OrderScript : MonoBehaviour
 
     public GameObject getGoyaCandy; 
     public GameObject getMentos;
+    public GameObject getWhiteRabbit;
 
     public GameObject requestItem;
     public GameObject item1;
@@ -18,6 +19,7 @@ public class OrderScript : MonoBehaviour
 
     public Text goyaCandyQuantityText;
     public Text mentosQuantityText;
+    public Text whiteRabbitQuantityText;
 
     private int manyItems, whatItemRoll;
     private List<string> itemName;
@@ -57,6 +59,7 @@ public class OrderScript : MonoBehaviour
             3 = Rice
             4 = Soy Sauce
             5 = Vinegar
+            6 = White Rabbit
             */
 
             if (whatItemRoll == 0)
@@ -93,6 +96,13 @@ public class OrderScript : MonoBehaviour
                 itemName.Add("Vinegar");
 
                 item1.GetComponent<SpriteRenderer>().sprite = items[4];
+            }
+            else if (whatItemRoll == 5)
+            {
+                Debug.Log("[ORDER] Item: White Rabbit");
+                itemName.Add("White Rabbit");
+
+                item1.GetComponent<SpriteRenderer>().sprite = items[5];
             }
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }

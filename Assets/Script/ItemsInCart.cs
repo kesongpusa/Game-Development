@@ -10,8 +10,9 @@ public class ItemsInCart : MonoBehaviour
 
     private int totalGoyaCandy = 0; 
     private int totalMentos = 0;
+    private int totalWhiteRabbit = 0;
 
-    public Text totalGoyaCandyText, totalMentosText;
+    public Text totalGoyaCandyText, totalMentosText, totalWhiteRabbitText;
 
     private List<string> cartItems = new List<string>();
 
@@ -25,6 +26,8 @@ public class ItemsInCart : MonoBehaviour
         { totalGoyaCandy++; Debug.Log($"Added Goya Candy to Cart"); }
         else if (ItemName.Equals("Mentos"))
         { totalMentos++; Debug.Log($"Added Mentos to Cart"); }
+        else if (ItemName.Equals("White Rabbit"))
+        { totalWhiteRabbit++; Debug.Log($"Added White Rabbit to Cart"); }
 
         AddItemsInCart();
     }
@@ -39,6 +42,7 @@ public class ItemsInCart : MonoBehaviour
         totalItemsText.text = $"Total Items: {totalItems}";
         totalGoyaCandyText.text = $"Goya: {totalGoyaCandy}";
         totalMentosText.text = $"Mentos: {totalMentos}";
+        totalWhiteRabbitText.text = $"White Rabbit: {totalWhiteRabbit}";
     }
 
     public void ClearCart()
@@ -48,6 +52,7 @@ public class ItemsInCart : MonoBehaviour
         totalItems = 0;
         totalGoyaCandy = 0;
         totalMentos = 0;
+        totalWhiteRabbit = 0;
 
         UpdateTotalText();
     }
@@ -61,4 +66,6 @@ public class ItemsInCart : MonoBehaviour
     { return totalGoyaCandy; }
     public int GetTotalMentos() 
     { return totalMentos; }
+    public int GetTotalWhiteRabbit() 
+    { return totalWhiteRabbit; }
 }
