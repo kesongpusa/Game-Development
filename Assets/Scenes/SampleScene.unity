@@ -499,6 +499,7 @@ MonoBehaviour:
   playerIncome: {fileID: 499462665}
   successfulTransaction: {fileID: 42805185}
   itemPrice: {fileID: 1292793527}
+  disableUI: {fileID: 84200907}
   calculator: {fileID: 370805973}
   textCalcu: {fileID: 1374150396}
 --- !u!114 &42805185
@@ -550,11 +551,16 @@ MonoBehaviour:
   shopButton: {fileID: 2019467690}
   closeShopButton: {fileID: 262409853}
   textItemRequestsAndScore: {fileID: 8146431}
+  textCustomerItemReqst: {fileID: 1250635609}
   textItemLeft: {fileID: 1472093069}
   textTotalItems: {fileID: 1743131655}
   items: {fileID: 347835362}
   hoverObjects: {fileID: 1450257452}
   cart: {fileID: 1148572597}
+  totalItems: {fileID: 1743131655}
+  riceLeftItem: {fileID: 1036311536}
+  soySauceLeftItem: {fileID: 891843337}
+  vinegarLeftItem: {fileID: 1455869337}
 --- !u!4 &84200908
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,6 +1258,7 @@ MonoBehaviour:
   item2QuantityText: {fileID: 1135130055}
   dragDropClick: {fileID: 284351481}
   payingCustomer: {fileID: 196513656}
+  disableUI: {fileID: 84200907}
 --- !u!4 &196513655
 Transform:
   m_ObjectHideFlags: 0

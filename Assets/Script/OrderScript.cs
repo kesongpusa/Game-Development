@@ -31,6 +31,7 @@ public class OrderScript : MonoBehaviour
 
     public DragDropClick dragDropClick;
     public PayingCustomer payingCustomer;
+    public DisablingUI disableUI;
 
     private void Start()
     {
@@ -48,7 +49,7 @@ public class OrderScript : MonoBehaviour
         requestItem.SetActive(true);
         //manyItems = Random.Range(1, 3);
 
-        manyItems = 2; //for testing purposes, set to 2 to test multiple item orders
+        manyItems = 1; //for testing purposes, set to 1
 
         itemName = new List<string>(); 
         itemQuantities = new List<int>();
@@ -414,6 +415,8 @@ public class OrderScript : MonoBehaviour
 
             item1.SetActive(false);
             item2.SetActive(false);
+
+            disableUI.DisableWhileCalcu();
         }
 
         UpdateListFromDragDropClick();

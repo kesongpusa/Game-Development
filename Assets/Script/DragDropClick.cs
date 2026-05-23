@@ -103,6 +103,7 @@ public class DragDropClick : MonoBehaviour
                         draggedObject = Instantiate(vinegarObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
+                    draggedObject.SetActive(false);
 
                     Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
                 }
@@ -134,6 +135,7 @@ public class DragDropClick : MonoBehaviour
 
             if (isDragging)
             {
+                draggedObject.SetActive(true);
                 draggedObject.transform.position = mouseWorldPos;
 
                 Debug.Log($"[HOLDMOUSE] Hovering over: {(nextHoverObject != null ? nextHoverObject.name : "nothing")}");

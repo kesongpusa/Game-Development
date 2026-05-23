@@ -9,6 +9,7 @@ public class CalculatorScript : MonoBehaviour
     public PlayerIncome playerIncome;
     public SuccessfulTransaction successfulTransaction;
     public ItemPrice itemPrice;
+    public DisablingUI disableUI;
 
     public GameObject calculator;
 
@@ -110,6 +111,8 @@ public class CalculatorScript : MonoBehaviour
             calculator.SetActive(false);
             
             successfulTransaction.Success();
+
+            disableUI.EnableWhileCalcu();
         }
         else
         {
