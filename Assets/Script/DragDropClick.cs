@@ -244,7 +244,8 @@ public class DragDropClick : MonoBehaviour
         int mentosLeft = itemsLeft.GetMentosLeft();
         int whiteRabbitLeft = itemsLeft.GetWhiteRabbitLeft();
 
-        Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}, Mentos Left: {mentosLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}, " +
+            $"Mentos Left: {mentosLeft}, White Rabbit Left: {whiteRabbitLeft}");
 
         if (goyaCandyLeft == 0)
         { goyaJarObject.SetActive(false); }
@@ -253,6 +254,10 @@ public class DragDropClick : MonoBehaviour
         if (mentosLeft == 0)
         { mentosJarObject.SetActive(false); }
         else { mentosJarObject.SetActive(true); }
+
+        if (whiteRabbitLeft == 0)
+        { whiteRabbitJarObject.SetActive(false); }
+        else { whiteRabbitJarObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()

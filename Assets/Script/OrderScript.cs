@@ -17,6 +17,8 @@ public class OrderScript : MonoBehaviour
 
     public Sprite[] items;
 
+    public Text oneItemRequest;
+
     public Text goyaCandyQuantityText;
     public Text mentosQuantityText;
     public Text whiteRabbitQuantityText;
@@ -36,7 +38,9 @@ public class OrderScript : MonoBehaviour
     public void GetOrderRandomizer()
     {
         requestItem.SetActive(true);
-        manyItems = Random.Range(1, 3);
+        //manyItems = Random.Range(1, 3);
+
+        manyItems = 1;
 
         itemName = new List<string>(); 
         itemQuantities = new List<int>();
@@ -51,7 +55,8 @@ public class OrderScript : MonoBehaviour
             item1.SetActive(true);
             Debug.Log("[ORDER] Items: 1");
 
-            whatItemRoll = Random.Range(0, 5);
+            //whatItemRoll = Random.Range(0, 6);
+            whatItemRoll = 5;
 
             /*
             1 = Goya Candy
@@ -145,10 +150,10 @@ public class OrderScript : MonoBehaviour
         {
             if (whatItem >= 0)
             {
-                goyaCandyQuantityText.enabled = true;
+                oneItemRequest.enabled = true;
 
-                Debug.Log($"[ORDER] Quantity (Goya Candy): {quantity}");
-                goyaCandyQuantityText.text = $"{quantity}";
+                Debug.Log($"[ORDER] One Item Req: {quantity}");
+                oneItemRequest.text = $"{quantity}";
             }
 
             itemQuantities.Add(quantity);
@@ -188,7 +193,13 @@ public class OrderScript : MonoBehaviour
                 Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
             }
 
-            if (quantity == 0)
+            if (manyItems == 1)
+            {
+                Debug.Log("[ORDER] White Rabbit order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
             {
                 Debug.Log("[ORDER] Goya Candy order complete!");
                 goyaCandyQuantityText.enabled = false;
@@ -209,15 +220,48 @@ public class OrderScript : MonoBehaviour
                 Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
             }
 
-            if (quantity == 0)
+            if (manyItems == 1)
+            {
+                Debug.Log("[ORDER] Mentos order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
             {
                 Debug.Log("[ORDER] Mentos order complete!");
                 mentosQuantityText.enabled = false;
             }
         }
+        else if (itemName == "White Rabbit")
+        {
+            //get current position of White Rabbit in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+
+                mentosQuantityText.text = $"{quantity}";
+                Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+            }
+
+            if (manyItems == 1)
+            {
+                Debug.Log("[ORDER] White Rabbit order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                Debug.Log("[ORDER] White Rabbit order complete!");
+                whiteRabbitQuantityText.enabled = false;
+            }
+        }
 
         if (itemQuantities.TrueForAll(q => q == 0))
-        { 
+        {
             payingCustomer.PayForTotalAmount();
             requestItem.SetActive(false);
 
