@@ -49,7 +49,7 @@ public class OrderScript : MonoBehaviour
         requestItem.SetActive(true);
         //manyItems = Random.Range(1, 3);
 
-        manyItems = 1; //for testing purposes, set to 1
+        manyItems = 2; //for testing purposes, set to 2
 
         itemName = new List<string>(); 
         itemQuantities = new List<int>();
@@ -211,10 +211,18 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    item1QuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -226,8 +234,18 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] Goya Candy order complete!");
-                item1QuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
             }
         }
         else if (itemName == "Mentos")
@@ -248,10 +266,20 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    item2QuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -263,8 +291,18 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] Mentos order complete!");
-                item2QuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                }
             }
         }
         else if (itemName == "White Rabbit")
@@ -283,10 +321,20 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    //whiteRabbitQuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -298,8 +346,18 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] White Rabbit order complete!");
-                //whiteRabbitQuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                }
             }
         }
         else if (itemName == "Rice")
@@ -318,10 +376,18 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    //whiteRabbitQuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -333,8 +399,18 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] Rice order complete!");
-                //whiteRabbitQuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);  
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                }
             }
         }
         else if (itemName == "Soy Sauce")
@@ -353,10 +429,18 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    //whiteRabbitQuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -368,8 +452,18 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] Soy Sauce order complete!");
-                //whiteRabbitQuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                }
             }
         }
         else if (itemName == "Vinegar")
@@ -388,10 +482,18 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else //Not implemented
+                else
                 {
-                    //whiteRabbitQuantityText.text = $"{quantity}";
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    }
                 }
             }
 
@@ -403,11 +505,20 @@ public class OrderScript : MonoBehaviour
 
             if (quantity == 0 && manyItems != 1)
             {
-                Debug.Log("[ORDER] Vinegar order complete!");
-                //whiteRabbitQuantityText.enabled = false;
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                }
             }
         }
-
         if (itemQuantities.TrueForAll(q => q == 0))
         {
             payingCustomer.PayForTotalAmount();
