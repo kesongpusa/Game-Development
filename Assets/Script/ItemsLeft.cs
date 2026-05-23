@@ -14,6 +14,9 @@ public class ItemsLeft : MonoBehaviour
     private int paylessXtraBigLeft;
     private int luckyMeLeft;
     private int cupNoodleLeft;
+    private int colgateLeft;
+    private int rexonaLeft;
+    private int sunsilkLeft;
 
     public GameObject joyItem;
     public GameObject surfItem;
@@ -29,6 +32,9 @@ public class ItemsLeft : MonoBehaviour
     public Text paylessXtraBigLeftText;
     public Text luckyMeLeftText;
     public Text cupNoodleLeftText;
+    public Text colgateLeftText;
+    public Text rexonaLeftText;
+    public Text sunsilkLeftText;
 
     void Start()
     {
@@ -43,6 +49,9 @@ public class ItemsLeft : MonoBehaviour
         paylessXtraBigLeft = 10;
         luckyMeLeft = 10;
         cupNoodleLeft = 10;
+        colgateLeft = 10;
+        rexonaLeft = 10;
+        sunsilkLeft = 10;
 
         UpdateGoyaCandyLeftText();
         UpdateMentosLeftText();
@@ -55,6 +64,9 @@ public class ItemsLeft : MonoBehaviour
         UpdatePaylessXtraBigLeftText();
         UpdateLuckyMeLeftText();
         UpdateCupNoodleLeftText();
+        UpdateColgateLeftText();
+        UpdateRexonaLeftText();
+        UpdateSunsilkLeftText();
     }
     public void DecreaseGoyaCandy()
     {
@@ -147,6 +159,30 @@ public class ItemsLeft : MonoBehaviour
         }
         UpdateCupNoodleLeftText();
     }
+    public void DecreaseColgate()
+    {
+        if (colgateLeft > 0)
+        {
+            colgateLeft--;
+        }
+        UpdateColgateLeftText();
+    }
+    public void DecreaseRexona()
+    {
+        if (rexonaLeft > 0)
+        {
+            rexonaLeft--;
+        }
+        UpdateRexonaLeftText();
+    }
+    public void DecreaseSunsilk()
+    {
+        if (sunsilkLeft > 0)
+        {
+            sunsilkLeft--;
+        }
+        UpdateSunsilkLeftText();
+    }
     public void DecreaseItem(string item)
     {
         if (item.Equals("Goya Candy"))
@@ -171,6 +207,12 @@ public class ItemsLeft : MonoBehaviour
         { DecreaseLuckyMe(); }
         else if (item.Equals("Cup Noodle"))
         { DecreaseCupNoodle(); }
+        else if (item.Equals("Colgate"))
+        { DecreaseColgate(); }
+        else if (item.Equals("Rexona"))
+        { DecreaseRexona(); }
+        else if (item.Equals("Sunsilk"))
+        { DecreaseSunsilk(); }
     }
 
     void UpdateGoyaCandyLeftText()
@@ -228,6 +270,21 @@ public class ItemsLeft : MonoBehaviour
         cupNoodleLeftText.text = $"{cupNoodleLeft}";
         Debug.Log($"[ITEMSLEFT] Cup Noodle left: {cupNoodleLeft}");
     }
+    void UpdateColgateLeftText()
+    {
+        colgateLeftText.text = $"{colgateLeft}";
+        Debug.Log($"[ITEMSLEFT] Colgate left: {colgateLeft}");
+    }
+    void UpdateRexonaLeftText()
+    {
+        rexonaLeftText.text = $"{rexonaLeft}";
+        Debug.Log($"[ITEMSLEFT] Rexona left: {rexonaLeft}");
+    }
+    void UpdateSunsilkLeftText()
+    {
+        sunsilkLeftText.text = $"{sunsilkLeft}";
+        Debug.Log($"[ITEMSLEFT] Sunsilk left: {sunsilkLeft}");
+    }
 
     public void SetGoyaCandyLeft(int goyaCandyLeft)
     {
@@ -284,7 +341,22 @@ public class ItemsLeft : MonoBehaviour
         this.cupNoodleLeft = cupNoodleLeft;
         UpdateCupNoodleLeftText();
     }
-    
+    public void SetColgateLeft(int colgateLeft)
+    {
+        this.colgateLeft = colgateLeft;
+        UpdateColgateLeftText();
+    }
+    public void SetRexonaLeft(int rexonaLeft)
+    {
+        this.rexonaLeft = rexonaLeft;
+        UpdateRexonaLeftText();
+    }
+    public void SetSunsilkLeft(int sunsilkLeft)
+    {
+        this.sunsilkLeft = sunsilkLeft;
+        UpdateSunsilkLeftText();
+    }
+
     public int GetGoyaCandyLeft()
     { return goyaCandyLeft; }
     public int GetMentosLeft()
@@ -307,4 +379,10 @@ public class ItemsLeft : MonoBehaviour
     { return luckyMeLeft; }
     public int GetCupNoodleLeft() 
     { return cupNoodleLeft; }
+    public int GetColgateLeft() 
+    { return colgateLeft; }
+    public int GetRexonaLeft() 
+    { return rexonaLeft; }
+    public int GetSunsilkLeft() 
+    { return sunsilkLeft; }
 }

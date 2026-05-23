@@ -59,17 +59,20 @@ public class OrderScript : MonoBehaviour
             whatItemRoll = Random.Range(0, countItems);
 
             /*
-            1 = Goya Candy
-            2 = Mentos
-            3 = Rice
-            4 = Soy Sauce
-            5 = Vinegar
-            6 = White Rabbit
-            7 = Joy
-            8 = Surf
-            9 = Payless Xtrabig
-            10 = Lucky Me
-            11 = Cup Noodle
+            0 = Goya Candy
+            1 = Mentos
+            2 = Rice
+            3 = Soy Sauce
+            4 = Vinegar
+            5 = White Rabbit
+            6 = Joy
+            7 = Surf
+            8 = Payless Xtrabig
+            9 = Lucky Me
+            10 = Cup Noodle
+            11 = Colgate
+            12 = Rexona
+            13 = Sunsilk
             */
 
             if (whatItemRoll == 0)
@@ -144,6 +147,24 @@ public class OrderScript : MonoBehaviour
                 Debug.Log("[ORDER] Item: Cup Noodle");
                 itemName.Add("Cup Noodle");
                 item1.GetComponent<SpriteRenderer>().sprite = items[10];
+            }
+            else if (whatItemRoll == 11)
+            {
+                Debug.Log("[ORDER] Item: Colgate");
+                itemName.Add("Colgate");
+                item1.GetComponent<SpriteRenderer>().sprite = items[11];
+            }
+            else if (whatItemRoll == 12)
+            {
+                Debug.Log("[ORDER] Item: Rexona");
+                itemName.Add("Rexona");
+                item1.GetComponent<SpriteRenderer>().sprite = items[12];
+            }
+            else if (whatItemRoll == 13)
+            {
+                Debug.Log("[ORDER] Item: Sunsilk");
+                itemName.Add("Sunsilk");
+                item1.GetComponent<SpriteRenderer>().sprite = items[13];
             }
 
             NormalizeSpriteScale(item1, items[whatItemRoll], item1OriginalScale);
@@ -779,6 +800,157 @@ public class OrderScript : MonoBehaviour
                         item2QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
                     }
+                }
+            }
+        }
+        else if (itemName == "Colgate")
+        {
+            //get current position of Colgate in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Colgate order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Rexona")
+        {
+            //get current position of Rexona in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Rexona order complete!");
+                oneItemRequest.enabled = false;
+            }
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Sunsilk")
+        {
+            //get current position of Sunsilk in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Sunsilk order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
                 }
             }
         }

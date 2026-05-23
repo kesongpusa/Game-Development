@@ -20,7 +20,8 @@ public class DragDropClick : MonoBehaviour
     public GameObject 
         riceObject, soySauceObject, vinegarObject,
         joyObject, surfObject,
-        paylessXtraBigObject, luckyMeObject, cupNoodleObject;
+        paylessXtraBigObject, luckyMeObject, cupNoodleObject,
+        colgateObject, rexonaObject, sunsilkObject;
 
     public GameObject goyaJarObject, mentosJarObject,
         whiteRabbitJarObject;
@@ -138,6 +139,22 @@ public class DragDropClick : MonoBehaviour
                         draggedObject = Instantiate(cupNoodleObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
+                    else if (clickObject.name == "Colgate")
+                    {
+                        draggedObject = Instantiate(colgateObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Rexona")
+                    {
+                        draggedObject = Instantiate(rexonaObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Sunsilk")
+                    {
+                        draggedObject = Instantiate(sunsilkObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+
                     draggedObject.SetActive(false);
 
                     Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
@@ -313,6 +330,21 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("Cup Noodle");
                         itemsLeft.DecreaseCupNoodle();
                     }
+                    else if (clickObject.name.Equals("Colgate"))
+                    {
+                        itemsInCart.AddItem("Colgate");
+                        itemsLeft.DecreaseColgate();
+                    }
+                    else if (clickObject.name.Equals("Rexona"))
+                    {
+                        itemsInCart.AddItem("Rexona");
+                        itemsLeft.DecreaseRexona();
+                    }
+                    else if (clickObject.name.Equals("Sunsilk"))
+                    {
+                        itemsInCart.AddItem("Sunsilk");
+                        itemsLeft.DecreaseSunsilk();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -346,6 +378,9 @@ public class DragDropClick : MonoBehaviour
         int paylessXtraBigLeft = itemsLeft.GetPaylessXtraBigLeft();
         int luckyMeLeft = itemsLeft.GetLuckyMeLeft();
         int cupNoodleLeft = itemsLeft.GetCupNoodleLeft();
+        int colgateLeft = itemsLeft.GetColgateLeft();
+        int rexonaLeft = itemsLeft.GetRexonaLeft();
+        int sunsilkLeft = itemsLeft.GetSunsilkLeft();
 
         Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Mentos Left: {mentosLeft}");
@@ -355,6 +390,12 @@ public class DragDropClick : MonoBehaviour
         Debug.Log($"[CHECKITEMSLEFT] Vinegar Left: {vinegarLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Joy Left: {joyLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Surf Left: {surfLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Payless Xtra Big Left: {paylessXtraBigLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Lucky Me Left: {luckyMeLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Cup Noodle Left: {cupNoodleLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Colgate Left: {colgateLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Rexona Left: {rexonaLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Sunsilk Left: {sunsilkLeft}");
 
         if (goyaCandyLeft == 0)
         { goyaJarObject.SetActive(false); }
@@ -427,6 +468,18 @@ public class DragDropClick : MonoBehaviour
         if (cupNoodleLeft == 0)
         { cupNoodleObject.SetActive(false); }
         else { cupNoodleObject.SetActive(true); }
+
+        if (colgateLeft == 0)
+        { colgateObject.SetActive(false); }
+        else { colgateObject.SetActive(true); }
+
+        if (rexonaLeft == 0)
+        { rexonaObject.SetActive(false); }
+        else { rexonaObject.SetActive(true); }
+
+        if (sunsilkLeft == 0)
+        { sunsilkObject.SetActive(false); }
+        else { sunsilkObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -449,6 +502,9 @@ public class DragDropClick : MonoBehaviour
             int totalPaylessXtraBig = itemsInCart.GetTotalPaylessXtraBig();
             int totalLuckyMe = itemsInCart.GetTotalLuckyMe();
             int totalCupNoodle = itemsInCart.GetTotalCupNoodle();
+            int totalColgate = itemsInCart.GetTotalColgate();
+            int totalRexona = itemsInCart.GetTotalRexona();
+            int totalSunsilk = itemsInCart.GetTotalSunsilk();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -525,6 +581,27 @@ public class DragDropClick : MonoBehaviour
                 int cupNoodleToGive = Mathf.Min(totalCupNoodle, quantityItemRequest[itemsRequest.IndexOf("Cup Noodle")]);
                 orderScript.DecreaseItemRequest("Cup Noodle", cupNoodleToGive);
                 totalItemsInCart -= cupNoodleToGive;
+            }
+
+            if (itemsRequest.Contains("Colgate") && totalColgate > 0)
+            {
+                int colgateToGive = Mathf.Min(totalColgate, quantityItemRequest[itemsRequest.IndexOf("Colgate")]);
+                orderScript.DecreaseItemRequest("Colgate", colgateToGive);
+                totalItemsInCart -= colgateToGive;
+            }
+
+            if (itemsRequest.Contains("Rexona") && totalRexona > 0)
+            {
+                int rexonaToGive = Mathf.Min(totalRexona, quantityItemRequest[itemsRequest.IndexOf("Rexona")]);
+                orderScript.DecreaseItemRequest("Rexona", rexonaToGive);
+                totalItemsInCart -= rexonaToGive;
+            }
+
+            if (itemsRequest.Contains("Sunsilk") && totalSunsilk > 0)
+            {
+                int sunsilkToGive = Mathf.Min(totalSunsilk, quantityItemRequest[itemsRequest.IndexOf("Sunsilk")]);
+                orderScript.DecreaseItemRequest("Sunsilk", sunsilkToGive);
+                totalItemsInCart -= sunsilkToGive;
             }
         }
     }

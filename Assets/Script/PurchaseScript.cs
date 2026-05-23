@@ -17,6 +17,9 @@ public class PurchaseScript : MonoBehaviour
     public Button paylessXtraBigItem;
     public Button luckyMeItem;
     public Button cupNoodleItem;
+    public Button colgateItem;
+    public Button rexonaItem;
+    public Button sunsilkItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -208,6 +211,51 @@ public class PurchaseScript : MonoBehaviour
             else
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase Cup Noodle.");
+            }
+        }
+        else if (cleanedItemName.Equals("Colgate"))
+        {
+            if (currentCurrency >= 48f)
+            {
+                int currentColgate = itemsLeft.GetColgateLeft();
+                itemsLeft.SetColgateLeft(currentColgate + 24);
+                Debug.Log($"[PURCHASE] Current Colgate: {itemsLeft.GetColgateLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 48f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Colgate.");
+            }
+        }
+        else if (cleanedItemName.Equals("Rexona"))
+        {
+            if (currentCurrency >= 144f)
+            {
+                int currentRexona = itemsLeft.GetRexonaLeft();
+                itemsLeft.SetRexonaLeft(currentRexona + 12);
+                Debug.Log($"[PURCHASE] Current Rexona: {itemsLeft.GetRexonaLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 144f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Rexona.");
+            }
+        }
+        else if (cleanedItemName.Equals("Sunsilk"))
+        {
+            if (currentCurrency >= 30f)
+            {
+                int currentSunsilk = itemsLeft.GetSunsilkLeft();
+                itemsLeft.SetSunsilkLeft(currentSunsilk + 24);
+                Debug.Log($"[PURCHASE] Current Sunsilk: {itemsLeft.GetSunsilkLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 30f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Sunsilk.");
             }
         }
         else
