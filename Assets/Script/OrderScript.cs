@@ -15,13 +15,15 @@ public class OrderScript : MonoBehaviour
     public GameObject item1;
     public GameObject item2;
 
+    private Vector3 item1OriginalScale;
+    private Vector3 item2OriginalScale;
+
     public Sprite[] items;
 
     public Text oneItemRequest;
 
-    public Text goyaCandyQuantityText;
-    public Text mentosQuantityText;
-    public Text whiteRabbitQuantityText;
+    public Text item1QuantityText;
+    public Text item2QuantityText;
 
     private int manyItems, whatItemRoll;
     private List<string> itemName;
@@ -32,15 +34,21 @@ public class OrderScript : MonoBehaviour
 
     private void Start()
     {
+        item1OriginalScale = item1.transform.localScale;
+        item2OriginalScale = item2.transform.localScale;
+
         GetOrderRandomizer();
+
     }
 
     public void GetOrderRandomizer()
     {
+        int countItems = items.Length;
+
         requestItem.SetActive(true);
         //manyItems = Random.Range(1, 3);
 
-        manyItems = 1;
+        manyItems = 2; //for testing purposes, set to 2 to test multiple item orders
 
         itemName = new List<string>(); 
         itemQuantities = new List<int>();
@@ -55,8 +63,7 @@ public class OrderScript : MonoBehaviour
             item1.SetActive(true);
             Debug.Log("[ORDER] Items: 1");
 
-            //whatItemRoll = Random.Range(0, 6);
-            whatItemRoll = 5;
+            whatItemRoll = Random.Range(0, countItems);
 
             /*
             1 = Goya Candy
@@ -114,12 +121,12 @@ public class OrderScript : MonoBehaviour
         else if (manyItems == 2)
         { Debug.Log("[ORDER] Items: 2");
 
-            int whatItemRoll1 = Random.Range(0, 5);
-            int whatItemRoll2 = Random.Range(0, 5);
+            int whatItemRoll1 = Random.Range(0, countItems);
+            int whatItemRoll2 = Random.Range(0, countItems);
 
             while (whatItemRoll1 == whatItemRoll2)
             {
-                whatItemRoll2 = Random.Range(0, 5);
+                whatItemRoll2 = Random.Range(0, countItems);
             }
 
             item1.SetActive(true);
@@ -131,6 +138,9 @@ public class OrderScript : MonoBehaviour
             item1.GetComponent<SpriteRenderer>().sprite = items[whatItemRoll1];
             item2.GetComponent<SpriteRenderer>().sprite = items[whatItemRoll2];
 
+            NormalizeSpriteScale(item1, items[whatItemRoll1], item1OriginalScale);
+            NormalizeSpriteScale(item2, items[whatItemRoll2], item2OriginalScale);
+
             GetQuantityOrderRandomizer(manyItems, itemName.Count);
         }
 
@@ -138,8 +148,6 @@ public class OrderScript : MonoBehaviour
         {
             Debug.Log($"[ORDER] Item {i + 1}: {itemName[i]}");
         }
-
-        
     }
 
     private void GetQuantityOrderRandomizer(int randItems, int whatItem)
@@ -160,19 +168,25 @@ public class OrderScript : MonoBehaviour
         }
         else if (randItems == itemName.Count)
         {
+            Sprite sprite;
+            string spriteName;
+
             for (int i = 0; i < randItems; i++)
             {
+                sprite = items[i];
+                spriteName = sprite.name;
+
                 int quantityItems = Random.Range(1, 10);
-                Debug.Log($"[ORDER] Quantity for Item {i + 1}: {quantityItems}");
+                Debug.Log($"[ORDER] Quantity for Item {i + 1} ({spriteName}): {quantityItems}");
 
                 itemQuantities.Add(quantityItems);
             }
 
-            goyaCandyQuantityText.enabled = true;
-            mentosQuantityText.enabled = true;
+            item1QuantityText.enabled = true;
+            item2QuantityText.enabled = true;
 
-            goyaCandyQuantityText.text = $"{itemQuantities[0]}";
-            mentosQuantityText.text = $"{itemQuantities[1]}";
+            item1QuantityText.text = $"{itemQuantities[0]}";
+            item2QuantityText.text = $"{itemQuantities[1]}";
         }
     }
 
@@ -196,9 +210,9 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else
+                else //Not implemented
                 {
-                    goyaCandyQuantityText.text = $"{quantity}";
+                    item1QuantityText.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
                 }
             }
@@ -212,7 +226,7 @@ public class OrderScript : MonoBehaviour
             if (quantity == 0 && manyItems != 1)
             {
                 Debug.Log("[ORDER] Goya Candy order complete!");
-                goyaCandyQuantityText.enabled = false;
+                item1QuantityText.enabled = false;
             }
         }
         else if (itemName == "Mentos")
@@ -233,9 +247,9 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else
+                else //Not implemented
                 {
-                    mentosQuantityText.text = $"{quantity}";
+                    item2QuantityText.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
                 }
             }
@@ -249,7 +263,7 @@ public class OrderScript : MonoBehaviour
             if (quantity == 0 && manyItems != 1)
             {
                 Debug.Log("[ORDER] Mentos order complete!");
-                mentosQuantityText.enabled = false;
+                item2QuantityText.enabled = false;
             }
         }
         else if (itemName == "White Rabbit")
@@ -268,9 +282,9 @@ public class OrderScript : MonoBehaviour
                     oneItemRequest.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
                 }
-                else
+                else //Not implemented
                 {
-                    whiteRabbitQuantityText.text = $"{quantity}";
+                    //whiteRabbitQuantityText.text = $"{quantity}";
                     Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
                 }
             }
@@ -284,7 +298,112 @@ public class OrderScript : MonoBehaviour
             if (quantity == 0 && manyItems != 1)
             {
                 Debug.Log("[ORDER] White Rabbit order complete!");
-                whiteRabbitQuantityText.enabled = false;
+                //whiteRabbitQuantityText.enabled = false;
+            }
+        }
+        else if (itemName == "Rice")
+        {
+            //get current position of Rice in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else //Not implemented
+                {
+                    //whiteRabbitQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Rice order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                Debug.Log("[ORDER] Rice order complete!");
+                //whiteRabbitQuantityText.enabled = false;
+            }
+        }
+        else if (itemName == "Soy Sauce")
+        {
+            //get current position of Soy Sauce in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else //Not implemented
+                {
+                    //whiteRabbitQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Soy Sauce order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                Debug.Log("[ORDER] Soy Sauce order complete!");
+                //whiteRabbitQuantityText.enabled = false;
+            }
+        }
+        else if (itemName == "Vinegar")
+        {
+            //get current position of Vinegar in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else //Not implemented
+                {
+                    //whiteRabbitQuantityText.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                }
+            }
+
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Vinegar order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                Debug.Log("[ORDER] Vinegar order complete!");
+                //whiteRabbitQuantityText.enabled = false;
             }
         }
 
@@ -315,6 +434,11 @@ public class OrderScript : MonoBehaviour
         }
     }
 
+    private void NormalizeSpriteScale(GameObject itemGameObject, Sprite sprite, Vector3 originalScale)
+    {
+        if (sprite != null)
+        { itemGameObject.transform.localScale = originalScale; }
+    }
     public void ClearItemsList()
     {
         itemName.Clear();

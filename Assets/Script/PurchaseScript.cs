@@ -9,6 +9,9 @@ public class PurchaseScript : MonoBehaviour
     public Button goyaCandyItem;
     public Button mentosItem;
     public Button whiteRabbitItem;
+    public Button riceItem;
+    public Button soySauceItem;
+    public Button vinegarItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -80,6 +83,51 @@ public class PurchaseScript : MonoBehaviour
             else
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase White Rabbit.");
+            }
+        }
+        else if (cleanedItemName.Equals("Rice"))
+        {
+            if (currentCurrency >= 300f)
+            {
+                int currentRice = itemsLeft.GetRiceLeft();
+                itemsLeft.SetRiceLeft(currentRice + 25);
+                Debug.Log($"[PURCHASE] Current Rice: {itemsLeft.GetRiceLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 300f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Rice.");
+            }
+        }
+        else if (cleanedItemName.Equals("Soy Sauce"))
+        {
+            if (currentCurrency >= 24f)
+            {
+                int currentSoySauce = itemsLeft.GetSoySauceLeft();
+                itemsLeft.SetSoySauceLeft(currentSoySauce + 12);
+                Debug.Log($"[PURCHASE] Current Soy Sauce: {itemsLeft.GetSoySauceLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 24f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Soy Sauce.");
+            }
+        }
+        else if (cleanedItemName.Equals("Vinegar"))
+        {
+            if (currentCurrency >= 21f)
+            {
+                int currentVinegar = itemsLeft.GetVinegarLeft();
+                itemsLeft.SetVinegarLeft(currentVinegar + 12);
+                Debug.Log($"[PURCHASE] Current Vinegar: {itemsLeft.GetVinegarLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 21f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Vinegar.");
             }
         }
     }

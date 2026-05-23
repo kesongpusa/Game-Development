@@ -17,6 +17,9 @@ public class DragDropClick : MonoBehaviour
     public GameObject origObjectWhiteRabbit;
     private GameObject draggedObject;
 
+    public GameObject riceObject, soySauceObject, 
+        vinegarObject;
+
     public GameObject goyaJarObject, mentosJarObject,
         whiteRabbitJarObject;
 
@@ -83,6 +86,21 @@ public class DragDropClick : MonoBehaviour
                     else if (clickObject.name == "White Rabbit Jar")
                     {
                         draggedObject = Instantiate(origObjectWhiteRabbit, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Rice")
+                    {
+                        draggedObject = Instantiate(riceObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Soy Sauce")
+                    {
+                        draggedObject = Instantiate(soySauceObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Vinegar")
+                    {
+                        draggedObject = Instantiate(vinegarObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
 
@@ -218,6 +236,21 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("White Rabbit");
                         itemsLeft.DecreaseWhiteRabbit();
                     }
+                    else if (clickObject.name.Equals("Rice"))
+                    {
+                        itemsInCart.AddItem("Rice");
+                        itemsLeft.DecreaseRice();
+                    }
+                    else if (clickObject.name.Equals("Soy Sauce"))
+                    {
+                        itemsInCart.AddItem("Soy Sauce");
+                        itemsLeft.DecreaseSoySauce();
+                    }
+                    else if (clickObject.name.Equals("Vinegar"))
+                    {
+                        itemsInCart.AddItem("Vinegar");
+                        itemsLeft.DecreaseVinegar();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -243,9 +276,16 @@ public class DragDropClick : MonoBehaviour
         int goyaCandyLeft = itemsLeft.GetGoyaCandyLeft();
         int mentosLeft = itemsLeft.GetMentosLeft();
         int whiteRabbitLeft = itemsLeft.GetWhiteRabbitLeft();
+        int riceLeft = itemsLeft.GetRiceLeft();
+        int soySauceLeft = itemsLeft.GetSoySauceLeft();
+        int vinegarLeft = itemsLeft.GetVinegarLeft();
 
-        Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}, " +
-            $"Mentos Left: {mentosLeft}, White Rabbit Left: {whiteRabbitLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Mentos Left: {mentosLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] White Rabbit Left: {whiteRabbitLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Rice Left: {riceLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Soy Sauce Left: {soySauceLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Vinegar Left: {vinegarLeft}");
 
         if (goyaCandyLeft == 0)
         { goyaJarObject.SetActive(false); }
@@ -258,6 +298,18 @@ public class DragDropClick : MonoBehaviour
         if (whiteRabbitLeft == 0)
         { whiteRabbitJarObject.SetActive(false); }
         else { whiteRabbitJarObject.SetActive(true); }
+
+        if (riceLeft == 0)
+        { riceObject.SetActive(false); }
+        else { riceObject.SetActive(true); }
+
+        if (soySauceLeft == 0)
+        { soySauceObject.SetActive(false); }
+        else { soySauceObject.SetActive(true); }
+
+        if (vinegarLeft == 0)
+        { vinegarObject.SetActive(false); }
+        else { vinegarObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -272,6 +324,9 @@ public class DragDropClick : MonoBehaviour
             int totalGoyaCandy = itemsInCart.GetTotalGoyaCandy();
             int totalMentos = itemsInCart.GetTotalMentos();
             int totalWhiteRabbit = itemsInCart.GetTotalWhiteRabbit();
+            int totalRice = itemsInCart.GetTotalRice();
+            int totalSoySauce = itemsInCart.GetTotalSoySauce();
+            int totalVinegar = itemsInCart.GetTotalVinegar();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -292,6 +347,27 @@ public class DragDropClick : MonoBehaviour
                 int whiteRabbitToGive = Mathf.Min(totalWhiteRabbit, quantityItemRequest[itemsRequest.IndexOf("White Rabbit")]);
                 orderScript.DecreaseItemRequest("White Rabbit", whiteRabbitToGive);
                 totalItemsInCart -= whiteRabbitToGive;
+            }
+
+            if (itemsRequest.Contains("Rice") && totalRice > 0)
+            {
+                int riceToGive = Mathf.Min(totalRice, quantityItemRequest[itemsRequest.IndexOf("Rice")]);
+                orderScript.DecreaseItemRequest("Rice", riceToGive);
+                totalItemsInCart -= riceToGive;
+            }
+
+            if (itemsRequest.Contains("Soy Sauce") && totalSoySauce > 0)
+            {
+                int soySauceToGive = Mathf.Min(totalSoySauce, quantityItemRequest[itemsRequest.IndexOf("Soy Sauce")]);
+                orderScript.DecreaseItemRequest("Soy Sauce", soySauceToGive);
+                totalItemsInCart -= soySauceToGive;
+            }
+
+            if (itemsRequest.Contains("Vinegar") && totalVinegar > 0)
+            {
+                int vinegarToGive = Mathf.Min(totalVinegar, quantityItemRequest[itemsRequest.IndexOf("Vinegar")]);
+                orderScript.DecreaseItemRequest("Vinegar", vinegarToGive);
+                totalItemsInCart -= vinegarToGive;
             }
         }
     }
