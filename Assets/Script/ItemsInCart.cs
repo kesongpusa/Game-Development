@@ -14,9 +14,12 @@ public class ItemsInCart : MonoBehaviour
     private int totalRice = 0;
     private int totalSoySauce = 0;
     private int totalVinegar = 0;
+    private int totalJoy = 0;
+    private int totalSurf = 0;
 
     public Text totalGoyaCandyText, totalMentosText, totalWhiteRabbitText,
-        totalRiceText, totalSoySauceText, totalVinegarText;
+        totalRiceText, totalSoySauceText, totalVinegarText,
+        totalJoyText, totalSurfText;
 
     private List<string> cartItems = new List<string>();
 
@@ -38,6 +41,10 @@ public class ItemsInCart : MonoBehaviour
         { totalSoySauce++; Debug.Log($"Added Soy Sauce to Cart"); }
         else if (ItemName.Equals("Vinegar"))
         { totalVinegar++; Debug.Log($"Added Vinegar to Cart"); }
+        else if (ItemName.Equals("Joy"))
+        { totalJoy++; Debug.Log($"Added Joy to Cart"); }
+        else if (ItemName.Equals("Surf"))
+        { totalSurf++; Debug.Log($"Added Surf to Cart"); }
 
         AddItemsInCart();
     }
@@ -56,6 +63,8 @@ public class ItemsInCart : MonoBehaviour
         totalRiceText.text = $"Rice: {totalRice}";
         totalSoySauceText.text = $"Soy Sauce: {totalSoySauce}";
         totalVinegarText.text = $"Vinegar: {totalVinegar}";
+        totalJoyText.text = $"Joy: {totalJoy}";
+        totalSurfText.text = $"Surf: {totalSurf}";
     }
 
     public void ClearCart()
@@ -63,12 +72,12 @@ public class ItemsInCart : MonoBehaviour
         cartItems.Clear();
 
         totalItems = 0;
-        totalGoyaCandy = 0;
-        totalMentos = 0;
-        totalWhiteRabbit = 0;
-        totalRice = 0;
-        totalSoySauce = 0;
-        totalVinegar = 0;
+        
+        totalGoyaCandy = 0; totalMentos = 0; totalWhiteRabbit = 0;
+        
+        totalRice = 0; totalSoySauce = 0; totalVinegar = 0;
+
+        totalJoy = 0; totalSurf = 0;
 
         UpdateTotalText();
     }
@@ -90,4 +99,8 @@ public class ItemsInCart : MonoBehaviour
     { return totalSoySauce; }
     public int GetTotalVinegar() 
     { return totalVinegar; }
+    public int GetTotalJoy() 
+    { return totalJoy; }
+    public int GetTotalSurf() 
+    { return totalSurf; }
 }

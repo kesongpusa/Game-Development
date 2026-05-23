@@ -5,12 +5,6 @@ using System.Collections.Generic;
 
 public class OrderScript : MonoBehaviour
 {
-    private int orderQuantity;
-
-    public GameObject getGoyaCandy; 
-    public GameObject getMentos;
-    public GameObject getWhiteRabbit;
-
     public GameObject requestItem;
     public GameObject item1;
     public GameObject item2;
@@ -47,9 +41,7 @@ public class OrderScript : MonoBehaviour
         int countItems = items.Length;
 
         requestItem.SetActive(true);
-        //manyItems = Random.Range(1, 3);
-
-        manyItems = 2; //for testing purposes, set to 2
+        manyItems = Random.Range(1, 3);
 
         itemName = new List<string>(); 
         itemQuantities = new List<int>();
@@ -73,6 +65,8 @@ public class OrderScript : MonoBehaviour
             4 = Soy Sauce
             5 = Vinegar
             6 = White Rabbit
+            7 = Joy
+            8 = Surf
             */
 
             if (whatItemRoll == 0)
@@ -117,6 +111,20 @@ public class OrderScript : MonoBehaviour
 
                 item1.GetComponent<SpriteRenderer>().sprite = items[5];
             }
+            else if (whatItemRoll == 6) 
+            {                 
+                Debug.Log("[ORDER] Item: Joy");
+                itemName.Add("Joy");
+
+                item1.GetComponent<SpriteRenderer>().sprite = items[6];
+            }
+            else if (whatItemRoll == 7)
+            {
+                Debug.Log("[ORDER] Item: Surf");
+                itemName.Add("Surf");
+                item1.GetComponent<SpriteRenderer>().sprite = items[7];
+            }
+             NormalizeSpriteScale(item1, items[whatItemRoll], item1OriginalScale);
             GetQuantityOrderRandomizer(manyItems, whatItemRoll);
         }
         else if (manyItems == 2)
@@ -407,7 +415,7 @@ public class OrderScript : MonoBehaviour
                 }
                 else if (index == 1)
                 {
-                    item2.SetActive(false);  
+                    item2.SetActive(false);
                     item2QuantityText.enabled = false;
                     Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
                 }
@@ -519,6 +527,85 @@ public class OrderScript : MonoBehaviour
                 }
             }
         }
+        else if (itemName == "Joy")
+        {
+            //get current position of Joy in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Joy order complete!");
+                oneItemRequest.enabled = false;
+            }
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Surf")
+        {
+            //get current position of Surf in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+        }
+
         if (itemQuantities.TrueForAll(q => q == 0))
         {
             payingCustomer.PayForTotalAmount();

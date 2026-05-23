@@ -12,6 +12,8 @@ public class PurchaseScript : MonoBehaviour
     public Button riceItem;
     public Button soySauceItem;
     public Button vinegarItem;
+    public Button surfItem;
+    public Button joyItem;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -129,6 +131,40 @@ public class PurchaseScript : MonoBehaviour
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase Vinegar.");
             }
+        }
+        else if (cleanedItemName.Equals("Joy"))
+        {
+            if (currentCurrency >= 31.25f)
+            {
+                int currentJoy = itemsLeft.GetJoyLeft();
+                itemsLeft.SetJoyLeft(currentJoy + 25);
+                Debug.Log($"[PURCHASE] Current Joy: {itemsLeft.GetJoyLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 31.25f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Joy.");
+            }
+        }
+        else if (cleanedItemName.Equals("Surf"))
+        {
+            if (currentCurrency >= 31.25f)
+            {
+                int currentSurf = itemsLeft.GetSurfLeft();
+                itemsLeft.SetSurfLeft(currentSurf + 25);
+                Debug.Log($"[PURCHASE] Current Surf: {itemsLeft.GetSurfLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 31.25f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Surf.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"[PURCHASE] Unknown item: {cleanedItemName}");
         }
     }
 }

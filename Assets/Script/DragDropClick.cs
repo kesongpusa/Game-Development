@@ -17,8 +17,9 @@ public class DragDropClick : MonoBehaviour
     public GameObject origObjectWhiteRabbit;
     private GameObject draggedObject;
 
-    public GameObject riceObject, soySauceObject, 
-        vinegarObject;
+    public GameObject 
+        riceObject, soySauceObject, vinegarObject,
+        joyObject, surfObject;
 
     public GameObject goyaJarObject, mentosJarObject,
         whiteRabbitJarObject;
@@ -101,6 +102,16 @@ public class DragDropClick : MonoBehaviour
                     else if (clickObject.name == "Vinegar")
                     {
                         draggedObject = Instantiate(vinegarObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Joy")
+                    {
+                        draggedObject = Instantiate(joyObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Surf")
+                    {
+                        draggedObject = Instantiate(surfObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
                     draggedObject.SetActive(false);
@@ -253,6 +264,16 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("Vinegar");
                         itemsLeft.DecreaseVinegar();
                     }
+                    else if (clickObject.name.Equals("Joy"))
+                    {
+                        itemsInCart.AddItem("Joy");
+                        itemsLeft.DecreaseJoy();
+                    }
+                    else if (clickObject.name.Equals("Surf"))
+                    {
+                        itemsInCart.AddItem("Surf");
+                        itemsLeft.DecreaseSurf();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -281,6 +302,8 @@ public class DragDropClick : MonoBehaviour
         int riceLeft = itemsLeft.GetRiceLeft();
         int soySauceLeft = itemsLeft.GetSoySauceLeft();
         int vinegarLeft = itemsLeft.GetVinegarLeft();
+        int joyLeft = itemsLeft.GetJoyLeft();
+        int surfLeft = itemsLeft.GetSurfLeft();
 
         Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Mentos Left: {mentosLeft}");
@@ -288,6 +311,8 @@ public class DragDropClick : MonoBehaviour
         Debug.Log($"[CHECKITEMSLEFT] Rice Left: {riceLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Soy Sauce Left: {soySauceLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Vinegar Left: {vinegarLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Joy Left: {joyLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Surf Left: {surfLeft}");
 
         if (goyaCandyLeft == 0)
         { goyaJarObject.SetActive(false); }
@@ -312,6 +337,14 @@ public class DragDropClick : MonoBehaviour
         if (vinegarLeft == 0)
         { vinegarObject.SetActive(false); }
         else { vinegarObject.SetActive(true); }
+
+        if (joyLeft == 0)
+        { joyObject.SetActive(false); }
+        else { joyObject.SetActive(true); }
+
+        if (surfLeft == 0)
+        { surfObject.SetActive(false); }
+        else { surfObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -329,6 +362,8 @@ public class DragDropClick : MonoBehaviour
             int totalRice = itemsInCart.GetTotalRice();
             int totalSoySauce = itemsInCart.GetTotalSoySauce();
             int totalVinegar = itemsInCart.GetTotalVinegar();
+            int totalJoy = itemsInCart.GetTotalJoy();
+            int totalSurf = itemsInCart.GetTotalSurf();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -370,6 +405,20 @@ public class DragDropClick : MonoBehaviour
                 int vinegarToGive = Mathf.Min(totalVinegar, quantityItemRequest[itemsRequest.IndexOf("Vinegar")]);
                 orderScript.DecreaseItemRequest("Vinegar", vinegarToGive);
                 totalItemsInCart -= vinegarToGive;
+            }
+
+            if (itemsRequest.Contains("Joy") && totalJoy > 0)
+            {
+                int joyToGive = Mathf.Min(totalJoy, quantityItemRequest[itemsRequest.IndexOf("Joy")]);
+                orderScript.DecreaseItemRequest("Joy", joyToGive);
+                totalItemsInCart -= joyToGive;
+            }
+
+            if (itemsRequest.Contains("Surf") && totalSurf > 0)
+            {
+                int surfToGive = Mathf.Min(totalSurf, quantityItemRequest[itemsRequest.IndexOf("Surf")]);
+                orderScript.DecreaseItemRequest("Surf", surfToGive);
+                totalItemsInCart -= surfToGive;
             }
         }
     }

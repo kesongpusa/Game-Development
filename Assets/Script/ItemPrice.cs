@@ -8,6 +8,8 @@ public class ItemPrice : MonoBehaviour
     public float soySaucePrice = 3.00f;
     public float vinegarPrice = 2.50f;
     public float whiteRabbitPrice = 0.25f;
+    public float surfPrice = 2.00f;
+    public float joyPrice = 2.00f;
 
     private float totalPrice = 0f;
 
@@ -27,6 +29,10 @@ public class ItemPrice : MonoBehaviour
                 return vinegarPrice;
             case "white rabbit":
                 return whiteRabbitPrice;
+            case "joy":
+                return joyPrice;
+            case "surf":
+                return surfPrice;
             default:
                 Debug.LogWarning("Unknown item: " + itemName);
                 return 0f;

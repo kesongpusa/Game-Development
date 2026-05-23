@@ -9,6 +9,8 @@ public class ItemsLeft : MonoBehaviour
     private int riceLeft;
     private int soySauceLeft;
     private int vinegarLeft;
+    private int joyLeft;
+    private int surfLeft;
 
     public Text goyaCandyLeftText;
     public Text mentosLeftText;
@@ -16,6 +18,8 @@ public class ItemsLeft : MonoBehaviour
     public Text riceLeftText;
     public Text soySauceLeftText;
     public Text vinegarLeftText;
+    public Text joyLeftText;
+    public Text surfLeftText;
 
     void Start()
     {
@@ -25,6 +29,8 @@ public class ItemsLeft : MonoBehaviour
         riceLeft = 10;
         soySauceLeft = 10;
         vinegarLeft = 10;
+        joyLeft = 10;
+        surfLeft = 10;
 
         UpdateGoyaCandyLeftText();
         UpdateMentosLeftText();
@@ -32,6 +38,8 @@ public class ItemsLeft : MonoBehaviour
         UpdateRiceLeftText();
         UpdateSoySauceLeftText();
         UpdateVinegarLeftText();
+        UpdateSurfLeftText();
+        UpdateJoyLeftText();
     }
     public void DecreaseGoyaCandy()
     {
@@ -41,7 +49,6 @@ public class ItemsLeft : MonoBehaviour
         }
         UpdateGoyaCandyLeftText();
     }
-
     public void DecreaseMentos()
     {
         if (mentosLeft > 0)
@@ -83,6 +90,22 @@ public class ItemsLeft : MonoBehaviour
         }
         UpdateVinegarLeftText();
     }
+    public void DecreaseJoy()
+    {
+        if (joyLeft > 0)
+        {
+            joyLeft--;
+        }
+        UpdateJoyLeftText();
+    }
+    public void DecreaseSurf()
+    {
+        if (surfLeft > 0)
+        {
+            surfLeft--;
+        }
+        UpdateSurfLeftText();
+    }
     public void DecreaseItem(string item)
     {
         if (item.Equals("Goya Candy"))
@@ -109,6 +132,14 @@ public class ItemsLeft : MonoBehaviour
         {
             DecreaseVinegar();
         }
+        else if (item.Equals("Joy"))
+        {
+            DecreaseJoy();
+        }
+        else if (item.Equals("Surf"))
+        {
+            DecreaseSurf();
+        }
     }
 
     void UpdateGoyaCandyLeftText()
@@ -116,35 +147,40 @@ public class ItemsLeft : MonoBehaviour
         goyaCandyLeftText.text = $"{goyaCandyLeft}";
         Debug.Log($"[ITEMSLEFT] Goya Candy left: {goyaCandyLeft}");
     }
-
     void UpdateMentosLeftText()
     {
         mentosLeftText.text = $"{mentosLeft}";
         Debug.Log($"[ITEMSLEFT] Mentos left: {mentosLeft}");
     }
-
     void UpdateWhiteRabbitLeftText()
     {
         whiteRabbitLeftText.text = $"{whiteRabbitLeft}";
         Debug.Log($"[ITEMSLEFT] White Rabbit left: {whiteRabbitLeft}");
     }
-
     void UpdateRiceLeftText()
     {
         riceLeftText.text = $"{riceLeft}";
         Debug.Log($"[ITEMSLEFT] Rice left: {riceLeft}");
     }
-
     void UpdateSoySauceLeftText()
     {
         soySauceLeftText.text = $"{soySauceLeft}";
         Debug.Log($"[ITEMSLEFT] Soy Sauce left: {soySauceLeft}");
     }
-
     void UpdateVinegarLeftText()
     {
         vinegarLeftText.text = $"{vinegarLeft}";
         Debug.Log($"[ITEMSLEFT] Vinegar left: {vinegarLeft}");
+    }
+    void UpdateJoyLeftText()
+    {
+        joyLeftText.text = $"{joyLeft}";
+        Debug.Log($"[ITEMSLEFT] Joy left: {joyLeft}");
+    }
+    void UpdateSurfLeftText()
+    {
+        surfLeftText.text = $"{surfLeft}";
+        Debug.Log($"[ITEMSLEFT] Surf left: {surfLeft}");
     }
 
     public void SetGoyaCandyLeft(int goyaCandyLeft)
@@ -152,37 +188,41 @@ public class ItemsLeft : MonoBehaviour
         this.goyaCandyLeft = goyaCandyLeft;
         UpdateGoyaCandyLeftText();
     }
-
     public void SetMentosLeft(int mentosLeft)
     {
         this.mentosLeft = mentosLeft;
         UpdateMentosLeftText();
     }
-
     public void SetWhiteRabbitLeft(int whiteRabbitLeft)
     {
         this.whiteRabbitLeft = whiteRabbitLeft;
         UpdateWhiteRabbitLeftText();
     }
-
     public void SetRiceLeft(int riceLeft)
     {
         this.riceLeft = riceLeft;
         UpdateRiceLeftText();
     }
-
     public void SetSoySauceLeft(int soySauceLeft)
     {
         this.soySauceLeft = soySauceLeft;
         UpdateSoySauceLeftText();
     }
-
     public void SetVinegarLeft(int vinegarLeft)
     {
         this.vinegarLeft = vinegarLeft;
         UpdateVinegarLeftText();
     }
-
+    public void SetJoyLeft(int joyLeft)
+    {
+        this.joyLeft = joyLeft;
+        UpdateJoyLeftText();
+    }
+    public void SetSurfLeft(int surfLeft)
+    {
+        this.surfLeft = surfLeft;
+        UpdateSurfLeftText();
+    }
     public int GetGoyaCandyLeft()
     { return goyaCandyLeft; }
 
@@ -198,4 +238,8 @@ public class ItemsLeft : MonoBehaviour
     { return soySauceLeft; }
     public int GetVinegarLeft() 
     { return vinegarLeft; }
+    public int GetJoyLeft() 
+    { return joyLeft; }
+    public int GetSurfLeft() 
+    { return surfLeft; }
 }
