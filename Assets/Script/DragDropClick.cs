@@ -21,7 +21,8 @@ public class DragDropClick : MonoBehaviour
         riceObject, soySauceObject, vinegarObject,
         joyObject, surfObject,
         paylessXtraBigObject, luckyMeObject, cupNoodleObject,
-        colgateObject, rexonaObject, sunsilkObject;
+        colgateObject, rexonaObject, sunsilkObject,
+        chippyObject, novaObject, piattosObject;
 
     public GameObject goyaJarObject, mentosJarObject,
         whiteRabbitJarObject;
@@ -154,7 +155,21 @@ public class DragDropClick : MonoBehaviour
                         draggedObject = Instantiate(sunsilkObject, mouseWorldPos, Quaternion.identity);
                         draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
                     }
-
+                    else if (clickObject.name == "Chippy")
+                    {
+                        draggedObject = Instantiate(chippyObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Nova")
+                    {
+                        draggedObject = Instantiate(novaObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
+                    else if (clickObject.name == "Piattos")
+                    {
+                        draggedObject = Instantiate(piattosObject, mouseWorldPos, Quaternion.identity);
+                        draggedObject.transform.localScale = new Vector3(0.08f, 0.08f, 0f);
+                    }
                     draggedObject.SetActive(false);
 
                     Debug.Log("[MOUSEDOWN] Started dragging clone of: " + clickObject.name);
@@ -345,6 +360,21 @@ public class DragDropClick : MonoBehaviour
                         itemsInCart.AddItem("Sunsilk");
                         itemsLeft.DecreaseSunsilk();
                     }
+                    else if (clickObject.name.Equals("Chippy"))
+                    {
+                        itemsInCart.AddItem("Chippy");
+                        itemsLeft.DecreaseChippy();
+                    }
+                    else if (clickObject.name.Equals("Nova"))
+                    {
+                        itemsInCart.AddItem("Nova");
+                        itemsLeft.DecreaseNova();
+                    }
+                    else if (clickObject.name.Equals("Piattos"))
+                    {
+                        itemsInCart.AddItem("Piattos");
+                        itemsLeft.DecreasePiattos();
+                    }
 
                     // If the click was on the cart, give items to cat
                     if (clickObject.CompareTag("Cart"))
@@ -381,6 +411,9 @@ public class DragDropClick : MonoBehaviour
         int colgateLeft = itemsLeft.GetColgateLeft();
         int rexonaLeft = itemsLeft.GetRexonaLeft();
         int sunsilkLeft = itemsLeft.GetSunsilkLeft();
+        int chippyLeft = itemsLeft.GetChippyLeft();
+        int novaLeft = itemsLeft.GetNovaLeft();
+        int piattosLeft = itemsLeft.GetPiattosLeft();
 
         Debug.Log($"[CHECKITEMSLEFT] Goya Candy Left: {goyaCandyLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Mentos Left: {mentosLeft}");
@@ -396,6 +429,9 @@ public class DragDropClick : MonoBehaviour
         Debug.Log($"[CHECKITEMSLEFT] Colgate Left: {colgateLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Rexona Left: {rexonaLeft}");
         Debug.Log($"[CHECKITEMSLEFT] Sunsilk Left: {sunsilkLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Chippy Left: {chippyLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Nova Left: {novaLeft}");
+        Debug.Log($"[CHECKITEMSLEFT] Piattos Left: {piattosLeft}");
 
         if (goyaCandyLeft == 0)
         { goyaJarObject.SetActive(false); }
@@ -480,6 +516,18 @@ public class DragDropClick : MonoBehaviour
         if (sunsilkLeft == 0)
         { sunsilkObject.SetActive(false); }
         else { sunsilkObject.SetActive(true); }
+
+        if (chippyLeft == 0)
+        { chippyObject.SetActive(false); }
+        else { chippyObject.SetActive(true); }
+
+        if (novaLeft == 0)
+        { novaObject.SetActive(false); }
+        else { novaObject.SetActive(true); }
+
+        if (piattosLeft == 0)
+        { piattosObject.SetActive(false); }
+        else { piattosObject.SetActive(true); }
     }
 
     private void GiveItemToCatFromCart()
@@ -505,6 +553,9 @@ public class DragDropClick : MonoBehaviour
             int totalColgate = itemsInCart.GetTotalColgate();
             int totalRexona = itemsInCart.GetTotalRexona();
             int totalSunsilk = itemsInCart.GetTotalSunsilk();
+            int totalChippy = itemsInCart.GetTotalChippy();
+            int totalNova = itemsInCart.GetTotalNova();
+            int totalPiattos = itemsInCart.GetTotalPiattos();
 
             if (itemsRequest.Contains("Goya Candy") && totalGoyaCandy > 0)
             {
@@ -602,6 +653,27 @@ public class DragDropClick : MonoBehaviour
                 int sunsilkToGive = Mathf.Min(totalSunsilk, quantityItemRequest[itemsRequest.IndexOf("Sunsilk")]);
                 orderScript.DecreaseItemRequest("Sunsilk", sunsilkToGive);
                 totalItemsInCart -= sunsilkToGive;
+            }
+
+            if (itemsRequest.Contains("Chippy") && totalChippy > 0)
+            {
+                int chippyToGive = Mathf.Min(totalChippy, quantityItemRequest[itemsRequest.IndexOf("Chippy")]);
+                orderScript.DecreaseItemRequest("Chippy", chippyToGive);
+                totalItemsInCart -= chippyToGive;
+            }
+
+            if (itemsRequest.Contains("Nova") && totalNova > 0)
+            {
+                int novaToGive = Mathf.Min(totalNova, quantityItemRequest[itemsRequest.IndexOf("Nova")]);
+                orderScript.DecreaseItemRequest("Nova", novaToGive);
+                totalItemsInCart -= novaToGive;
+            }
+
+            if (itemsRequest.Contains("Piattos") && totalPiattos > 0)
+            {
+                int piattosToGive = Mathf.Min(totalPiattos, quantityItemRequest[itemsRequest.IndexOf("Piattos")]);
+                orderScript.DecreaseItemRequest("Piattos", piattosToGive);
+                totalItemsInCart -= piattosToGive;
             }
         }
     }

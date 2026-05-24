@@ -20,6 +20,9 @@ public class PurchaseScript : MonoBehaviour
     public Button colgateItem;
     public Button rexonaItem;
     public Button sunsilkItem;
+    public Button chippyItem;
+    public Button novaItem;
+    public Button piattos;
 
     public ItemsLeft itemsLeft;
     public PlayerCurrency playerCurrency;
@@ -256,6 +259,51 @@ public class PurchaseScript : MonoBehaviour
             else
             {
                 Debug.Log("[PURCHASE] Not enough currency to purchase Sunsilk.");
+            }
+        }
+        else if (cleanedItemName.Equals("Chippy"))
+        {
+            if (currentCurrency >= 96f)
+            {
+                int currentChippy = itemsLeft.GetChippyLeft();
+                itemsLeft.SetChippyLeft(currentChippy + 24);
+                Debug.Log($"[PURCHASE] Current Chippy: {itemsLeft.GetChippyLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 96f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Chippy.");
+            }
+        }
+        else if (cleanedItemName.Equals("Nova"))
+        {
+            if (currentCurrency >= 96f)
+            {
+                int currentNova = itemsLeft.GetNovaLeft();
+                itemsLeft.SetNovaLeft(currentNova + 24);
+                Debug.Log($"[PURCHASE] Current Nova: {itemsLeft.GetNovaLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 96f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Nova.");
+            }
+        }
+        else if (cleanedItemName.Equals("Piattos"))
+        {
+            if (currentCurrency >= 96f)
+            {
+                int currentPiattos = itemsLeft.GetPiattosLeft();
+                itemsLeft.SetPiattosLeft(currentPiattos + 24);
+                Debug.Log($"[PURCHASE] Current Piattos: {itemsLeft.GetPiattosLeft()}");
+                playerCurrency.SetCurrentCurrency(currentCurrency - 96f);
+                Debug.Log($"[PURCHASE] Currency after purchase: {playerCurrency.GetCurrentCurrency()}");
+            }
+            else
+            {
+                Debug.Log("[PURCHASE] Not enough currency to purchase Piattos.");
             }
         }
         else

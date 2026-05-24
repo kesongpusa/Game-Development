@@ -3,38 +3,31 @@ using UnityEngine.UI;
 
 public class ItemsLeft : MonoBehaviour
 {
-    private int goyaCandyLeft;
-    private int mentosLeft;
-    private int whiteRabbitLeft;
-    private int riceLeft;
-    private int soySauceLeft;
-    private int vinegarLeft;
-    private int joyLeft;
-    private int surfLeft;
-    private int paylessXtraBigLeft;
-    private int luckyMeLeft;
-    private int cupNoodleLeft;
-    private int colgateLeft;
-    private int rexonaLeft;
-    private int sunsilkLeft;
+    private int goyaCandyLeft, mentosLeft, whiteRabbitLeft;
 
-    public GameObject joyItem;
-    public GameObject surfItem;
+    private int riceLeft, soySauceLeft, vinegarLeft;
 
-    public Text goyaCandyLeftText;
-    public Text mentosLeftText;
-    public Text whiteRabbitLeftText;
-    public Text riceLeftText;
-    public Text soySauceLeftText;
-    public Text vinegarLeftText;
-    public Text joyLeftText;
-    public Text surfLeftText;
-    public Text paylessXtraBigLeftText;
-    public Text luckyMeLeftText;
-    public Text cupNoodleLeftText;
-    public Text colgateLeftText;
-    public Text rexonaLeftText;
-    public Text sunsilkLeftText;
+    private int joyLeft, surfLeft;
+
+    private int paylessXtraBigLeft, luckyMeLeft, cupNoodleLeft;
+
+    private int colgateLeft, rexonaLeft, sunsilkLeft;
+
+    private int chippyLeft, novaLeft, piattosLeft;
+
+    public GameObject joyItem, surfItem;
+
+    public Text goyaCandyLeftText, mentosLeftText, whiteRabbitLeftText;
+
+    public Text riceLeftText, soySauceLeftText, vinegarLeftText;
+
+    public Text joyLeftText, surfLeftText;
+
+    public Text paylessXtraBigLeftText, luckyMeLeftText, cupNoodleLeftText;
+
+    public Text colgateLeftText, rexonaLeftText, sunsilkLeftText;
+
+    public Text chippyLeftText, novaLeftText, piattosLeftText;
 
     void Start()
     {
@@ -52,6 +45,9 @@ public class ItemsLeft : MonoBehaviour
         colgateLeft = 10;
         rexonaLeft = 10;
         sunsilkLeft = 10;
+        chippyLeft = 10;
+        novaLeft = 10;
+        piattosLeft = 10;
 
         UpdateGoyaCandyLeftText();
         UpdateMentosLeftText();
@@ -67,6 +63,9 @@ public class ItemsLeft : MonoBehaviour
         UpdateColgateLeftText();
         UpdateRexonaLeftText();
         UpdateSunsilkLeftText();
+        UpdateChippyLeftText();
+        UpdateNovaLeftText();
+        UpdatePiattosLeftText();
     }
     public void DecreaseGoyaCandy()
     {
@@ -183,6 +182,30 @@ public class ItemsLeft : MonoBehaviour
         }
         UpdateSunsilkLeftText();
     }
+    public void DecreaseChippy()
+    {
+        if (chippyLeft > 0)
+        {
+            chippyLeft--;
+        }
+        UpdateChippyLeftText();
+    }
+    public void DecreaseNova()
+    {
+        if (novaLeft > 0)
+        {
+            novaLeft--;
+        }
+        UpdateNovaLeftText();
+    }
+    public void DecreasePiattos()
+    {
+        if (piattosLeft > 0)
+        {
+            piattosLeft--;
+        }
+        UpdatePiattosLeftText();
+    }
     public void DecreaseItem(string item)
     {
         if (item.Equals("Goya Candy"))
@@ -213,77 +236,98 @@ public class ItemsLeft : MonoBehaviour
         { DecreaseRexona(); }
         else if (item.Equals("Sunsilk"))
         { DecreaseSunsilk(); }
+        else if (item.Equals("Chippy"))
+        { DecreaseChippy(); }
+        else if (item.Equals("Nova"))
+        { DecreaseNova(); }
+        else if (item.Equals("Piattos"))
+        { DecreasePiattos(); }
     }
 
-    void UpdateGoyaCandyLeftText()
+    private void UpdateGoyaCandyLeftText()
     {
         goyaCandyLeftText.text = $"{goyaCandyLeft}";
         Debug.Log($"[ITEMSLEFT] Goya Candy left: {goyaCandyLeft}");
     }
-    void UpdateMentosLeftText()
+    private void UpdateMentosLeftText()
     {
         mentosLeftText.text = $"{mentosLeft}";
         Debug.Log($"[ITEMSLEFT] Mentos left: {mentosLeft}");
     }
-    void UpdateWhiteRabbitLeftText()
+    private void UpdateWhiteRabbitLeftText()
     {
         whiteRabbitLeftText.text = $"{whiteRabbitLeft}";
         Debug.Log($"[ITEMSLEFT] White Rabbit left: {whiteRabbitLeft}");
     }
-    void UpdateRiceLeftText()
+    private void UpdateRiceLeftText()
     {
         riceLeftText.text = $"{riceLeft}";
         Debug.Log($"[ITEMSLEFT] Rice left: {riceLeft}");
     }
-    void UpdateSoySauceLeftText()
+    private void UpdateSoySauceLeftText()
     {
         soySauceLeftText.text = $"{soySauceLeft}";
         Debug.Log($"[ITEMSLEFT] Soy Sauce left: {soySauceLeft}");
     }
-    void UpdateVinegarLeftText()
+    private void UpdateVinegarLeftText()
     {
         vinegarLeftText.text = $"{vinegarLeft}";
         Debug.Log($"[ITEMSLEFT] Vinegar left: {vinegarLeft}");
     }
-    void UpdateJoyLeftText()
+    private void UpdateJoyLeftText()
     {
         joyLeftText.text = $"{joyLeft}";
         Debug.Log($"[ITEMSLEFT] Joy left: {joyLeft}");
     }
-    void UpdateSurfLeftText()
+    private void UpdateSurfLeftText()
     {
         surfLeftText.text = $"{surfLeft}";
         Debug.Log($"[ITEMSLEFT] Surf left: {surfLeft}");
     }
-    void UpdatePaylessXtraBigLeftText()
+    private void UpdatePaylessXtraBigLeftText()
     {
         paylessXtraBigLeftText.text = $"{paylessXtraBigLeft}";
         Debug.Log($"[ITEMSLEFT] Payless Xtra Big left: {paylessXtraBigLeft}");
     }
-    void UpdateLuckyMeLeftText()
+    private void UpdateLuckyMeLeftText()
     {
         luckyMeLeftText.text = $"{luckyMeLeft}";
         Debug.Log($"[ITEMSLEFT] Lucky Me left: {luckyMeLeft}");
     }
-    void UpdateCupNoodleLeftText()
+    private void UpdateCupNoodleLeftText()
     {
         cupNoodleLeftText.text = $"{cupNoodleLeft}";
         Debug.Log($"[ITEMSLEFT] Cup Noodle left: {cupNoodleLeft}");
     }
-    void UpdateColgateLeftText()
+    private void UpdateColgateLeftText()
     {
         colgateLeftText.text = $"{colgateLeft}";
         Debug.Log($"[ITEMSLEFT] Colgate left: {colgateLeft}");
     }
-    void UpdateRexonaLeftText()
+    private void UpdateRexonaLeftText()
     {
         rexonaLeftText.text = $"{rexonaLeft}";
         Debug.Log($"[ITEMSLEFT] Rexona left: {rexonaLeft}");
     }
-    void UpdateSunsilkLeftText()
+    private void UpdateSunsilkLeftText()
     {
         sunsilkLeftText.text = $"{sunsilkLeft}";
         Debug.Log($"[ITEMSLEFT] Sunsilk left: {sunsilkLeft}");
+    }
+    private void UpdateChippyLeftText()
+    {
+        chippyLeftText.text = $"{chippyLeft}";
+        Debug.Log($"[ITEMSLEFT] Chippy left: {chippyLeft}");
+    }
+    private void UpdateNovaLeftText()
+    {
+        novaLeftText.text = $"{novaLeft}";
+        Debug.Log($"[ITEMSLEFT] Nova left: {novaLeft}");
+    }
+    private void UpdatePiattosLeftText()
+    {
+        piattosLeftText.text = $"{piattosLeft}";
+        Debug.Log($"[ITEMSLEFT] Piattos left: {piattosLeft}");
     }
 
     public void SetGoyaCandyLeft(int goyaCandyLeft)
@@ -356,6 +400,21 @@ public class ItemsLeft : MonoBehaviour
         this.sunsilkLeft = sunsilkLeft;
         UpdateSunsilkLeftText();
     }
+    public void SetChippyLeft(int chippyLeft)
+    {
+        this.chippyLeft = chippyLeft;
+        UpdateChippyLeftText();
+    }
+    public void SetNovaLeft(int novaLeft)
+    {
+        this.novaLeft = novaLeft;
+        UpdateNovaLeftText();
+    }
+    public void SetPiattosLeft(int piattosLeft)
+    {
+        this.piattosLeft = piattosLeft;
+        UpdatePiattosLeftText();
+    }
 
     public int GetGoyaCandyLeft()
     { return goyaCandyLeft; }
@@ -385,4 +444,10 @@ public class ItemsLeft : MonoBehaviour
     { return rexonaLeft; }
     public int GetSunsilkLeft() 
     { return sunsilkLeft; }
+    public int GetChippyLeft() 
+    { return chippyLeft; }
+    public int GetNovaLeft() 
+    { return novaLeft; }
+    public int GetPiattosLeft() 
+    { return piattosLeft; }
 }

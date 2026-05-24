@@ -73,6 +73,9 @@ public class OrderScript : MonoBehaviour
             11 = Colgate
             12 = Rexona
             13 = Sunsilk
+            14 = Chippy
+            15 = Nova
+            16 = Piattos
             */
 
             if (whatItemRoll == 0)
@@ -165,6 +168,24 @@ public class OrderScript : MonoBehaviour
                 Debug.Log("[ORDER] Item: Sunsilk");
                 itemName.Add("Sunsilk");
                 item1.GetComponent<SpriteRenderer>().sprite = items[13];
+            }
+            else if (whatItemRoll == 14)
+            {
+                Debug.Log("[ORDER] Item: Chippy");
+                itemName.Add("Chippy");
+                item1.GetComponent<SpriteRenderer>().sprite = items[14];
+            }
+            else if (whatItemRoll == 15)
+            {
+                Debug.Log("[ORDER] Item: Nova");
+                itemName.Add("Nova");
+                item1.GetComponent<SpriteRenderer>().sprite = items[15];
+            }
+            else if (whatItemRoll == 16)
+            {
+                Debug.Log("[ORDER] Item: Piattos");
+                itemName.Add("Piattos");
+                item1.GetComponent<SpriteRenderer>().sprite = items[16];
             }
 
             NormalizeSpriteScale(item1, items[whatItemRoll], item1OriginalScale);
@@ -953,6 +974,155 @@ public class OrderScript : MonoBehaviour
                     Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
                 }
             }
+        }
+        else if (itemName == "Chippy")
+        {
+            //get current position of Chippy in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Chippy quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Chippy quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Chippy order complete!");
+                oneItemRequest.enabled = false;
+            }
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Chippy quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Chippy quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Nova")
+        {
+            //get current position of Nova in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Nova quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Nova quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Nova order complete!");
+                oneItemRequest.enabled = false;
+            }
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Nova quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Nova quantity. New quantity: {quantity}");
+                }
+            }
+        }
+        else if (itemName == "Piattos")
+        {
+            //get current position of Piattos in itemName/itemQuantities list
+            int index = this.itemName.IndexOf(itemName);
+            int quantity = itemQuantities[index];
+            if (quantity > 0)
+            {
+                quantity -= itemToGive;
+                itemQuantities[index] = quantity;
+                if (manyItems == 1)
+                {
+                    oneItemRequest.text = $"{quantity}";
+                    Debug.Log($"[ORDER] Decreasing the One Item Req quantity by {itemToGive} for one item request.");
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Piattos quantity. New quantity: {quantity}");
+                    }
+                    else
+                    {
+                        item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Piattos quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+            if (manyItems == 1 && quantity == 0)
+            {
+                Debug.Log("[ORDER] Piattos order complete!");
+                oneItemRequest.enabled = false;
+            }
+
+            if (quantity == 0 && manyItems != 1)
+            {
+                if (index == 0)
+                {
+                    item1.SetActive(false);
+                    item1QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Piattos quantity. New quantity: {quantity}");
+                }
+                else if (index == 1)
+                {
+                    item2.SetActive(false);
+                    item2QuantityText.enabled = false;
+                    Debug.Log($"[ORDER] Decreased Piattos quantity. New quantity: {quantity}");
+                }
+            }
+
         }
 
         if (itemQuantities.TrueForAll(q => q == 0))

@@ -16,6 +16,9 @@ public class ItemPrice : MonoBehaviour
     public float colgatePrice = 3.00f;
     public float rexonaPrice = 15.00f;
     public float sunsilkPrice = 2.00f;
+    public float chippyPrice = 5.00f;
+    public float novaPrice = 6.00f;
+    public float piattosPrice = 7.00f;
 
     private float totalPrice = 0f;
 
@@ -51,6 +54,12 @@ public class ItemPrice : MonoBehaviour
                 return rexonaPrice;
             case "sunsilk":
                 return sunsilkPrice;
+            case "chippy":
+                return chippyPrice;
+            case "nova":
+                return novaPrice;
+            case "piattos":
+                return piattosPrice;
             default:
                 Debug.LogWarning("Unknown item: " + itemName);
                 return 0f;

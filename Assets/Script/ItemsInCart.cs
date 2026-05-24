@@ -22,12 +22,16 @@ public class ItemsInCart : MonoBehaviour
     private int totalColgate = 0;
     private int totalRexona = 0;
     private int totalSunsilk = 0;
+    private int totalChippy = 0;
+    private int totalNova = 0;
+    private int totalPiattos = 0;
 
     public Text totalGoyaCandyText, totalMentosText, totalWhiteRabbitText,
         totalRiceText, totalSoySauceText, totalVinegarText,
         totalJoyText, totalSurfText,
         totalPaylessXtraBigText, totalLuckyMeText, totalCupNoodleText,
-        totalColgateText, totalRexonaText, totalSunsilkText;
+        totalColgateText, totalRexonaText, totalSunsilkText,
+        totalChippyText, totalNovaText, totalPiattosText;
 
     private List<string> cartItems = new List<string>();
 
@@ -65,6 +69,12 @@ public class ItemsInCart : MonoBehaviour
         { totalRexona++; Debug.Log($"Added Rexona to Cart"); }
         else if (ItemName.Equals("Sunsilk"))
         { totalSunsilk++; Debug.Log($"Added Sunsilk to Cart"); }
+        else if (ItemName.Equals("Chippy"))
+        { totalChippy++; Debug.Log($"Added Chippy to Cart"); }
+        else if (ItemName.Equals("Nova"))
+        { totalNova++; Debug.Log($"Added Nova to Cart"); }
+        else if (ItemName.Equals("Piattos"))
+        { totalPiattos++; Debug.Log($"Added Piattos to Cart"); }
 
         AddItemsInCart();
     }
@@ -133,6 +143,18 @@ public class ItemsInCart : MonoBehaviour
             if (totalSunsilk > 0)
             { totalSunsilkText.enabled = true; }
             else { totalSunsilkText.enabled = false; }
+
+            if (totalChippy > 0)
+            { totalChippyText.enabled = true; }
+            else { totalChippyText.enabled = false; }
+
+            if (totalNova > 0)
+            { totalNovaText.enabled = true; }
+            else { totalNovaText.enabled = false; }
+
+            if (totalPiattos > 0)
+            { totalPiattosText.enabled = true; }
+            else { totalPiattosText.enabled = false; }
         }
 
         totalItemsText.text = $"Total Items: {totalItems}";
@@ -150,6 +172,9 @@ public class ItemsInCart : MonoBehaviour
         totalColgateText.text = $"Colgate: {totalColgate}";
         totalRexonaText.text = $"Rexona: {totalRexona}";
         totalSunsilkText.text = $"Sunsilk: {totalSunsilk}";
+        totalChippyText.text = $"Chippy: {totalChippy}";
+        totalNovaText.text = $"Nova: {totalNova}";
+        totalPiattosText.text = $"Piattos: {totalPiattos}";
     }
 
     public void ClearCart()
@@ -167,6 +192,8 @@ public class ItemsInCart : MonoBehaviour
         totalPaylessXtraBig = 0; totalLuckyMe = 0; totalCupNoodle = 0;
 
         totalColgate = 0; totalRexona = 0; totalSunsilk = 0;
+
+        totalChippy = 0; totalNova = 0; totalPiattos = 0;
 
         UpdateTotalText();
     }
@@ -204,4 +231,10 @@ public class ItemsInCart : MonoBehaviour
     { return totalRexona; }
     public int GetTotalSunsilk() 
     { return totalSunsilk; }
+    public int GetTotalChippy() 
+    { return totalChippy; }
+    public int GetTotalNova() 
+    { return totalNova; }
+    public int GetTotalPiattos() 
+    { return totalPiattos; }
 }
