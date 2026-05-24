@@ -298,25 +298,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Goya Candy order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Goya Candy order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Goya Candy quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -342,38 +344,38 @@ public class OrderScript : MonoBehaviour
                 {
                     if (index == 0)
                     {
-                        item1.SetActive(false);
                         item1QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
                     }
                     else if (index == 1)
                     {
-                        item2.SetActive(false);
                         item2QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
                     }
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Mentos order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Mentos order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Mentos quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -397,38 +399,38 @@ public class OrderScript : MonoBehaviour
                 {
                     if (index == 0)
                     {
-                        item1.SetActive(false);
                         item1QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
                     }
                     else if (index == 1)
                     {
-                        item2.SetActive(false);
                         item2QuantityText.text = $"{quantity}";
                         Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
                     }
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] White Rabbit order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] White Rabbit order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased White Rabbit quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -463,25 +465,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Rice order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Rice order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Rice quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -516,25 +520,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Soy Sauce order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Soy Sauce order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Soy Sauce quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -569,25 +575,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Vinegar order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Vinegar order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Vinegar quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -619,24 +627,28 @@ public class OrderScript : MonoBehaviour
                     }
                 }
             }
-            if (manyItems == 1 && quantity == 0)
+
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Joy order complete!");
-                oneItemRequest.enabled = false;
-            }
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Joy order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Joy quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -669,25 +681,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Surf order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Surf order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Surf quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -720,25 +734,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Payless Xtra Big order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (manyItems != 1 && quantity == 0)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Payless Xtra Big order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Payless Xtrabig quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -771,25 +787,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Lucky Me order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (manyItems != 1 && quantity == 0)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Lucky Me order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Lucky Me quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -819,6 +837,30 @@ public class OrderScript : MonoBehaviour
                     else
                     {
                         item2QuantityText.text = $"{quantity}";
+                        Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
+                    }
+                }
+            }
+
+            if (quantity == 0)
+            {
+                if (manyItems == 1)
+                {
+                    Debug.Log("[ORDER] Cup Noodle order complete!");
+                    oneItemRequest.enabled = false;
+                }
+                else
+                {
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
                         Debug.Log($"[ORDER] Decreased Cup Noodle quantity. New quantity: {quantity}");
                     }
                 }
@@ -853,25 +895,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Colgate order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Colgate order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Colgate quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -903,24 +947,28 @@ public class OrderScript : MonoBehaviour
                     }
                 }
             }
-            if (manyItems == 1 && quantity == 0)
+
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Rexona order complete!");
-                oneItemRequest.enabled = false;
-            }
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Rexona order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Rexona quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
@@ -953,25 +1001,27 @@ public class OrderScript : MonoBehaviour
                 }
             }
 
-            if (manyItems == 1 && quantity == 0)
+            if (quantity == 0)
             {
-                Debug.Log("[ORDER] Sunsilk order complete!");
-                oneItemRequest.enabled = false;
-            }
-
-            if (quantity == 0 && manyItems != 1)
-            {
-                if (index == 0)
+                if (manyItems == 1)
                 {
-                    item1.SetActive(false);
-                    item1QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    Debug.Log("[ORDER] Sunsilk order complete!");
+                    oneItemRequest.enabled = false;
                 }
-                else if (index == 1)
+                else
                 {
-                    item2.SetActive(false);
-                    item2QuantityText.enabled = false;
-                    Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    if (index == 0)
+                    {
+                        item1.SetActive(false);
+                        item1QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    }
+                    else if (index == 1)
+                    {
+                        item2.SetActive(false);
+                        item2QuantityText.enabled = false;
+                        Debug.Log($"[ORDER] Decreased Sunsilk quantity. New quantity: {quantity}");
+                    }
                 }
             }
         }
