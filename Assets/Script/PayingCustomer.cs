@@ -17,6 +17,8 @@ public class PayingCustomer : MonoBehaviour
     private float paymentAmount = 0f;
     private float totalPrice = 0f;
 
+    private int[] choiceCustomerGiveMoney = new int[8] { 5, 10, 20, 50, 70, 100, 150, 200 };
+
     private List<string> itemName;
     private List<int> itemQuantities;
 
@@ -40,7 +42,44 @@ public class PayingCustomer : MonoBehaviour
             }
         }
     }
-    public void PayForItem(string itemName)
+    private float CustomerGenerateMoney(float minRequiredAmount)
+    {
+        float minRequiredAmountRounded = (float)Math.Round(minRequiredAmount, 2);
+        Debug.Log($"[PAYINGCUSTOMER] Minimum required amount: ₱{minRequiredAmountRounded}");
+
+        // Find all bills that are greater than the minimum required amount
+        List<int> validBills = new List<int>();
+        foreach (int bill in choiceCustomerGiveMoney)
+        {
+            if (bill > totalPrice)
+            {
+                validBills.Add(bill);
+            }
+        }
+
+        // If no single bill is enough, pick the largest bill and add random extra bills
+        if (validBills.Count == 0)
+        {
+            float randomMoney = choiceCustomerGiveMoney[choiceCustomerGiveMoney.Length - 1];
+
+            while (randomMoney <= minRequiredAmountRounded)
+            {
+                int randomBillIndex = UnityEngine.Random.Range(0, choiceCustomerGiveMoney.Length);
+                randomMoney += choiceCustomerGiveMoney[randomBillIndex];
+            }
+
+            Debug.Log($"[PAYINGCUSTOMER] Customer generates multiple bills: ₱{randomMoney}");
+            return randomMoney;
+        }
+
+        // Pick a random valid bill from the list
+        int selectedIndex = UnityEngine.Random.Range(0, validBills.Count);
+        float selectedBill = validBills[selectedIndex];
+
+        Debug.Log($"[PAYINGCUSTOMER] Customer generates: ₱{selectedBill}");
+        return selectedBill;
+    }
+    private void PayForItem(string itemName)
     {
         paymentAmount = itemPrice.GetPrice(itemName);
         Debug.Log("[PAYINGCUSTOMER] Customer pays: ₱" + paymentAmount);
@@ -58,7 +97,13 @@ public class PayingCustomer : MonoBehaviour
         float maxGiveMoney = itemPrice.GetTotalPrice() + 5f;
 
         customerGiveMoney = UnityEngine.Random.Range(minGiveMoney, maxGiveMoney);
-        customerGiveMoney = RoundToNearestFive(customerGiveMoney);
+        
+        int generateMoreMoneyChance = UnityEngine.Random.Range(1, 101);
+
+        if (generateMoreMoneyChance <= 100 && generateMoreMoneyChance >= 30)
+        { customerGiveMoney = CustomerGenerateMoney((float)UnityEngine.Random.Range(customerGiveMoney, 2)); }
+        else if (generateMoreMoneyChance <= 30 && generateMoreMoneyChance >= 1)
+        { customerGiveMoney = totalPrice; }
 
         Debug.Log("[PAYINGCUSTOMER] Customer gives: ₱" + customerGiveMoney);
 
@@ -67,8 +112,6 @@ public class PayingCustomer : MonoBehaviour
 
         changeScript.CalculateChange();
     }
-    private float RoundToNearestFive(float value)
-    { return Mathf.Round(value / 5f) * 5f; }
     public float GetTotalPrice()
     { return totalPrice; }
 
